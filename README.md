@@ -1,1 +1,1 @@
-# RPG
+# RPG - design patterns
