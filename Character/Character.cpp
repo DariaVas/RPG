@@ -25,7 +25,12 @@ void Character::set_parameter(std::string parameter_name, std::uint8_t parameter
 
 }
 
-void Character::change_resistance(types resistance_type, intresistance_delta)
+void Character::change_reflection_of_damage(types damage_type, int reflection_delta)
+{
+
+}
+
+void Character::change_resistance(types resistance_type, int resistance_delta)
 {
 
 }

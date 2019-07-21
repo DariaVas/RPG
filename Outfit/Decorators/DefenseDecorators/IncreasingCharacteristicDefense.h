@@ -5,11 +5,11 @@
 #include "DefenseDecorator.h"
 #include "Character/Character.h"
 
-class IncreasingCharacteristicWeapon final : public DefenseDecorator
+class IncreasingCharacteristicDefense final : public DefenseDecorator
 {
 public:
 
-    IncreasingCharacteristicWeapon(Defense &decorator, std::uint8_t value, std::string characteristic) :
+    IncreasingCharacteristicDefense(Defense &decorator, std::uint8_t value, std::string characteristic) :
             DefenseDecorator(decorator),
             m_characteristic_name(characteristic),
             m_value(value)

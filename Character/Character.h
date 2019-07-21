@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "Character/Сharacterization.h"
+#include "Character/Characterization.h"
 #include "Character/Parameters.h"
 
 class Character
@@ -18,7 +18,7 @@ public:
     void set_parameter(std::string parameter_name, std::uint8_t parameter_value);
 
     void change_resistance(types resistance_type, int resistance_delta);
-
+    void change_reflection_of_damage(types damage_type, int reflection_delta);
     void set_stun(std::uint8_t stun_seconds);
 
     void break_outfit(std::uint8_t breaking_value);
