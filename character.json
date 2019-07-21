@@ -1,0 +1,282 @@
+{
+  "damage_type": {
+    "physic": 1,
+    "fire": 2,
+    "ice": 3,
+    "electric": 4,
+    "acid": 5
+  },
+  "weapon_effects": {
+    "additional_damage": {
+      "damage_type": 1,
+      "damage": 20
+    },
+    "increase_characteristic": {
+      "characteristic_type": "strength",
+      "points_to_increase": 10
+    },
+    "increase_chance_of_critical_hit": {
+      "points_to_increase": 10
+    },
+    "increase_damage_modifier": {
+      "points_to_increase": 10
+    },
+    "stunning": {
+      "stunning_seconds": 2
+    },
+    "breaking": {
+      "breaking_power": 10
+    },
+    "piercing": {
+      "piercing_power": 20
+    },
+    "damn": {
+      "characteristic_type": "strength",
+      "points_to_decrease": 10
+    }
+  },
+  "armor_effects": {
+    "increase_characteristic": {
+      "characteristic_type": "strength",
+      "points_to_increase": 10
+    },
+    "increase_resists_to_damage": {
+      "damage_type": 1,
+      "resist_points": 20
+    },
+    "increase_reflection_to_damage": {
+      "damage_type": 1,
+      "reflection_points": 20
+    },
+    "increase_chance_of_critical_hit": {
+      "points_to_increase": 10
+    },
+    "increase_chance_of_dodge": {
+      "points_to_increase": 10
+    }
+  },
+  "character_1": {
+    "name": "John",
+    "characteristic": {
+      "strength": 100,
+      "sleight": 50,
+      "intelligence": 70,
+      "physique": 30,
+      "luck": 56,
+      "initiative": 10
+    },
+    "outfit": {
+      "armor": {
+        "head": {
+          "type_of_resistance": 2,
+          "resistance": 10,
+          "additional_effects": [
+            "increase_characteristic",
+            "increase_reflection_to_damage"
+          ]
+        },
+        "torso": {
+          "type_of_resistance": 1,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_chance_of_dodge"
+          ]
+        },
+        "gloves": {
+          "type_of_resistance": 5,
+          "resistance": 5,
+          "additional_effects": [
+          ]
+        },
+        "legs": {
+          "type_of_resistance": 4,
+          "resistance": 20,
+          "additional_effects": [
+            "increase_chance_of_critical_hit"
+          ]
+        },
+        "boots": {
+          "type_of_resistance": 1,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_resists_to_damage"
+          ]
+        }
+      },
+      "defense_and_weapon_slots": {
+        "choice": "weapon_shield",
+        "weapon_shield": {
+          "weapon": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "additional_damage"
+            ]
+          },
+          "shield": {
+            "type_of_resistance": 1,
+            "resistance": 15,
+            "additional_effects": [
+              "increase_resists_to_damage"
+            ]
+          }
+        },
+        "weapon_weapon": {
+          "weapon1": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "additional_damage",
+              "stunning",
+              "breaking"
+            ]
+          },
+          "weapon2": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "damn",
+              "piercing"
+            ]
+          }
+        }
+      },
+      "magic_attributes": {
+        "ring1": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_characteristic"
+          ]
+        },
+        "ring2": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+          ]
+        },
+        "amulet": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+          ]
+        }
+      }
+    }
+  },
+  "character_2": {
+    "name": "Jack",
+    "characteristic": {
+      "strength": 100,
+      "sleight": 50,
+      "intelligence": 70,
+      "physique": 30,
+      "luck": 56,
+      "initiative": 10
+    },
+    "outfit": {
+      "armor": {
+        "head": {
+          "type_of_resistance": 2,
+          "resistance": 10,
+          "additional_effects": [
+            "increase_characteristic",
+            "increase_reflection_to_damage"
+          ]
+        },
+        "torso": {
+          "type_of_resistance": 1,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_chance_of_dodge"
+          ]
+        },
+        "gloves": {
+          "type_of_resistance": 5,
+          "resistance": 5,
+          "additional_effects": [
+          ]
+        },
+        "legs": {
+          "type_of_resistance": 4,
+          "resistance": 20,
+          "additional_effects": [
+            "increase_chance_of_critical_hit"
+          ]
+        },
+        "boots": {
+          "type_of_resistance": 1,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_resists_to_damage"
+          ]
+        }
+      },
+      "defense_and_weapon_slots": {
+        "choice": "weapon_shield",
+        "weapon_shield": {
+          "weapon": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "additional_damage"
+            ]
+          },
+          "shield": {
+            "type_of_resistance": 1,
+            "resistance": 15,
+            "additional_effects": [
+              "increase_resists_to_damage"
+            ]
+          }
+        },
+        "weapon_weapon": {
+          "weapon1": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "additional_damage",
+              "stunning",
+              "breaking"
+            ]
+          },
+          "weapon2": {
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              "damn",
+              "piercing"
+            ]
+          }
+        }
+      },
+      "magic_attributes": {
+        "ring1": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+            "increase_characteristic"
+          ]
+        },
+        "ring2": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+          ]
+        },
+        "amulet": {
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+          ]
+        }
+      }
+    }
+  }
+}
