@@ -3,11 +3,12 @@
 
 #include "Character/Characterization.h"
 #include "Character/Parameters.h"
+#include "Outfit/Outfit.h"
 
 class Character
 {
 public:
-    Character();
+    Character(const Outfit& outfit, const Сharacterization& characterization);
 
     std::uint8_t get_characteristic(std::string feature_name);
 
@@ -24,10 +25,11 @@ public:
     void break_outfit(std::uint8_t breaking_value);
 
 private:
-    Characteristic::Сharacterization m_characterization;
+    Сharacterization m_characterization;
     Parameters m_parameters;
     bool m_stunned;
     std::uint8_t m_stun_seconds;
+    Outfit m_outfit;
 };
 
 #endif // CHARACTER_H

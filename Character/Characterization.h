@@ -1,5 +1,4 @@
-яыф#
-ifndef СHARACTERIZATION_H
+#ifndef СHARACTERIZATION_H
 #define СHARACTERIZATION_H
 
 #include <cstdint>
@@ -13,7 +12,7 @@ namespace Characteristic {
     const std::string physique = "physique";
     const std::string luck = "luck";
     const std::string initiative = "initiative";
-
+}
     struct Сharacterization
     {
     public:
@@ -52,7 +51,6 @@ namespace Characteristic {
     private:
         std::map <std::string, std::uint8_t> m_сharacterization;
     };
-}
 
 
 #endif // СHARACTERIZATION_H

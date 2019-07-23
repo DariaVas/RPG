@@ -55,7 +55,8 @@
       "points_to_increase": 10
     }
   },
-  "character_1": {
+  
+  "first_hero": {
     "name": "John",
     "characteristic": {
       "strength": 100,
@@ -167,7 +168,7 @@
       }
     }
   },
-  "character_2": {
+  "second_hero": {
     "name": "Jack",
     "characteristic": {
       "strength": 100,
