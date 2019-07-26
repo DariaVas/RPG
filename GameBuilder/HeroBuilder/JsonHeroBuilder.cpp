@@ -4,13 +4,14 @@ using nlohmann::json;
 
 JsonHeroBuilder::JsonHeroBuilder(const std::string &file_path)
     :m_file_path(file_path),
-     m_config(read_json_file(json::parse(file_path)))
+     m_config(json::parse(read_json_file(file_path)))
 {
 }
 
 MagicDefense JsonHeroBuilder::build_magic_amulet(const std::string &hero)
 {
-    m_config[hero][]
+    auto amulet_info = m_config[hero]["outfit"]["magic_attributes"]["amulet"];
+    amulet_info["type_of_resistance"].get<int>();
 }
 
 std::string JsonHeroBuilder::read_json_file()

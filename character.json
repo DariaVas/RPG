@@ -1,14 +1,6 @@
 {
-  "damage_type": {
-    "physic": 1,
-    "fire": 2,
-    "ice": 3,
-    "electric": 4,
-    "acid": 5
-  },
   "weapon_effects": {
     "additional_damage": {
-      "damage_type": 1,
       "damage": 20
     },
     "increase_characteristic": {
