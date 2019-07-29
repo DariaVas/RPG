@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ADDITIONALHIT_H
 #define ADDITIONALHIT_H
 

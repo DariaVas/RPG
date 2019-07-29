@@ -1,10 +1,12 @@
+#pragma once
+
 #ifndef WEAPON_H
 #define WEAPON_H
 
 #include <vector>
 #include <damage.h>
 #include "thing.h"
-#include "Character/Character.h"
+#include "Character.h"
 
 enum holding_type
 {
@@ -22,7 +24,9 @@ public:
     virtual void effect_before_attack(Character &character);
 
     virtual void effect_after_attack(Character &character);
+    void apply_effect(Character &character) override;
 
+    void discard_effect(Character &character) override;
     virtual ~Weapon() = 0;
 
 protected:

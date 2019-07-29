@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef DAMNEDWEAPON_H
 #define DAMNEDWEAPON_H
 

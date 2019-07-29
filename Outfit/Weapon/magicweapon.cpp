@@ -26,3 +26,4 @@ Damage MagicWeapon::generate_damage(Character &ch)
 
     return Damage{get_damage_type(), power, 0, modifier_of_critical_hit};
 }
+

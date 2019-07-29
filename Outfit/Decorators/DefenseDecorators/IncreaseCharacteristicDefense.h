@@ -1,15 +1,16 @@
-#ifndef INCREASINGCHARACTERISTICDEFENSE_H
-#define INCREASINGCHARACTERISTICDEFENSE_H
+#pragma once
+#ifndef INCREASECHARACTERISTICDEFENSE_H
+#define INCREASECHARACTERISTICDEFENSE_H
 
 #include <iostream>
 #include "DefenseDecorator.h"
 #include "Character/Character.h"
 
-class IncreasingCharacteristicDefense final : public DefenseDecorator
+class IncreaseCharacteristicDefense final : public DefenseDecorator
 {
 public:
 
-    IncreasingCharacteristicDefense(Defense &decorator, std::uint8_t value, std::string characteristic) :
+    IncreaseCharacteristicDefense(Defense &decorator, std::uint8_t value, std::string characteristic) :
             DefenseDecorator(decorator),
             m_characteristic_name(characteristic),
             m_value(value)
@@ -44,4 +45,4 @@ private:
     std::uint8_t m_value;
 };
 
-#endif // INCREASINGCHARACTERISTICDEFENSE_H
+#endif // INCREASECHARACTERISTICDEFENSE_H

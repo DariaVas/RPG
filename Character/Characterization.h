@@ -1,5 +1,6 @@
-#ifndef СHARACTERIZATION_H
-#define СHARACTERIZATION_H
+#pragma once
+#ifndef CHARACTERIZATION_H
+#define CHARACTERIZATION_H
 
 #include <cstdint>
 #include <map>
@@ -13,44 +14,44 @@ namespace Characteristic {
     const std::string luck = "luck";
     const std::string initiative = "initiative";
 }
-    struct Сharacterization
+struct Characterization
+{
+public:
+    Characterization() :
+            m_characterization{
+                    {Characteristic::strenght,     0},
+                    {Characteristic::sleight,      0},
+                    {Characteristic::intelligence, 0},
+                    {Characteristic::physique,     0},
+                    {Characteristic::luck,         0},
+                    {Characteristic::initiative,   0}
+            }
+    {}
+
+    std::uint8_t get_characteristic(std::string feature_name)
     {
-    public:
-        Сharacterization() :
-                m_сharacterization{
-                        {strenght,     0},
-                        {sleight,      0},
-                        {intelligence, 0},
-                        {physique,     0},
-                        {luck,         0},
-                        {initiative,   0}
-                }
-        {}
-
-        std::uint8_t get_characteristic(std::string feature_name)
+        auto feature = m_characterization.find(feature_name);
+        if (feature == m_characterization.end())
         {
-            auto feature = m_сharacterization.find(feature_name);
-            if (feature == m_сharacterization.end())
-            {
-                throw std::runtime_error("Cannot find feature");
-            }
-            return feature->second;
-
+            throw std::runtime_error("Cannot find feature");
         }
+        return feature->second;
 
-        void set_characteristic(std::string feature_name, std::uint8_t feature_value)
+    }
+
+    void set_characteristic(std::string feature_name, std::uint8_t feature_value)
+    {
+        auto feature = m_characterization.find(feature_name);
+        if (feature == m_characterization.end())
         {
-            auto feature = m_сharacterization.find(feature_name);
-            if (feature == m_сharacterization.end())
-            {
-                throw std::runtime_error("Cannot find feature");
-            }
-            feature->second = feature_value;
+            throw std::runtime_error("Cannot find feature");
         }
+        feature->second = feature_value;
+    }
 
-    private:
-        std::map <std::string, std::uint8_t> m_сharacterization;
-    };
+private:
+    std::map <std::string, std::uint8_t> m_characterization;
+};
 
 
-#endif // СHARACTERIZATION_H
+#endif // CHARACTERIZATION_H

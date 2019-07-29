@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef PHYSICALWEAPON_H
 #define PHYSICALWEAPON_H
 

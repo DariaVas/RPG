@@ -1,12 +1,14 @@
-#ifndef INCREASINGREFLECTIONOFDAMAGE_H
-#define INCREASINGREFLECTIONOFDAMAGE_H
+#pragma once
+#ifndef INCREASEREFLECTIONOFDAMAGE_H
+#define INCREASEREFLECTIONOFDAMAGE_H
+
 #include "DefenseDecorator.h"
 
-class IncreasingReflectionOfDamage final : public DefenseDecorator
+class IncreaseReflectionOfDamage final : public DefenseDecorator
 {
 public:
 
-    IncreasingReflectionOfDamage(Defense &decorator, std::uint8_t value, types& damage_type) :
+    IncreaseReflectionOfDamage(Defense &decorator, std::uint8_t value, types &damage_type) :
             DefenseDecorator(decorator),
             m_damage_type(damage_type),
             m_reflection_power(value)
@@ -31,4 +33,5 @@ private:
     types m_damage_type;
     std::uint8_t m_reflection_power;
 };
-#endif // INCREASINGREFLECTIONOFDAMAGE_H
+
+#endif // INCREASEREFLECTIONOFDAMAGE_H

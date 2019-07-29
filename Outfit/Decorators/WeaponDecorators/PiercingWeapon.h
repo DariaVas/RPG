@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef PIERCINGWEAPON_H
 #define PIERCINGWEAPON_H
 

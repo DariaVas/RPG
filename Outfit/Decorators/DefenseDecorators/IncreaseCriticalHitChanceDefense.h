@@ -1,17 +1,18 @@
-#ifndef INCREASEINGRITICALHITCHANCEDEFENSE_H
-#define INCREASEINGRITICALHITCHANCEDEFENSE_H
+#pragma once
+#ifndef INCREASECRITICALHITCHANCEDEFENSE_H
+#define INCREASECRITICALHITCHANCEDEFENSE_H
 
 #include "DefenseDecorator.h"
 #include <iostream>
 #include "Character/Character.h"
 #include "Character/Parameters.h"
 
-class IncreasingCriticalHitChanceDefense final : public DefenseDecorator
+class IncreaseCriticalHitChanceDefense final : public DefenseDecorator
 {
 
 public:
 
-    IncreasingCriticalHitChanceDefense(Defense &decorator, std::uint8_t value) :
+    IncreaseCriticalHitChanceDefense(Defense &decorator, std::uint8_t value) :
             DefenseDecorator(decorator),
             m_increase_value(value)
     {
@@ -46,4 +47,4 @@ private:
     std::uint8_t m_increase_value;
 };
 
-#endif // INCREASEINGRITICALHITCHANCEDEFENSE_H
+#endif // INCREASECRITICALHITCHANCEDEFENSE_H

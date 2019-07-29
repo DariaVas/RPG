@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef STUNNINGWEAPON_H
 #define STUNNINGWEAPON_H
 

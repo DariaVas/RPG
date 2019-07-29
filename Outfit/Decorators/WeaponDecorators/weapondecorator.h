@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef WEAPONDECORATOR_H
 #define WEAPONDECORATOR_H
 

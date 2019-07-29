@@ -1,8 +1,8 @@
 #include "Character.h"
 
-Character::Character(const Outfit& outfit, const Сharacterization& characterization) :
-    m_outfit(outfit),
-    m_characterization(characterization)
+Character::Character(const Outfit &outfit, const Characterization &characterization) :
+        m_outfit(outfit),
+        m_characterization(characterization)
 {
 
 }
