@@ -6,6 +6,7 @@
 #include "Parameters.h"
 #include "Outfit.h"
 
+
 class Character
 {
 public:

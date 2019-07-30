@@ -6,6 +6,8 @@
 #include "thing.h"
 #include "damage.h"
 
+class Character;
+
 class Defense : public Thing
 {
 public:
@@ -14,7 +16,7 @@ public:
     void discard_effect(Character &character) override;
     types get_resist_type();
     std::uint8_t get_resist_power();
-    ~Defense()=0;
+    virtual ~Defense()=0;
 private:
     types m_resist_type;
     std::uint8_t m_resist_power;

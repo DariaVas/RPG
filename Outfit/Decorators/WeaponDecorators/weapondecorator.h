@@ -9,29 +9,13 @@
 class WeaponDecorator : public Weapon
 {
 public:
-    WeaponDecorator(Weapon &decorator) :
-            Weapon(decorator),
-            m_decorator(decorator)
-    {
+    WeaponDecorator(Weapon &decorator);
+    virtual Damage generate_damage(Character &character) override;
 
-    }
+    virtual void effect_before_attack(Character &character) override;
+    virtual void effect_after_attack(Character &character) override;
 
-    virtual Damage generate_damage(Character &character) override
-    {
-        return m_decorator.generate_damage(character);
-    }
-
-    virtual void effect_before_attack(Character &character) override
-    {
-        return m_decorator.effect_before_attack(character);
-    }
-
-    virtual void effect_after_attack(Character &character) override
-    {
-        return m_decorator.effect_after_attack(character);
-    }
-
-    virtual ~WeaponDecorator() override = default;
+    virtual ~WeaponDecorator() = 0;
 
 protected:
     Weapon &m_decorator;

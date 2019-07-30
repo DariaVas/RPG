@@ -1,4 +1,5 @@
 #include "magicdefense.h"
+#include <stdexcept>
 
 MagicDefense::MagicDefense(const std::string &name, types resist_type, std::uint8_t resist_power) :
         Defense(name, resist_type, resist_power)
@@ -9,7 +10,7 @@ MagicDefense::MagicDefense(const std::string &name, types resist_type, std::uint
     }
 }
 
-void MagicDefense::reduce_durability(unsigned int value) override
+void MagicDefense::reduce_durability(unsigned int value)
 {
     return;
 }

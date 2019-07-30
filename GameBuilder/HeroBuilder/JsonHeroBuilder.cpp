@@ -15,41 +15,41 @@ JsonHeroBuilder::JsonHeroBuilder(const std::string &file_path)
 {
 }
 
-std::unique_ptr <Defense> JsonHeroBuilder::decorate_defence(numDefenseDecorator &decorator_num, std::unique_ptr <Defense> &decorated_obj)
+std::unique_ptr <Defense> JsonHeroBuilder::decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj)
 {
     std::unique_ptr <Defense> decorator;
     switch (decorator_num)
     {
         case numDefenseDecorator::increase_characteristic:
-            decorator.reset(new IncreaseCharacteristicDefense(std::move(decorated_obj),
-                                                              m_config["armor_effects"]["increase_characteristic"]["characteristic_type"].get<std::string>(),
-                                                              m_config["armor_effects"]["increase_characteristic"]["points_to_increase"].get<uint8_t>()));
+            decorator.reset(new IncreaseCharacteristicDefense(decorated_obj,
+                                                              m_config["armor_effects"]["increase_characteristic"]["points_to_increase"].get<uint8_t>(),
+                                                              m_config["armor_effects"]["increase_characteristic"]["characteristic_type"].get<std::string>()));
             break;
 
         case numDefenseDecorator::increase_resists_to_damage:
-            decorator.reset(new IncreaseResistanceToDamage(std::move(decorated_obj),
-                                                           m_config["armor_effects"]["increase_resists_to_damage"]["damage_type"].get<types>(),
-                                                           m_config["armor_effects"]["increase_resists_to_damage"]["resist_points"].get<uint8_t>()
+            decorator.reset(new IncreaseResistanceToDamage(decorated_obj,
+                                                           m_config["armor_effects"]["increase_resists_to_damage"]["resist_points"].get<uint8_t>(),
+                                                           m_config["armor_effects"]["increase_resists_to_damage"]["damage_type"].get<types>()
             ));
 
             break;
         case numDefenseDecorator::increase_reflection_to_damage:
-            decorator.reset(new IncreaseReflectionOfDamage(std::move(decorated_obj),
-                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["damage_type"].get<types>(),
-                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["reflection_points"].get<uint8_t>()
+            decorator.reset(new IncreaseReflectionOfDamage(decorated_obj,
+                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["reflection_points"].get<uint8_t>(),
+                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["damage_type"].get<types>()
             ));
 
             break;
 
         case numDefenseDecorator::increase_chance_of_critical_hit:
-            decorator.reset(new IncreaseCriticalHitChanceDefense(std::move(decorated_obj),
-                                                                 m_config["armor_effects"]["increase_chance_of_critical_hit"]["points_to_increase"].get<uint8_t>(),
+            decorator.reset(new IncreaseCriticalHitChanceDefense(decorated_obj,
+                                                                 m_config["armor_effects"]["increase_chance_of_critical_hit"]["points_to_increase"].get<uint8_t>()
             ));
             break;
 
         case numDefenseDecorator::increase_chance_of_dodge:
 
-            decorator.reset(new IncreaseChanceOfDobge(std::move(decorated_obj),
+            decorator.reset(new IncreaseChanceOfDobge(decorated_obj,
                                                       m_config["armor_effects"]["increase_chance_of_dodge"]["points_to_increase"].get<uint8_t>()));
             break;
 
@@ -69,7 +69,7 @@ std::unique_ptr <Defense> JsonHeroBuilder::build_magic_amulet(const std::string 
     for (json::iterator it = amulet_info["additional_effects"].begin();
          it != amulet_info["additional_effects"].end(); ++it)
     {
-        amulet = decorate_defence(amulet, *it);
+        amulet = decorate_defence((*it).get<numDefenseDecorator>(), amulet);
     }
     return amulet;
 }
@@ -122,3 +122,8 @@ std::vector <Weapon> JsonHeroBuilder::build_weapon(const std::string &hero)
 }
 
 
+
+JsonHeroBuilder::~JsonHeroBuilder()
+{
+    
+}

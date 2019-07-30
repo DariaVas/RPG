@@ -1,4 +1,4 @@
-#include <math.h>
+#include <cmath>
 #include "weapon.h"
 
 Weapon::Weapon(const std::string &name, holding_type hold_type, types damage_type, std::uint8_t weapon_power) :
@@ -50,4 +50,9 @@ void Weapon::apply_effect(Character &character)
 void Weapon::discard_effect(Character &character)
 {
 
+}
+
+Weapon::~Weapon()
+{
+    
 }

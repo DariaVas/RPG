@@ -3,7 +3,9 @@
 #ifndef THING_H
 #define THING_H
 
-class Character;
+#include <cstdint>
+#include <string>
+#include "Character.h"
 
 class Thing
 {

@@ -12,12 +12,12 @@ Character HeroBuilder::build_second_hero()
 
 Character HeroBuilder::build_hero(const std::string &hero)
 {
-    Outfit outfit(build_hero_outfit);
-    Characterization characterization(build_hero_personality);
+    Outfit outfit(build_hero_outfit(hero));
+    Characterization characterization(build_hero_personality(hero));
     return Character(outfit, characterization);
 }
 
-Outfit HeroBuilder::build_hero_otfit(const std::string &hero)
+Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
 {
 //    std::vector < Defense &> defense_things;
 //    std::vector <MagicDefense> rings(build_magic_rings(name));
@@ -41,10 +41,15 @@ Outfit HeroBuilder::build_hero_otfit(const std::string &hero)
 //        defense_things.push_back(build_shield(hero));
 //    }
 //    return Outfit(defense_things, weapons);
-
+    return Outfit();
 }
 
 Characterization HeroBuilder::build_hero_personality(const std::string &hero)
 {
-    return Characterization;
+    return Characterization();
+}
+
+HeroBuilder:: ~HeroBuilder()
+{
+    
 }

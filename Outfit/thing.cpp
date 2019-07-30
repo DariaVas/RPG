@@ -1,4 +1,5 @@
 #include "thing.h"
+#include "Character.h"
 
 Thing::Thing(const std::string &name) : m_durability(100), m_name(name)
 {

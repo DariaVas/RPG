@@ -10,35 +10,10 @@ class IncreaseCharacteristicDefense final : public DefenseDecorator
 {
 public:
 
-    IncreaseCharacteristicDefense(Defense &decorator, std::uint8_t value, std::string characteristic) :
-            DefenseDecorator(decorator),
-            m_characteristic_name(characteristic),
-            m_value(value)
-    {
+    IncreaseCharacteristicDefense(std::unique_ptr<Defense>& decorator, std::uint8_t value, std::string characteristic);
 
-    }
-
-    void apply_effect(Character &character) override
-    {
-        std::uint8_t ch_value = character.get_characteristic(m_characteristic_name);
-        character.set_characteristic(m_characteristic_name, ch_value + m_value);
-        std::cout << "Apply magic effect" << std::endl;
-        std::cout << "Increased " << m_characteristic_name << " characterictic, value to increase : " << m_value <<
-                  " characteristic before: " << ch_value
-                  << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
-        m_decorator.apply_effect(character);
-    }
-
-    void discard_effect(Character &character) override
-    {
-        std::uint8_t ch_value = character.get_characteristic(m_characteristic_name);
-        character.set_characteristic(m_characteristic_name, ch_value - m_value);
-        std::cout << "Discard magic effect" << std::endl;
-        std::cout << "Decreased " << m_characteristic_name << " characterictic, value to decrease : " << m_value <<
-                  " characteristic before: " << ch_value
-                  << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
-        m_decorator.discard_effect(character);
-    }
+    void apply_effect(Character &character) override;
+    void discard_effect(Character &character) override;
 
 private:
     std::string m_characteristic_name;

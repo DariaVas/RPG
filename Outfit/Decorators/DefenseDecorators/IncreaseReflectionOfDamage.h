@@ -8,26 +8,11 @@ class IncreaseReflectionOfDamage final : public DefenseDecorator
 {
 public:
 
-    IncreaseReflectionOfDamage(Defense &decorator, std::uint8_t value, types &damage_type) :
-            DefenseDecorator(decorator),
-            m_damage_type(damage_type),
-            m_reflection_power(value)
-    {
+    IncreaseReflectionOfDamage(std::unique_ptr<Defense> &decorator, std::uint8_t value, types damage_type);
+    
+    void apply_effect(Character &character) override;
 
-    }
-
-    void apply_effect(Character &character) override
-    {
-
-        character.change_reflection_of_damage(m_damage_type, m_reflection_power);
-        m_decorator.apply_effect(character);
-    }
-
-    void discard_effect(Character &character) override
-    {
-        character.change_reflection_of_damage(m_damage_type, -m_reflection_power);
-        m_decorator.discard_effect(character);
-    }
+    void discard_effect(Character &character) override;
 
 private:
     types m_damage_type;

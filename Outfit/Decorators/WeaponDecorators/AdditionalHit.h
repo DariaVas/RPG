@@ -7,19 +7,9 @@
 class AdditionalHit : public WeaponDecorator
 {
 public:
-    AdditionalHit(Weapon &decorator, std::uint8_t power) :
-            WeaponDecorator(decorator),
-            m_damage_power(power)
-    {
+    AdditionalHit(Weapon &decorator, std::uint8_t power) ;
 
-    }
-
-    Damage generate_damage(Character &character) override
-    {
-        Damage damage = m_decorator.generate_damage(character);
-        damage.damage_power += m_damage_power;
-        return damage;
-    }
+    Damage generate_damage(Character &character) override;
 
 private:
     std::uint8_t m_damage_power;

@@ -8,7 +8,7 @@ class JsonHeroBuilder : public HeroBuilder
 {
 public:
     JsonHeroBuilder(const std::string &file_path);
-
+    ~JsonHeroBuilder() override;
 private:
     std::vector <MagicDefense> build_magic_rings(const std::string &hero) override;
 
@@ -29,7 +29,7 @@ private:
     std::vector <Weapon> build_weapon(const std::string &hero) override;
 
     std::string read_json_file();
-    std::unique_ptr <Defense> decorate_defence(numDefenseDecorator &decorator_num, std::unique_ptr <Defense> &decorated_obj);
+    std::unique_ptr <Defense> decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj);
 
 
 private:

@@ -9,24 +9,11 @@
 class DefenseDecorator : public Defense
 {
 public:
-    DefenseDecorator(std::unique_ptr<Defense>& decorator) :
-            Defense(decorator->get_name(), decorator->get_resist_type(),
-                    decorator->get_resist_power()),
-            m_decorator(std::move(decorator))
-    {
+    DefenseDecorator(std::unique_ptr<Defense>& decorator);
 
-    }
+    void apply_effect(Character &character);
 
-    void apply_effect(Character &character) override
-    {
-        m_decorator.apply_effect(character);
-    }
-
-    void discard_effect(Character &character) override
-    {
-        m_decorator.apply_effect(character);
-    }
-
+    void discard_effect(Character &character);
     virtual ~DefenseDecorator() = 0;
 
 protected:

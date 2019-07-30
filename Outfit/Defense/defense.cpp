@@ -1,5 +1,6 @@
 #include "defense.h"
 #include "damage.h"
+#include "Character.h"
 
 Defense::Defense(const std::string &name, types resist_type, std::uint8_t resist_power) :
         Thing(name),
@@ -26,4 +27,9 @@ types Defense::get_resist_type()
 std::uint8_t Defense::get_resist_power()
 {
     return m_resist_power;
+}
+
+Defense::~Defense()
+{
+    
 }

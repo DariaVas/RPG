@@ -7,25 +7,10 @@
 class IncreaseChanceOfDobge final : public DefenseDecorator
 {
 public:
-    IncreaseChanceOfDobge(Defense &decorator, std::uint8_t value) :
-            DefenseDecorator(decorator),
-            m_dobge_power(value)
-    {
+    IncreaseChanceOfDobge(std::unique_ptr<Defense> &decorator, std::uint8_t value);
 
-    }
-
-    void apply_effect(Character &character) override
-    {
-
-        character.set_parameter(Parameter::dodge_chance, m_dobge_power);
-        m_decorator.apply_effect(character);
-    }
-
-    void discard_effect(Character &character) override
-    {
-        character.set_parameter(Parameter::dodge_chance, -m_dobge_power);
-        m_decorator.discard_effect(character);
-    }
+    void apply_effect(Character &character) override;
+    void discard_effect(Character &character) override;
 
 private:
     std::uint8_t m_dobge_power;
