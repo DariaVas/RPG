@@ -1,6 +1,6 @@
-#CC=/usr/bin/clang++-4.0
-CC=g++
-CFLAGS=-std=c++11 -Wall
+CC=/usr/bin/clang++-4.0
+#CC=g++
+CFLAGS=-std=c++11 -Wall  -fPIC
 INC=\
     $(PWD) \
     $(PWD)/Character \
@@ -15,32 +15,33 @@ INC=\
 INC_PARAMS=$(foreach d, $(INC), -I$d)
 LDFLAGS=
 SOURCES=\
-    ./main.cpp \
-    ./Character/Character.cpp \
-    ./Outfit/thing.cpp \
-    ./Outfit/Outfit.cpp \
-    ./Outfit/Weapon/magicweapon.cpp \
-    ./Outfit/Weapon/physicalweapon.cpp \
-    ./Outfit/Weapon/weapon.cpp \
-    ./Outfit/Defense/defense.cpp \
-    ./Outfit/Defense/magicdefense.cpp \
-    ./Outfit/Defense/physicaldefense.cpp \
-    ./GameBuilder/HeroBuilder/HeroBuilder.cpp \
-    ./GameBuilder/HeroBuilder/JsonHeroBuilder.cpp \
-    ./Outfit/Decorators/DefenseDecorators/DefenseDecorator.cpp \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseChanceOfDobge.cpp \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseCharacteristicDefense.cpp \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseCriticalHitChanceDefense.cpp \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseReflectionOfDamage.cpp \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseResistanceToDamage.cpp \
-    ./Outfit/Decorators/WeaponDecorators/AdditionalHit.cpp \
-    ./Outfit/Decorators/WeaponDecorators/BreakingWeapon.cpp \
-    ./Outfit/Decorators/WeaponDecorators/DamnedWeapon.cpp \
-    ./Outfit/Decorators/WeaponDecorators/IncreaseCharacteristicWeapon.cpp \
-    ./Outfit/Decorators/WeaponDecorators/IncreaseCriticalHitChanceWeapon.cpp \
-    ./Outfit/Decorators/WeaponDecorators/IncreaseCriticalHitModifier.cpp \
-    ./Outfit/Decorators/WeaponDecorators/PiercingWeapon.cpp \
-    ./Outfit/Decorators/WeaponDecorators/StunningWeapon.cpp
+    ./main.o \
+    ./Character/Character.o \
+    ./Outfit/thing.o \
+    ./Outfit/Outfit.o \
+    ./Outfit/Weapon/magicweapon.o \
+    ./Outfit/Weapon/physicalweapon.o \
+    ./Outfit/Weapon/weapon.o \
+    ./Outfit/Defense/defense.o \
+    ./Outfit/Defense/magicdefense.o \
+    ./Outfit/Defense/physicaldefense.o \
+    ./GameBuilder/HeroBuilder/HeroBuilder.o \
+    ./GameBuilder/HeroBuilder/JsonHeroBuilder.o \
+    ./Outfit/Decorators/DefenseDecorators/DefenseDecorator.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseChanceOfDobge.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseCharacteristicDefense.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseCriticalHitChanceDefense.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseReflectionOfDamage.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseResistanceToDamage.o \
+    ./Outfit/Decorators/WeaponDecorators/weapondecorator.o \
+    ./Outfit/Decorators/WeaponDecorators/AdditionalHit.o \
+    ./Outfit/Decorators/WeaponDecorators/BreakingWeapon.o \
+    ./Outfit/Decorators/WeaponDecorators/DamnedWeapon.o \
+    ./Outfit/Decorators/WeaponDecorators/IncreaseCharacteristicWeapon.o \
+    ./Outfit/Decorators/WeaponDecorators/IncreaseCriticalHitChanceWeapon.o \
+    ./Outfit/Decorators/WeaponDecorators/IncreaseCriticalHitModifier.o \
+    ./Outfit/Decorators/WeaponDecorators/PiercingWeapon.o \
+    ./Outfit/Decorators/WeaponDecorators/StunningWeapon.o
 
 
 OBJECTS=$(SOURCES:.cpp=.o)

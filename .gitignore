@@ -1,1 +1,4 @@
 RPG.*
+*.o
+RPG
+.idea/*

@@ -22,3 +22,8 @@ void WeaponDecorator::effect_after_attack(Character &character)
 {
     return m_decorator.effect_after_attack(character);
 }
+
+WeaponDecorator::~WeaponDecorator()
+{
+
+}

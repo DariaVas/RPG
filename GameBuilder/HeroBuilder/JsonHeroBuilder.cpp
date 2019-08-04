@@ -74,6 +74,10 @@ std::unique_ptr <Defense> JsonHeroBuilder::build_magic_amulet(const std::string 
     return amulet;
 }
 
+std::vector <MagicDefense> JsonHeroBuilder::build_magic_rings(const std::string &hero)
+{
+
+}
 
 std::string JsonHeroBuilder::read_json_file()
 {

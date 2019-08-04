@@ -7,7 +7,7 @@ StunningWeapon::StunningWeapon(Weapon &decorator, std::uint8_t stun_seconds) :
 
     }
 
-    void StunningWeapon::effect_after_attack(Character &character) override
+    void StunningWeapon::effect_after_attack(Character &character)
     {
         character.set_stun(m_stun_seconds);
         m_decorator.effect_after_attack(character);

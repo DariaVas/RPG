@@ -1,7 +1,7 @@
 #include "IncreaseReflectionOfDamage.h"
 
 
-IncreaseReflectionOfDamage::IncreaseReflectionOfDamage(std::unique_ptr<Defense> &decorator, std::uint8_t value, types &damage_type) :
+IncreaseReflectionOfDamage::IncreaseReflectionOfDamage(std::unique_ptr<Defense> &decorator, std::uint8_t value, types damage_type) :
         DefenseDecorator(decorator),
         m_damage_type(damage_type),
         m_reflection_power(value)

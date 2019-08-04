@@ -1,6 +1,6 @@
 #include "IncreaseCharacteristicWeapon.h"
 
-IncreaseCriticalHitChanceWeapon::IncreaseCriticalHitChanceWeapon(Weapon &decorator, std::uint8_t value, std::string characteristic) :
+IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(Weapon &decorator, std::uint8_t value, std::string characteristic) :
 WeaponDecorator(decorator),
 m_characteristic_name(characteristic),
 m_value(value)
@@ -8,7 +8,7 @@ m_value(value)
 
 }
 
-void IncreaseCriticalHitChanceWeapon::apply_effect(Character &character)
+void IncreaseCharacteristicWeapon::apply_effect(Character &character)
 {
 std::uint8_t ch_value = character.get_characteristic(m_characteristic_name);
 character.set_characteristic(m_characteristic_name, ch_value + m_value);
@@ -19,7 +19,7 @@ std::cout << "Increased " << m_characteristic_name << " characteristic, value to
 m_decorator.apply_effect(character);
 }
 
-void IncreaseCriticalHitChanceWeapon::discard_effect(Character &character)
+void IncreaseCharacteristicWeapon::discard_effect(Character &character)
 {
 std::uint8_t ch_value = character.get_characteristic(m_characteristic_name);
 character.set_characteristic(m_characteristic_name, ch_value - m_value);
