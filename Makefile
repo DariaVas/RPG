@@ -28,7 +28,7 @@ SOURCES=\
     ./GameBuilder/HeroBuilder/HeroBuilder.o \
     ./GameBuilder/HeroBuilder/JsonHeroBuilder.o \
     ./Outfit/Decorators/DefenseDecorators/DefenseDecorator.o \
-    ./Outfit/Decorators/DefenseDecorators/IncreaseChanceOfDobge.o \
+    ./Outfit/Decorators/DefenseDecorators/IncreaseChanceOfDodge.o \
     ./Outfit/Decorators/DefenseDecorators/IncreaseCharacteristicDefense.o \
     ./Outfit/Decorators/DefenseDecorators/IncreaseCriticalHitChanceDefense.o \
     ./Outfit/Decorators/DefenseDecorators/IncreaseReflectionOfDamage.o \
@@ -51,6 +51,7 @@ EXECUTABLE=RPG
 all: $(EXECUTABLE)
 clean:
 	find . -type f -name '*.o' -delete
+	rm -f RPG
 	
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS) -ldl

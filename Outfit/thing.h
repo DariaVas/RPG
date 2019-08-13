@@ -19,8 +19,11 @@ public:
     virtual void apply_effect(Character &character) = 0;
 
     virtual void discard_effect(Character &character) = 0;
-    std::uint8_t get_durability();
+
+    size_t get_durability();
+
     std::string get_name();
+
     virtual ~Thing() = default;
 
 private:

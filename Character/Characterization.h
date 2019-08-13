@@ -7,7 +7,7 @@
 
 namespace Characteristic {
 
-    const std::string strenght = "strenght";
+    const std::string strength = "strength";
     const std::string sleight = "sleight";
     const std::string intelligence = "intelligence";
     const std::string physique = "physique";
@@ -19,7 +19,7 @@ struct Characterization
 public:
     Characterization() :
             m_characterization{
-                    {Characteristic::strenght,     0},
+                    {Characteristic::strength,     0},
                     {Characteristic::sleight,      0},
                     {Characteristic::intelligence, 0},
                     {Characteristic::physique,     0},
@@ -28,7 +28,7 @@ public:
             }
     {}
 
-    std::uint8_t get_characteristic(std::string feature_name)
+    size_t get_characteristic(std::string feature_name)
     {
         auto feature = m_characterization.find(feature_name);
         if (feature == m_characterization.end())
@@ -39,7 +39,7 @@ public:
 
     }
 
-    void set_characteristic(std::string feature_name, std::uint8_t feature_value)
+    void set_characteristic(std::string feature_name, size_t feature_value)
     {
         auto feature = m_characterization.find(feature_name);
         if (feature == m_characterization.end())
@@ -50,7 +50,7 @@ public:
     }
 
 private:
-    std::map <std::string, std::uint8_t> m_characterization;
+    std::map <std::string, size_t> m_characterization;
 };
 
 

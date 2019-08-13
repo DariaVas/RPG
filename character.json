@@ -266,6 +266,11 @@
           "type_of_resistance": 3,
           "resistance": 15,
           "additional_effects": [
+            1,
+            2,
+            3,
+            4,
+            5
           ]
         }
       }

@@ -15,9 +15,9 @@ enum types
 struct Damage
 {
     types type;
-    std::uint8_t damage_power;
-    std::uint8_t piercing_power;
-    std::uint8_t critical_damage_multiplier;
+    size_t damage_power;
+    size_t piercing_power;
+    size_t critical_damage_multiplier;
 };
 
 #endif // DAMAGE_H

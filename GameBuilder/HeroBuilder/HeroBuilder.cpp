@@ -49,7 +49,7 @@ Characterization HeroBuilder::build_hero_personality(const std::string &hero)
     return Characterization();
 }
 
-HeroBuilder:: ~HeroBuilder()
+HeroBuilder::~HeroBuilder()
 {
-    
+
 }

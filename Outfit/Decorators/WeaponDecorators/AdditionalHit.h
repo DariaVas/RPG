@@ -7,12 +7,12 @@
 class AdditionalHit : public WeaponDecorator
 {
 public:
-    AdditionalHit(Weapon &decorator, std::uint8_t power) ;
+    AdditionalHit(Weapon &decorator, size_t power);
 
     Damage generate_damage(Character &character) override;
 
 private:
-    std::uint8_t m_damage_power;
+    size_t m_damage_power;
 };
 
 #endif // ADDITIONALHIT_H

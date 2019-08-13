@@ -7,12 +7,12 @@
 
 class PiercingWeapon final : public WeaponDecorator
 {
-    PiercingWeapon(Weapon &decorator, std::uint8_t piercing_power) ;
+    PiercingWeapon(Weapon &decorator, size_t piercing_power);
 
     Damage generate_damage(Character &character) override;
 
 private:
-    std::uint8_t m_piercing_power;
+    size_t m_piercing_power;
 };
 
 #endif // PIERCINGWEAPON_H

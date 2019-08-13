@@ -1,14 +1,16 @@
 #pragma once
 #ifndef OUTFIT_H
 #define OUTFIT_H
+
 #include <memory>
 
 class Outfit
 {
 public:
-    Outfit()= default;
-    ~Outfit()= default;
-    
+    Outfit() = default;
+
+    ~Outfit() = default;
+
 //    Outfit(std::vector <std::unique_ptr<Defense>> &&defense_things, std::vector <std::unique_ptr<Weapon>> &&weapons)
 //    {
 

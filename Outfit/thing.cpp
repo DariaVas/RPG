@@ -22,7 +22,7 @@ bool Thing::is_broken()
     return m_durability == 0;
 }
 
-std::uint8_t Thing::get_durability()
+size_t Thing::get_durability()
 {
     return m_durability;
 }

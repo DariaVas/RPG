@@ -9,10 +9,12 @@
 class IncreaseCriticalHitModifier final : public WeaponDecorator
 {
 public:
-    IncreaseCriticalHitModifier(Weapon &decorator, std::uint8_t value);
+    IncreaseCriticalHitModifier(Weapon &decorator, size_t value);
+
     Damage generate_damage(Character &character) override;
+
 private:
-    std::uint8_t m_increase_value;
+    size_t m_increase_value;
 };
 
 

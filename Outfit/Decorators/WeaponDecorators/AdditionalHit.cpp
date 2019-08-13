@@ -1,6 +1,6 @@
 #include "AdditionalHit.h"
 
-AdditionalHit::AdditionalHit(Weapon &decorator, std::uint8_t power) :
+AdditionalHit::AdditionalHit(Weapon &decorator, size_t power) :
         WeaponDecorator(decorator),
         m_damage_power(power)
 {

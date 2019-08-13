@@ -19,15 +19,16 @@ public:
 
     virtual ~HeroBuilder() = 0;
 
-private:
+public:
     Character build_hero(const std::string &hero);
+
     Outfit build_hero_outfit(const std::string &hero);
 
     Characterization build_hero_personality(const std::string &hero);
 
     virtual std::vector <MagicDefense> build_magic_rings(const std::string &hero) = 0;
 
-    virtual std::unique_ptr <Defense>  build_magic_amulet(const std::string &hero) = 0;
+    virtual std::unique_ptr <Defense> build_magic_amulet(const std::string &hero) = 0;
 
     virtual PhysicalDefense build_head_protection(const std::string &hero) = 0;
 

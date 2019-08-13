@@ -7,13 +7,13 @@
 
 class DamnedWeapon final : public WeaponDecorator
 {
-    DamnedWeapon(Weapon &decorator, std::uint8_t value, std::string characteristic) ;
+    DamnedWeapon(Weapon &decorator, size_t value, std::string characteristic);
 
     void effect_after_attack(Character &character) override;
 
 private:
     std::string m_characteristic_name;
-    std::uint8_t m_value;
+    size_t m_value;
     bool m_first_damage;
 };
 

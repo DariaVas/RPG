@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "JsonHeroBuilder.h"
-#include "IncreaseChanceOfDobge.h"
+#include "IncreaseChanceOfDodge.h"
 #include "IncreaseResistanceToDamage.h"
 #include "IncreaseCriticalHitChanceDefense.h"
 #include "IncreaseReflectionOfDamage.h"
@@ -15,7 +15,8 @@ JsonHeroBuilder::JsonHeroBuilder(const std::string &file_path)
 {
 }
 
-std::unique_ptr <Defense> JsonHeroBuilder::decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj)
+std::unique_ptr <Defense>
+JsonHeroBuilder::decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj)
 {
     std::unique_ptr <Defense> decorator;
     switch (decorator_num)
@@ -49,7 +50,7 @@ std::unique_ptr <Defense> JsonHeroBuilder::decorate_defence(numDefenseDecorator 
 
         case numDefenseDecorator::increase_chance_of_dodge:
 
-            decorator.reset(new IncreaseChanceOfDobge(decorated_obj,
+            decorator.reset(new IncreaseChanceOfDodge(decorated_obj,
                                                       m_config["armor_effects"]["increase_chance_of_dodge"]["points_to_increase"].get<uint8_t>()));
             break;
 
@@ -126,8 +127,7 @@ std::vector <Weapon> JsonHeroBuilder::build_weapon(const std::string &hero)
 }
 
 
-
 JsonHeroBuilder::~JsonHeroBuilder()
 {
-    
+
 }
