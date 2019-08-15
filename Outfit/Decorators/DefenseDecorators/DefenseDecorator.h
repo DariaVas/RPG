@@ -2,9 +2,9 @@
 #ifndef DEFENSEDECORATOR_H
 #define DEFENSEDECORATOR_H
 
-#include "defense.h"
 #include <iostream>
 #include <memory>
+#include "Defense.h"
 
 class DefenseDecorator : public Defense
 {

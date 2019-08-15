@@ -4,8 +4,8 @@
 #define WEAPON_H
 
 #include <vector>
-#include <damage.h>
-#include "thing.h"
+#include <Damage.h>
+#include "Thing.h"
 #include "Character.h"
 
 enum holding_type
@@ -29,13 +29,15 @@ public:
 
     void discard_effect(Character &character) override;
 
+    holding_type get_hold_type() const;
+
+    size_t get_weapon_power() const;
+
+    types get_damage_type() const;
+
     virtual ~Weapon() = 0;
 
 protected:
-    size_t get_weapon_power();
-
-    types get_damage_type();
-
     size_t calculate_modifier_of_critical_hit(size_t characteristic_value);
 
     size_t calculate_additional_damage(size_t characteristic_value);

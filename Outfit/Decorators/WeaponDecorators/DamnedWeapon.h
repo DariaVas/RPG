@@ -3,11 +3,12 @@
 #ifndef DAMNEDWEAPON_H
 #define DAMNEDWEAPON_H
 
-#include "weapondecorator.h"
+#include "WeaponDecorator.h"
 
 class DamnedWeapon final : public WeaponDecorator
 {
-    DamnedWeapon(Weapon &decorator, size_t value, std::string characteristic);
+public:
+    DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic);
 
     void effect_after_attack(Character &character) override;
 

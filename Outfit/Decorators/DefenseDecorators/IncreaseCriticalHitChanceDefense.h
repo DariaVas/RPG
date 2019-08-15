@@ -2,10 +2,10 @@
 #ifndef INCREASECRITICALHITCHANCEDEFENSE_H
 #define INCREASECRITICALHITCHANCEDEFENSE_H
 
-#include "DefenseDecorator.h"
 #include <iostream>
-#include "Character/Character.h"
-#include "Character/Parameters.h"
+#include "DefenseDecorator.h"
+#include "Character.h"
+#include "Parameters.h"
 
 class IncreaseCriticalHitChanceDefense final : public DefenseDecorator
 {

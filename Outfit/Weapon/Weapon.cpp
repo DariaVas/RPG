@@ -1,5 +1,5 @@
 #include <cmath>
-#include "weapon.h"
+#include "Weapon.h"
 
 Weapon::Weapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power) :
         Thing(name),
@@ -10,12 +10,12 @@ Weapon::Weapon(const std::string &name, holding_type hold_type, types damage_typ
 
 }
 
-size_t Weapon::get_weapon_power()
+size_t Weapon::get_weapon_power() const
 {
     return m_weapon_power;
 }
 
-types Weapon::get_damage_type()
+types Weapon::get_damage_type() const
 {
     return m_damage_type;
 }
@@ -33,13 +33,13 @@ void Weapon::effect_after_attack(Character &character)
 size_t Weapon::calculate_modifier_of_critical_hit(size_t characteristic_value)
 {
     const double koef = 0.3;
-    return static_cast<uint8_t>(std::floor((characteristic_value * koef) + 0.5));
+    return static_cast<size_t>(std::floor((characteristic_value * koef) + 0.5));
 }
 
 size_t Weapon::calculate_additional_damage(size_t characteristic_value)
 {
     const double koef = 0.4;
-    return static_cast<uint8_t>(std::floor((characteristic_value * koef) + 0.5));
+    return static_cast<size_t>(std::floor((characteristic_value * koef) + 0.5));
 }
 
 void Weapon::apply_effect(Character &character)
@@ -50,6 +50,11 @@ void Weapon::apply_effect(Character &character)
 void Weapon::discard_effect(Character &character)
 {
 
+}
+
+holding_type Weapon::get_hold_type() const
+{
+    return m_hold_type;
 }
 
 Weapon::~Weapon()

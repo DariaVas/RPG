@@ -3,7 +3,7 @@
 #ifndef PHYSICALDEFENSE_H
 #define PHYSICALDEFENSE_H
 
-#include "defense.h"
+#include "Defense.h"
 
 class PhysicalDefense : public Defense
 {

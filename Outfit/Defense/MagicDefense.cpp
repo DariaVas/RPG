@@ -1,5 +1,5 @@
-#include "magicdefense.h"
 #include <stdexcept>
+#include "MagicDefense.h"
 
 MagicDefense::MagicDefense(const std::string &name, types resist_type, size_t resist_power) :
         Defense(name, resist_type, resist_power)

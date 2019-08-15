@@ -1,6 +1,7 @@
-#include "magicweapon.h"
+#include <iostream>
 #include <stdexcept>
-#include "iostream"
+#include "MagicWeapon.h"
+
 
 MagicWeapon::MagicWeapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power)
         :

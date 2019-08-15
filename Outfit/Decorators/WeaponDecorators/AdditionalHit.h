@@ -2,12 +2,12 @@
 #ifndef ADDITIONALHIT_H
 #define ADDITIONALHIT_H
 
-#include "weapondecorator.h"
+#include "WeaponDecorator.h"
 
 class AdditionalHit : public WeaponDecorator
 {
 public:
-    AdditionalHit(Weapon &decorator, size_t power);
+    AdditionalHit(std::unique_ptr <Weapon> &decorator, size_t power);
 
     Damage generate_damage(Character &character) override;
 

@@ -3,13 +3,13 @@
 #ifndef INCREASECRITICALHITMODIFIER_H
 #define INCREASECRITICALHITMODIFIER_H
 
-#include "weapondecorator.h"
-#include "Character/Character.h"
+#include "WeaponDecorator.h"
+#include "Character.h"
 
 class IncreaseCriticalHitModifier final : public WeaponDecorator
 {
 public:
-    IncreaseCriticalHitModifier(Weapon &decorator, size_t value);
+    IncreaseCriticalHitModifier(std::unique_ptr <Weapon> &decorator, size_t value);
 
     Damage generate_damage(Character &character) override;
 

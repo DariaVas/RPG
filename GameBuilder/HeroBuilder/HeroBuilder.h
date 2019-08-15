@@ -5,10 +5,10 @@
 #include <vector>
 #include <memory>
 #include "Character.h"
-#include "magicweapon.h"
-#include "physicalweapon.h"
-#include "magicdefense.h"
-#include "physicaldefense.h"
+#include "MagicWeapon.h"
+#include "PhysicalWeapon.h"
+#include "MagicDefense.h"
+#include "PhysicalDefense.h"
 
 class HeroBuilder
 {
@@ -26,31 +26,33 @@ public:
 
     Characterization build_hero_personality(const std::string &hero);
 
-    virtual std::vector <MagicDefense> build_magic_rings(const std::string &hero) = 0;
+    virtual std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) = 0;
 
-    virtual std::unique_ptr <Defense> build_magic_amulet(const std::string &hero) = 0;
+    virtual std::vector <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) = 0;
 
-    virtual PhysicalDefense build_head_protection(const std::string &hero) = 0;
+    virtual std::unique_ptr <Defense> build_shield(const std::string &hero) = 0;
 
-    virtual PhysicalDefense build_torso_protection(const std::string &hero) = 0;
-
-    virtual PhysicalDefense build_legs_protection(const std::string &hero) = 0;
-
-    virtual PhysicalDefense build_boots_protection(const std::string &hero) = 0;
-
-    virtual PhysicalDefense build_gloves_protection(const std::string &hero) = 0;
-
-    virtual PhysicalDefense build_shield(const std::string &hero) = 0;
-
-    virtual std::vector <Weapon> build_weapon(const std::string &hero) = 0;
+    virtual std::vector <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) = 0;
 };
 
-enum numDefenseDecorator
+enum class numDefenseDecorator
 {
     increase_characteristic = 1,
     increase_resists_to_damage = 2,
     increase_reflection_to_damage,
     increase_chance_of_critical_hit,
     increase_chance_of_dodge,
+};
+
+enum class numWeaponDecorator
+{
+    additional_damage = 1,
+    increase_characteristic = 2,
+    increase_chance_of_critical_hit,
+    increase_damage_modifier,
+    stunning,
+    breaking,
+    piercing,
+    damn,
 };
 #endif //RPG_HEROBUILDER_H

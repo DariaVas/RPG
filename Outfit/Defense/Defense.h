@@ -3,8 +3,8 @@
 #ifndef DEFENSE_H
 #define DEFENSE_H
 
-#include "thing.h"
-#include "damage.h"
+#include "Thing.h"
+#include "Damage.h"
 
 class Character;
 

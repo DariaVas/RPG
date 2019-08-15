@@ -4,7 +4,7 @@
 
 #include <cstdint>
 #include <map>
-#include "damage.h"
+#include "Damage.h"
 
 namespace Parameter {
     const std::string HP = "strength";

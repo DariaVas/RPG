@@ -1,4 +1,4 @@
-#include "defense.h"
+#include "Defense.h"
 #include "DefenseDecorator.h"
 
 DefenseDecorator::DefenseDecorator(std::unique_ptr <Defense> &decorator) :

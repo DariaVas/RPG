@@ -13,29 +13,25 @@ public:
     ~JsonHeroBuilder() override;
 
 public:
-    std::vector <MagicDefense> build_magic_rings(const std::string &hero) override;
+    std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) override;
 
-    std::unique_ptr <Defense> build_magic_amulet(const std::string &hero) override;
+    std::vector <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) override;
 
-    PhysicalDefense build_head_protection(const std::string &hero) override;
+    std::unique_ptr <Defense> build_shield(const std::string &hero) override;
 
-    PhysicalDefense build_torso_protection(const std::string &hero) override;
+    std::vector <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) override;
 
-    PhysicalDefense build_legs_protection(const std::string &hero) override;
-
-    PhysicalDefense build_boots_protection(const std::string &hero) override;
-
-    PhysicalDefense build_gloves_protection(const std::string &hero) override;
-
-    PhysicalDefense build_shield(const std::string &hero) override;
-
-    std::vector <Weapon> build_weapon(const std::string &hero) override;
+    std::unique_ptr <Weapon> construct_weapon(const nlohmann::json &weapon_info);
 
     std::string read_json_file();
 
-    std::unique_ptr <Defense>
-    decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj);
+    void decorate_defence(numDefenseDecorator decorator_num, std::unique_ptr <Defense> &decorated_obj);
 
+    void apply_defence_decorators(const nlohmann::json &thing_info, std::unique_ptr <Defense> &decorated_obj);
+
+    void decorate_weapon(numWeaponDecorator decorator_num, std::unique_ptr <Weapon> &decorated_obj);
+
+    void apply_weapon_decorators(const nlohmann::json &thing_info, std::unique_ptr <Weapon> &decorated_obj);
 
 private:
     const std::string m_file_path;

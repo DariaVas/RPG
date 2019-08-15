@@ -3,7 +3,7 @@
 #ifndef PHYSICALWEAPON_H
 #define PHYSICALWEAPON_H
 
-#include "weapon.h"
+#include "Weapon.h"
 
 class PhysicalWeapon final : public Weapon
 {

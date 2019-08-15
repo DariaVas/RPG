@@ -3,11 +3,12 @@
 #ifndef PIERCINGWEAPON_H
 #define PIERCINGWEAPON_H
 
-#include "weapondecorator.h"
+#include "WeaponDecorator.h"
 
 class PiercingWeapon final : public WeaponDecorator
 {
-    PiercingWeapon(Weapon &decorator, size_t piercing_power);
+public:
+    PiercingWeapon(std::unique_ptr <Weapon> &decorator, size_t piercing_power);
 
     Damage generate_damage(Character &character) override;
 

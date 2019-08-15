@@ -3,11 +3,12 @@
 #ifndef STUNNINGWEAPON_H
 #define STUNNINGWEAPON_H
 
-#include "weapondecorator.h"
+#include "WeaponDecorator.h"
 
 class StunningWeapon final : public WeaponDecorator
 {
-    StunningWeapon(Weapon &decorator, size_t stun_seconds);
+public:
+    StunningWeapon(std::unique_ptr <Weapon> &decorator, size_t stun_seconds);
 
 
     void effect_after_attack(Character &character) override;

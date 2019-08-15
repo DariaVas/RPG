@@ -4,14 +4,14 @@
 #define INCREASINGCHARACTERISTICWEAPON_H
 
 #include <iostream>
-#include "weapondecorator.h"
-#include "Character/Character.h"
+#include "WeaponDecorator.h"
+#include "Character.h"
 
 class IncreaseCharacteristicWeapon final : public WeaponDecorator
 {
 public:
 
-    IncreaseCharacteristicWeapon(Weapon &decorator, size_t value, std::string characteristic);
+    IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic);
 
     void apply_effect(Character &character) override;
 

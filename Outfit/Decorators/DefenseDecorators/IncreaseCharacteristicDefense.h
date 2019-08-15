@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "DefenseDecorator.h"
-#include "Character/Character.h"
+#include "Character.h"
 
 class IncreaseCharacteristicDefense final : public DefenseDecorator
 {

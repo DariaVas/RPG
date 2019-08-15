@@ -3,7 +3,7 @@
 #ifndef MAGICDEFENSE_H
 #define MAGICDEFENSE_H
 
-#include "defense.h"
+#include "Defense.h"
 
 class MagicDefense final : public Defense
 {

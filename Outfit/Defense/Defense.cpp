@@ -1,6 +1,6 @@
 #include <iostream>
-#include "defense.h"
-#include "damage.h"
+#include "Defense.h"
+#include "Damage.h"
 #include "Character.h"
 
 Defense::Defense(const std::string &name, types resist_type, size_t resist_power) :

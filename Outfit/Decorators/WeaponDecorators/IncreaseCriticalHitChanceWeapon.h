@@ -3,17 +3,17 @@
 #ifndef INCREASEINGRITICALHITCHANCEWEAPON_H
 #define INCREASEINGRITICALHITCHANCEWEAPON_H
 
-#include "weapondecorator.h"
+#include "WeaponDecorator.h"
 #include <iostream>
-#include "Character/Character.h"
-#include "Character/Parameters.h"
+#include "Character.h"
+#include "Parameters.h"
 
 class IncreaseCriticalHitChanceWeapon final : public WeaponDecorator
 {
 
 public:
 
-    IncreaseCriticalHitChanceWeapon(Weapon &decorator, size_t value);
+    IncreaseCriticalHitChanceWeapon(std::unique_ptr <Weapon> &decorator, size_t value);
 
     void apply_effect(Character &character) override;
 

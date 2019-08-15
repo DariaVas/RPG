@@ -3,13 +3,13 @@
 #ifndef WEAPONDECORATOR_H
 #define WEAPONDECORATOR_H
 
-#include "weapon.h"
+#include "Weapon.h"
 #include <iostream>
 
 class WeaponDecorator : public Weapon
 {
 public:
-    WeaponDecorator(Weapon &decorator);
+    WeaponDecorator(std::unique_ptr <Weapon> &decorator);
 
     virtual Damage generate_damage(Character &character) override;
 
@@ -20,7 +20,7 @@ public:
     virtual ~WeaponDecorator() = 0;
 
 protected:
-    Weapon &m_decorator;
+    std::unique_ptr <Weapon> m_decorator;
 };
 
 #endif // WEAPONDECORATOR_H

@@ -17,7 +17,7 @@ void IncreaseCharacteristicDefense::apply_effect(Character &character)
     size_t ch_value = character.get_characteristic(m_characteristic_name);
     std::cout << "Thing: " << this->get_name() << ", applying effect \" increase characteristic\", "
               << " points to increase : " << ch_value
-              << " characteristic to increase : " << m_characteristic_name  << std::endl;
+              << " characteristic to increase : " << m_characteristic_name << std::endl;
 
     character.set_characteristic(m_characteristic_name, ch_value + m_value);
 

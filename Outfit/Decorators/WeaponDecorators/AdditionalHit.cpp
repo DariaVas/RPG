@@ -1,6 +1,6 @@
 #include "AdditionalHit.h"
 
-AdditionalHit::AdditionalHit(Weapon &decorator, size_t power) :
+AdditionalHit::AdditionalHit(std::unique_ptr <Weapon> &decorator, size_t power) :
         WeaponDecorator(decorator),
         m_damage_power(power)
 {
@@ -9,7 +9,7 @@ AdditionalHit::AdditionalHit(Weapon &decorator, size_t power) :
 
 Damage AdditionalHit::generate_damage(Character &character)
 {
-    Damage damage = m_decorator.generate_damage(character);
+    Damage damage = m_decorator->generate_damage(character);
     damage.damage_power += m_damage_power;
     return damage;
 }

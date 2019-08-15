@@ -1,6 +1,6 @@
 #include "IncreaseCharacteristicWeapon.h"
 
-IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(Weapon &decorator, size_t value,
+IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value,
                                                            std::string characteristic) :
         WeaponDecorator(decorator),
         m_characteristic_name(characteristic),
@@ -17,7 +17,7 @@ void IncreaseCharacteristicWeapon::apply_effect(Character &character)
     std::cout << "Increased " << m_characteristic_name << " characteristic, value to increase : " << m_value <<
               " characteristic before: " << ch_value
               << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
-    m_decorator.apply_effect(character);
+    m_decorator->apply_effect(character);
 }
 
 void IncreaseCharacteristicWeapon::discard_effect(Character &character)
@@ -28,5 +28,5 @@ void IncreaseCharacteristicWeapon::discard_effect(Character &character)
     std::cout << "Decreased " << m_characteristic_name << " characteristic, value to decrease : " << m_value <<
               " characteristic before: " << ch_value
               << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
-    m_decorator.discard_effect(character);
+    m_decorator->discard_effect(character);
 }

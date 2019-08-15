@@ -3,8 +3,8 @@
 #ifndef MAGICWEAPON_H
 #define MAGICWEAPON_H
 
-#include "weapon.h"
-#include "damage.h"
+#include "Weapon.h"
+#include "Damage.h"
 
 class MagicWeapon final : public Weapon
 {
