@@ -3,22 +3,23 @@
 #define OUTFIT_H
 
 #include <memory>
+#include <vector>
+#include "Weapon.h"
+#include "Defense.h"
 
 class Outfit
 {
 public:
-    Outfit() = default;
-
+    Outfit(Outfit&& o);
+    Outfit();
+    Outfit(std::vector <std::unique_ptr<Defense>> &defenses, std::vector <std::unique_ptr<Weapon>> &weapons);
+    void add_defense(std::unique_ptr<Defense>& defense);
+    void add_weapon(std::unique_ptr<Weapon>& weapon);
     ~Outfit() = default;
 
-//    Outfit(std::vector <std::unique_ptr<Defense>> &&defense_things, std::vector <std::unique_ptr<Weapon>> &&weapons)
-//    {
-
-//    }
-
 private:
-//    std::vector <std::unique_ptr<Defense>> m_defenses;
-//    std::vector <std::unique_ptr<Weapon>> m_weapons;
+    std::vector <std::unique_ptr<Defense>> m_defenses;
+    std::vector <std::unique_ptr<Weapon>> m_weapons;
 };
 
 #endif // OUTFIT_H

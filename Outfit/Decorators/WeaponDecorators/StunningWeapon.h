@@ -11,7 +11,7 @@ public:
     StunningWeapon(std::unique_ptr <Weapon> &decorator, size_t stun_seconds);
 
 
-    void effect_after_attack(Character &character) override;
+    void effect_after_attack(Character *character) override;
 
 private:
     size_t m_stun_seconds;

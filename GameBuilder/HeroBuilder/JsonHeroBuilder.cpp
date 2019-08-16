@@ -182,7 +182,7 @@ std::unique_ptr <Weapon> JsonHeroBuilder::construct_weapon(const nlohmann::json 
 
 std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::string &hero)
 {
-    std::vector <std::unique_ptr<Weapon>> weapons(2);
+    std::vector <std::unique_ptr<Weapon>> weapons;
 
     if (m_config[hero]["outfit"]["defense_and_weapon_slots"]["choice"] == "weapon_shield")
     {
@@ -251,6 +251,15 @@ std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_physical_defenses(
     }
 
     return physical_defenses;
+}
+
+CharacterizationObservable JsonHeroBuilder::build_hero_personality(const std::string &hero)
+{
+    auto characteristic = m_config[hero]["characteristic"];
+    return CharacterizationObservable(characteristic["strength"].get<size_t>(),
+            characteristic["sleight"].get<size_t>(), characteristic["intelligence"].get<size_t>(),
+            characteristic["physique"].get<size_t>(), characteristic["luck"].get<size_t>(),
+            characteristic["initiative"].get<size_t>());
 }
 
 JsonHeroBuilder::~JsonHeroBuilder()

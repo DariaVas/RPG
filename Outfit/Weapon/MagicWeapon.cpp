@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "MagicWeapon.h"
-
+#include "Character.h"
 
 MagicWeapon::MagicWeapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power)
         :
@@ -13,12 +13,12 @@ MagicWeapon::MagicWeapon(const std::string &name, holding_type hold_type, types 
     }
 }
 
-Damage MagicWeapon::generate_damage(Character &ch)
+Damage MagicWeapon::generate_damage(Character *ch)
 {
-    size_t additional_power = calculate_additional_damage(ch.get_characteristic(Characteristic::intelligence));
+    size_t additional_power = calculate_additional_damage(ch->get_characteristic(Characteristic::intelligence));
     size_t power = get_weapon_power() + additional_power;
     size_t modifier_of_critical_hit = calculate_modifier_of_critical_hit(
-            ch.get_characteristic(Characteristic::intelligence));
+            ch->get_characteristic(Characteristic::intelligence));
 
     std::cout << "Generated base magic damage, code of type:  " << get_damage_type() <<
               " weapon power = " <<

@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include "PhysicalDefense.h"
+#include "Character.h"
 
 PhysicalDefense::PhysicalDefense(const std::string &name, types resist_type, size_t resist_power) : Defense(name,
                                                                                                             resist_type,

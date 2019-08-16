@@ -13,9 +13,9 @@ class Defense : public Thing
 public:
     Defense(const std::string &name, types resist_type, size_t resist_power);
 
-    void apply_effect(Character &character) override;
+    void apply_effect(Character *character) override;
 
-    void discard_effect(Character &character) override;
+    void discard_effect(Character *character) override;
 
     types get_resist_type();
 

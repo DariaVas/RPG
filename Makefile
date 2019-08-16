@@ -12,14 +12,19 @@ INC=\
     $(PWD)/Outfit/Defense \
     $(PWD)/Outfit/Weapon
 
-debug: CFLAGS += -DDEBUG -g
-debug:all
+ifeq ($(DEBUG), 1)
+    CFLAGS += -DDEBUG -g
+else
+    CLFAGS += -O2
+endif
 
 INC_PARAMS=$(foreach d, $(INC), -I$d)
 LDFLAGS=
 SOURCES=\
     ./main.o \
     ./Character/Character.o \
+    ./Character/CharacterizationObservable.o \
+    ./Character/Parameters.o \
     ./Outfit/Thing.o \
     ./Outfit/Outfit.o \
     ./Outfit/Weapon/MagicWeapon.o \

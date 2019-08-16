@@ -1,4 +1,6 @@
 #include "IncreaseCharacteristicWeapon.h"
+#include "Character.h"
+
 
 IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value,
                                                            std::string characteristic) :
@@ -9,24 +11,16 @@ IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weap
 
 }
 
-void IncreaseCharacteristicWeapon::apply_effect(Character &character)
+void IncreaseCharacteristicWeapon::apply_effect(Character *character)
 {
-    size_t ch_value = character.get_characteristic(m_characteristic_name);
-    character.set_characteristic(m_characteristic_name, ch_value + m_value);
-    std::cout << "Apply magic effect" << std::endl;
-    std::cout << "Increased " << m_characteristic_name << " characteristic, value to increase : " << m_value <<
-              " characteristic before: " << ch_value
-              << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
+    character->increase_characteristic(m_characteristic_name, m_value);
+
     m_decorator->apply_effect(character);
 }
 
-void IncreaseCharacteristicWeapon::discard_effect(Character &character)
+void IncreaseCharacteristicWeapon::discard_effect(Character *character)
 {
-    size_t ch_value = character.get_characteristic(m_characteristic_name);
-    character.set_characteristic(m_characteristic_name, ch_value - m_value);
-    std::cout << "Discard magic effect" << std::endl;
-    std::cout << "Decreased " << m_characteristic_name << " characteristic, value to decrease : " << m_value <<
-              " characteristic before: " << ch_value
-              << " characteristic after: " << character.get_characteristic(m_characteristic_name) << std::endl;
+    character->decrease_characteristic(m_characteristic_name, m_value);
+
     m_decorator->discard_effect(character);
 }

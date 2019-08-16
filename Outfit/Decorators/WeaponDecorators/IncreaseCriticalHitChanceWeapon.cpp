@@ -1,4 +1,6 @@
 #include "IncreaseCriticalHitChanceWeapon.h"
+#include "Character.h"
+
 
 IncreaseCriticalHitChanceWeapon::IncreaseCriticalHitChanceWeapon(std::unique_ptr <Weapon> &decorator, size_t value) :
         WeaponDecorator(decorator),
@@ -7,25 +9,15 @@ IncreaseCriticalHitChanceWeapon::IncreaseCriticalHitChanceWeapon(std::unique_ptr
 
 }
 
-void IncreaseCriticalHitChanceWeapon::apply_effect(Character &character)
+void IncreaseCriticalHitChanceWeapon::apply_effect(Character *character)
 {
-    auto value = character.get_parameter(Parameter::critical_hit_chance);
-    character.set_parameter(Parameter::critical_hit_chance, value + m_increase_value);
-    std::cout << "Applied magic effect" << std::endl;
-    std::cout << "Increased chance of critical hit, value to increase : " << m_increase_value <<
-              " characteristic before: " << value
-              << " characteristic after: " << character.get_parameter(Parameter::critical_hit_chance) << std::endl;
+    character->increase_parameter(parameter::critical_hit_chance, m_increase_value);
     m_decorator->apply_effect(character);
 }
 
-void IncreaseCriticalHitChanceWeapon::discard_effect(Character &character)
+void IncreaseCriticalHitChanceWeapon::discard_effect(Character *character)
 {
-    auto value = character.get_parameter(Parameter::critical_hit_chance);
-    character.set_parameter(Parameter::critical_hit_chance, value - m_increase_value);
-    std::cout << "Discard magic effect" << std::endl;
-    std::cout << "Decreased chance of critical hit, value to decrease : " << m_increase_value <<
-              " characteristic before: " << value
-              << " characteristic after: " << character.get_parameter(Parameter::critical_hit_chance) << std::endl;
+    character->decrease_parameter(parameter::critical_hit_chance, m_increase_value);
 
     m_decorator->discard_effect(character);
 }

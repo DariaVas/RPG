@@ -5,24 +5,32 @@
 #include <cstdint>
 #include <map>
 #include "Damage.h"
+#include "Observer.h"
+#include "CharacterizationObservable.h"
 
-namespace Parameter {
-    const std::string HP = "strength";
-    const std::string carried_weight = "sleight";
-    const std::string damage_resistance = "intelligence";
-    const std::string damage_reflection = "physique";
-    const std::string dodge_chance = "luck";
-    const std::string critical_hit_chance = "initiative";
-}
-struct Parameters
+enum class parameter
 {
-    size_t HP;
-    size_t carried_weight;
-    std::map <types, size_t> damage_resistance;
-    std::map <types, size_t> damage_reflection;
-    size_t dodge_chance;
-    size_t critical_hit_chance;
-//    size_t critical_damage_multiplier;
+    HP=1,
+    carried_weight = 2,
+    dodge_chance,
+    critical_hit_chance,
+};
+
+
+class Parameters : public Observer
+{
+public:
+    void handle_event(const CharacterizationObservable* o) override;
+    size_t get_parameter(parameter p);
+    void set_parameter(parameter p, size_t value);
+    size_t get_damage_resistance(types resistance_type);
+    size_t get_damage_reflection(types reflection_type);
+    void set_damage_resistance(types resistance_type, size_t value);
+    void set_damage_reflection(types reflection_type, size_t value);
+private:
+    std::map <parameter, size_t> m_parameters;
+    std::map <types, size_t> m_damage_resistance;
+    std::map <types, size_t> m_damage_reflection;
 };
 
 #endif // PARAMETERS_H

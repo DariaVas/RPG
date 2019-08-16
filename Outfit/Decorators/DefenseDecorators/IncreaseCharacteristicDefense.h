@@ -12,9 +12,9 @@ public:
 
     IncreaseCharacteristicDefense(std::unique_ptr <Defense> &decorator, size_t value, std::string characteristic);
 
-    void apply_effect(Character &character) override;
+    void apply_effect(Character *character) override;
 
-    void discard_effect(Character &character) override;
+    void discard_effect(Character *character) override;
 
 private:
     std::string m_characteristic_name;

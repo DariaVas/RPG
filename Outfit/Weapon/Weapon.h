@@ -6,7 +6,6 @@
 #include <vector>
 #include <Damage.h>
 #include "Thing.h"
-#include "Character.h"
 
 enum holding_type
 {
@@ -19,15 +18,15 @@ class Weapon : public Thing
 public:
     Weapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power);
 
-    virtual Damage generate_damage(Character &character) = 0;
+    virtual Damage generate_damage(Character *character) = 0;
 
-    virtual void effect_before_attack(Character &character);
+    virtual void effect_before_attack(Character *character);
 
-    virtual void effect_after_attack(Character &character);
+    virtual void effect_after_attack(Character *character);
 
-    void apply_effect(Character &character) override;
+    void apply_effect(Character *character) override;
 
-    void discard_effect(Character &character) override;
+    void discard_effect(Character *character) override;
 
     holding_type get_hold_type() const;
 

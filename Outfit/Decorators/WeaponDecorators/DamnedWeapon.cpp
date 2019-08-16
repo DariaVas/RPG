@@ -1,4 +1,6 @@
 #include "DamnedWeapon.h"
+#include "Character.h"
+
 
 DamnedWeapon::DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic) :
         WeaponDecorator(decorator),
@@ -9,12 +11,11 @@ DamnedWeapon::DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, st
 
 }
 
-void DamnedWeapon::effect_after_attack(Character &character)
+void DamnedWeapon::effect_after_attack(Character *character)
 {
     if (m_first_damage)
     {
-        size_t value = character.get_characteristic(m_characteristic_name);
-        character.set_characteristic(m_characteristic_name, value + m_value);
+        character->increase_characteristic(m_characteristic_name, m_value);
         m_first_damage = false;
     }
     m_decorator->effect_after_attack(character);

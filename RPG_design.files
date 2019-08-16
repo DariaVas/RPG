@@ -1,8 +1,11 @@
+Character/CharacterizationObservable.cpp
+Character/CharacterizationObservable.h
+Character/Observer.h
+Character/Parameters.cpp
 README.md
 main.cpp
 Character/Character.cpp
 Character/Character.h
-Character/Characterization.h
 Character/Parameters.h
 Damage.h
 GameBuilder/ConfigGameCreator.h

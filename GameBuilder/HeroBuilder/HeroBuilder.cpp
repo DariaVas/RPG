@@ -13,40 +13,55 @@ Character HeroBuilder::build_second_hero()
 Character HeroBuilder::build_hero(const std::string &hero)
 {
     Outfit outfit(build_hero_outfit(hero));
-    Characterization characterization(build_hero_personality(hero));
+    CharacterizationObservable characterization(build_hero_personality(hero));
     return Character(outfit, characterization);
 }
 
 Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
 {
-//    std::vector < Defense &> defense_things;
-//    std::vector <MagicDefense> rings(build_magic_rings(name));
-//    if (rings.size() > 2)
-//    {
-//        throw std::logic_error("Count of magic rings cannot be more than 2");
-//    }
-//    std::move(std::make_move_iterator(rings.begin()),
-//              std::make_move_iterator(rings.end()),
-//              std::back_inserter(defense_things));
+    Outfit outfit;
 
-//    defense_things.push_back(build_magic_amulet(hero));
-//    defense_things.push_back(build_head_protection(hero));
-//    defense_things.push_back(build_torso_protection(hero));
-//    defense_things.push_back(build_legs_protection(hero));
-//    defense_things.push_back(build_gloves_protection(hero));
-//    std::vector <Weapon> weapons(build_weapon(hero));
-//    if (weapons.size() < 2)
-//    {
-//        // There is also slot for a shield
-//        defense_things.push_back(build_shield(hero));
-//    }
-//    return Outfit(defense_things, weapons);
-    return Outfit();
-}
+    std::vector<std::unique_ptr<Defense>> magic_defenses (build_magic_defenses(hero));
+    if(magic_defenses.size() != 3)
+    {
+        throw std::logic_error("Quantity of magic defenses must be equal 3 : 2 rings and 1 amulet");
+    }
+    for (auto& defense : magic_defenses)
+    {
+        outfit.add_defense(defense);
+    }
 
-Characterization HeroBuilder::build_hero_personality(const std::string &hero)
-{
-    return Characterization();
+    std::vector<std::unique_ptr<Defense>> physical_defenses (build_physical_defenses(hero));
+    if(physical_defenses.size() != 5)
+    {
+        throw std::logic_error("Quantity of physical defenses must be equal 5 : "
+                               "head"
+                               "torso"
+                               "legs"
+                               "gloves"
+                               "boots");
+    }
+    for (auto& defense : physical_defenses)
+    {
+        outfit.add_defense(defense);
+    }
+
+    std::unique_ptr<Defense> shield (build_shield(hero));
+    if(shield)
+    {
+        outfit.add_defense(shield);
+    }
+
+    std::vector<std::unique_ptr<Weapon>> weapons (build_weapon(hero));
+    if(weapons.size() > 2)
+    {
+        throw std::logic_error("Quantity of weapons cannot be greater than 2 : ");
+    }
+    for (auto& weapon : weapons)
+    {
+        outfit.add_weapon(weapon);
+    }
+    return outfit;
 }
 
 HeroBuilder::~HeroBuilder()

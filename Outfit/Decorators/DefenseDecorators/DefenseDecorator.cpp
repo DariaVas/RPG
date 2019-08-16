@@ -1,5 +1,7 @@
 #include "Defense.h"
 #include "DefenseDecorator.h"
+#include "Character.h"
+
 
 DefenseDecorator::DefenseDecorator(std::unique_ptr <Defense> &decorator) :
         Defense(decorator->get_name(), decorator->get_resist_type(),
@@ -9,14 +11,14 @@ DefenseDecorator::DefenseDecorator(std::unique_ptr <Defense> &decorator) :
 
 }
 
-void DefenseDecorator::apply_effect(Character &character)
+void DefenseDecorator::apply_effect(Character *character)
 {
 
     m_decorator->apply_effect(character);
 }
 
 
-void DefenseDecorator::discard_effect(Character &character)
+void DefenseDecorator::discard_effect(Character *character)
 {
     m_decorator->apply_effect(character);
 }

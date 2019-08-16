@@ -10,7 +10,7 @@ class DamnedWeapon final : public WeaponDecorator
 public:
     DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic);
 
-    void effect_after_attack(Character &character) override;
+    void effect_after_attack(Character *character) override;
 
 private:
     std::string m_characteristic_name;

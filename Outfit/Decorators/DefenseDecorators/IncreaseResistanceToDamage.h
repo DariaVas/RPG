@@ -10,9 +10,9 @@ public:
 
     IncreaseResistanceToDamage(std::unique_ptr <Defense> &decorator, size_t value, types damage_type);
 
-    void apply_effect(Character &character) override;
+    void apply_effect(Character *character) override;
 
-    void discard_effect(Character &character) override;
+    void discard_effect(Character *character) override;
 
 private:
     types m_damage_type;

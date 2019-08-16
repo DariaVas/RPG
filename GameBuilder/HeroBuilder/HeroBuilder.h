@@ -24,7 +24,7 @@ public:
 
     Outfit build_hero_outfit(const std::string &hero);
 
-    Characterization build_hero_personality(const std::string &hero);
+    virtual CharacterizationObservable build_hero_personality(const std::string &hero) = 0;
 
     virtual std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) = 0;
 

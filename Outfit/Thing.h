@@ -5,7 +5,8 @@
 
 #include <cstdint>
 #include <string>
-#include "Character.h"
+
+class Character;
 
 class Thing
 {
@@ -16,9 +17,9 @@ public:
 
     bool is_broken();
 
-    virtual void apply_effect(Character &character) = 0;
+    virtual void apply_effect(Character *character) = 0;
 
-    virtual void discard_effect(Character &character) = 0;
+    virtual void discard_effect(Character *character) = 0;
 
     size_t get_durability();
 

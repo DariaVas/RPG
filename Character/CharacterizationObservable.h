@@ -4,6 +4,8 @@
 
 #include <cstdint>
 #include <map>
+#include <list>
+#include "Observer.h"
 
 namespace Characteristic {
 
@@ -14,43 +16,22 @@ namespace Characteristic {
     const std::string luck = "luck";
     const std::string initiative = "initiative";
 }
-struct Characterization
+
+class CharacterizationObservable
 {
 public:
-    Characterization() :
-            m_characterization{
-                    {Characteristic::strength,     0},
-                    {Characteristic::sleight,      0},
-                    {Characteristic::intelligence, 0},
-                    {Characteristic::physique,     0},
-                    {Characteristic::luck,         0},
-                    {Characteristic::initiative,   0}
-            }
-    {}
-
-    size_t get_characteristic(std::string feature_name)
-    {
-        auto feature = m_characterization.find(feature_name);
-        if (feature == m_characterization.end())
-        {
-            throw std::runtime_error("Cannot find feature");
-        }
-        return feature->second;
-
-    }
-
-    void set_characteristic(std::string feature_name, size_t feature_value)
-    {
-        auto feature = m_characterization.find(feature_name);
-        if (feature == m_characterization.end())
-        {
-            throw std::runtime_error("Cannot find feature");
-        }
-        feature->second = feature_value;
-    }
-
+    CharacterizationObservable();
+    CharacterizationObservable(size_t strength, size_t sleight, size_t intelligence,
+                               size_t physique, size_t luck, size_t initiative);
+    void add_observer(Observer* o);
+    void remove_observer(Observer* o);
+    size_t get_characteristic(std::string feature_name);
+    void set_characteristic(std::string feature_name, size_t feature_value);
 private:
-    std::map <std::string, size_t> m_characterization;
+   void notify_observers();
+private:
+    std::map <std::string, size_t> m_characterizations;
+    std::list<Observer*> m_observers;
 };
 
 

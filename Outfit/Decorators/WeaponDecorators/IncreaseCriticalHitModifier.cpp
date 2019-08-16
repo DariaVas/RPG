@@ -1,4 +1,6 @@
 #include "IncreaseCriticalHitModifier.h"
+#include "Character.h"
+
 
 IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon> &decorator, size_t value) :
         WeaponDecorator(decorator),
@@ -7,7 +9,7 @@ IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon
 
 }
 
-Damage IncreaseCriticalHitModifier::generate_damage(Character &character)
+Damage IncreaseCriticalHitModifier::generate_damage(Character *character)
 {
     Damage damage = m_decorator->generate_damage(character);
     damage.critical_damage_multiplier += m_increase_value;

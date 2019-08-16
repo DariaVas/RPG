@@ -11,9 +11,9 @@ class DefenseDecorator : public Defense
 public:
     DefenseDecorator(std::unique_ptr <Defense> &decorator);
 
-    void apply_effect(Character &character);
+    void apply_effect(Character *character);
 
-    void discard_effect(Character &character);
+    void discard_effect(Character *character);
 
     virtual ~DefenseDecorator() = 0;
 
