@@ -11,14 +11,14 @@ class IncreaseCharacteristicWeapon final : public WeaponDecorator
 {
 public:
 
-    IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic);
+    IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value, characteristic characteristic);
 
     void apply_effect(Character *character) override;
 
     void discard_effect(Character *character) override;
 
 private:
-    std::string m_characteristic_name;
+    characteristic m_characteristic;
     size_t m_value;
 };
 

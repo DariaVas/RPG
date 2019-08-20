@@ -1,12 +1,47 @@
 #include <iostream>
-#include "JsonHeroBuilder.h"
+#include "Game.h"
+#include "ConfigGameCreator.h"
+#include "RandomGameCreator.h"
 
 using namespace std;
 
 int main()
 {
-    JsonHeroBuilder builder ("character.json");
-    builder.build_first_hero();
+    try
+    {
+      std::cout << "How do you want to initialize heroes? \n"
+                   "1. Randomly generate heroes \n"
+                   "2. Load heroes configuration from json configuration file \n";
+      size_t choose = 2;
+//      std::cin >> choose;
+      std::unique_ptr<GameCreator> game_creator;
+      switch(choose)
+      {
+        case 1:
+          game_creator.reset(new RandomGameCreator());
+          break;
+       case 2:
+          game_creator.reset(new ConfigGameCreator());
+          break;
+        default:
+          std::cout << "Unknown choice" << std::endl;
+          return 1;
+          break;
+      }
+      Game game(game_creator);
+      game.play();
+    }
+    catch (const std::exception& ex)
+    {
+        std::cout << "The error happend: " <<  ex.what();
+        return 1;
+    }
+
+//    JsonHeroBuilder builder("character.json");
+//    builder.build_first_hero();
+
+
+
 //    JsonHeroBuilder builder("character.json");
 
 //    std::vector <std::unique_ptr<Defense>> magic_things(builder.build_magic_defenses("first_hero"));

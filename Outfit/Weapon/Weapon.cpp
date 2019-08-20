@@ -2,7 +2,7 @@
 #include "Weapon.h"
 #include "Character.h"
 
-Weapon::Weapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power) :
+Weapon::Weapon(const std::string &name, holding_type hold_type, damage_types damage_type, size_t weapon_power) :
         Thing(name),
         m_weapon_power(weapon_power),
         m_hold_type(hold_type),
@@ -16,7 +16,7 @@ size_t Weapon::get_weapon_power() const
     return m_weapon_power;
 }
 
-types Weapon::get_damage_type() const
+damage_types Weapon::get_damage_type() const
 {
     return m_damage_type;
 }

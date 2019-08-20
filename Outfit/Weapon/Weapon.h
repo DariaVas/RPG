@@ -16,7 +16,7 @@ enum holding_type
 class Weapon : public Thing
 {
 public:
-    Weapon(const std::string &name, holding_type hold_type, types damage_type, size_t weapon_power);
+    Weapon(const std::string &name, holding_type hold_type, damage_types damage_type, size_t weapon_power);
 
     virtual Damage generate_damage(Character *character) = 0;
 
@@ -32,7 +32,7 @@ public:
 
     size_t get_weapon_power() const;
 
-    types get_damage_type() const;
+    damage_types get_damage_type() const;
 
     virtual ~Weapon() = 0;
 
@@ -44,7 +44,7 @@ protected:
 private:
     size_t m_weapon_power;
     holding_type m_hold_type;
-    types m_damage_type;
+    damage_types m_damage_type;
 };
 
 #endif // WEAPON_H

@@ -12,7 +12,7 @@ public:
 
     ~JsonHeroBuilder() override;
 
-public:
+private:
     CharacterizationObservable build_hero_personality(const std::string &hero) override;
 
     std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) override;

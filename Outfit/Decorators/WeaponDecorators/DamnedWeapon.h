@@ -4,16 +4,17 @@
 #define DAMNEDWEAPON_H
 
 #include "WeaponDecorator.h"
+#include "CharacterizationObservable.h"
 
 class DamnedWeapon final : public WeaponDecorator
 {
 public:
-    DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, std::string characteristic);
+    DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, characteristic ch_type);
 
     void effect_after_attack(Character *character) override;
 
 private:
-    std::string m_characteristic_name;
+    characteristic m_characteristic;
     size_t m_value;
     bool m_first_damage;
 };

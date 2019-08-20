@@ -3,9 +3,9 @@
 
 
 IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weapon> &decorator, size_t value,
-                                                           std::string characteristic) :
+                                                           characteristic characteristic) :
         WeaponDecorator(decorator),
-        m_characteristic_name(characteristic),
+        m_characteristic(characteristic),
         m_value(value)
 {
 
@@ -13,14 +13,14 @@ IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weap
 
 void IncreaseCharacteristicWeapon::apply_effect(Character *character)
 {
-    character->increase_characteristic(m_characteristic_name, m_value);
+    character->increase_characteristic(m_characteristic, m_value);
 
     m_decorator->apply_effect(character);
 }
 
 void IncreaseCharacteristicWeapon::discard_effect(Character *character)
 {
-    character->decrease_characteristic(m_characteristic_name, m_value);
+    character->decrease_characteristic(m_characteristic, m_value);
 
     m_decorator->discard_effect(character);
 }

@@ -4,7 +4,9 @@ CFLAGS=-std=c++11 -Wall  -fPIC
 INC=\
     $(PWD) \
     $(PWD)/Character \
+    $(PWD)/Character/HeroState \
     $(PWD)/GameBuilder \
+    $(PWD)/Game \
     $(PWD)/GameBuilder/HeroBuilder \
     $(PWD)/Outfit \
     $(PWD)/Outfit/Decorators/WeaponDecorators \
@@ -22,7 +24,10 @@ INC_PARAMS=$(foreach d, $(INC), -I$d)
 LDFLAGS=
 SOURCES=\
     ./main.o \
+    ./Game/Game.o \
     ./Character/Character.o \
+    ./Character/HeroState/ActiveHeroState.o \
+    ./Character/HeroState/StunnedHeroState.o \
     ./Character/CharacterizationObservable.o \
     ./Character/Parameters.o \
     ./Outfit/Thing.o \
@@ -35,6 +40,7 @@ SOURCES=\
     ./Outfit/Defense/PhysicalDefense.o \
     ./GameBuilder/HeroBuilder/HeroBuilder.o \
     ./GameBuilder/HeroBuilder/JsonHeroBuilder.o \
+    ./GameBuilder/HeroBuilder/RandomHeroBuilder.o \
     ./Outfit/Decorators/DefenseDecorators/DefenseDecorator.o \
     ./Outfit/Decorators/DefenseDecorators/IncreaseChanceOfDodge.o \
     ./Outfit/Decorators/DefenseDecorators/IncreaseCharacteristicDefense.o \

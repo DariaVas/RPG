@@ -10,11 +10,20 @@
 class Outfit
 {
 public:
-    Outfit(Outfit&& o);
+    Outfit(Outfit &&o);
+
     Outfit();
+
     Outfit(std::vector <std::unique_ptr<Defense>> &defenses, std::vector <std::unique_ptr<Weapon>> &weapons);
-    void add_defense(std::unique_ptr<Defense>& defense);
-    void add_weapon(std::unique_ptr<Weapon>& weapon);
+
+    void add_defense(std::unique_ptr <Defense> &defense);
+
+    void add_weapon(std::unique_ptr <Weapon> &weapon);
+
+    void apply_magic_effect(Character* ch);
+
+    std::vector<Damage> generate_damages(Character* ch);
+
     ~Outfit() = default;
 
 private:

@@ -32,20 +32,20 @@ void JsonHeroBuilder::decorate_defence(numDefenseDecorator decorator_num, std::u
         case numDefenseDecorator::increase_characteristic:
             decorator.reset(new IncreaseCharacteristicDefense(decorated_obj,
                                                               m_config["armor_effects"]["increase_characteristic"]["points_to_increase"].get<size_t>(),
-                                                              m_config["armor_effects"]["increase_characteristic"]["characteristic_type"].get<std::string>()));
+                                                              m_config["armor_effects"]["increase_characteristic"]["characteristic_type"].get<characteristic>()));
             break;
 
         case numDefenseDecorator::increase_resists_to_damage:
             decorator.reset(new IncreaseResistanceToDamage(decorated_obj,
                                                            m_config["armor_effects"]["increase_resists_to_damage"]["resist_points"].get<size_t>(),
-                                                           m_config["armor_effects"]["increase_resists_to_damage"]["damage_type"].get<types>()
+                                                           m_config["armor_effects"]["increase_resists_to_damage"]["damage_type"].get<damage_types>()
             ));
 
             break;
         case numDefenseDecorator::increase_reflection_to_damage:
             decorator.reset(new IncreaseReflectionOfDamage(decorated_obj,
                                                            m_config["armor_effects"]["increase_reflection_to_damage"]["reflection_points"].get<size_t>(),
-                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["damage_type"].get<types>()
+                                                           m_config["armor_effects"]["increase_reflection_to_damage"]["damage_type"].get<damage_types>()
             ));
 
             break;
@@ -64,7 +64,7 @@ void JsonHeroBuilder::decorate_defence(numDefenseDecorator decorator_num, std::u
 
 
         default:
-            throw std::runtime_error("Unknown type of defense decorator");
+            throw std::runtime_error("Unknown damage_types of defense decorator");
     }
     decorated_obj = std::move(decorator);
 }
@@ -93,7 +93,7 @@ void JsonHeroBuilder::decorate_weapon(numWeaponDecorator decorator_num, std::uni
         case numWeaponDecorator::increase_characteristic:
             decorator.reset(new IncreaseCharacteristicWeapon(decorated_obj,
                                                              weapon_effects["increase_characteristic"]["points_to_increase"].get<size_t>(),
-                                                             weapon_effects["increase_characteristic"]["characteristic_type"]));
+                                                             weapon_effects["increase_characteristic"]["characteristic_type"].get<characteristic>()));
             break;
         case numWeaponDecorator::increase_chance_of_critical_hit:
             decorator.reset(new IncreaseCriticalHitChanceWeapon(decorated_obj,
@@ -120,11 +120,11 @@ void JsonHeroBuilder::decorate_weapon(numWeaponDecorator decorator_num, std::uni
             break;
         case numWeaponDecorator::damn:
             decorator.reset(new DamnedWeapon(decorated_obj, weapon_effects["damn"]["points_to_decrease"].get<size_t>(),
-                                             weapon_effects["damn"]["characteristic_type"]));
+                                             weapon_effects["damn"]["characteristic_type"].get<characteristic>()));
 
             break;
         default:
-            throw std::runtime_error("Unknown type of weapon decorator");
+            throw std::runtime_error("Unknown damage_types of weapon decorator");
     }
     decorated_obj = std::move(decorator);
 
@@ -157,7 +157,7 @@ std::unique_ptr <Defense> JsonHeroBuilder::build_shield(const std::string &hero)
     {
         auto shield_info = m_config[hero]["outfit"]["defense_and_weapon_slots"]["weapon_shield"]["shield"];
         shield.reset(new PhysicalDefense("shield",
-                                         shield_info["type_of_resistance"].get<types>(),
+                                         shield_info["type_of_resistance"].get<damage_types>(),
                                          shield_info["resistance"].get<size_t>()));
         apply_defence_decorators(shield_info, shield);
     }
@@ -166,7 +166,7 @@ std::unique_ptr <Defense> JsonHeroBuilder::build_shield(const std::string &hero)
 
 std::unique_ptr <Weapon> JsonHeroBuilder::construct_weapon(const nlohmann::json &weapon_info)
 {
-    if (weapon_info["type_of_damage"] == types::physical)
+    if (weapon_info["type_of_damage"] == damage_types::physical)
     {
         return std::unique_ptr<Weapon>(new PhysicalWeapon(weapon_info["name"],
                                                           weapon_info["arm_type"].get<holding_type>(),
@@ -175,7 +175,7 @@ std::unique_ptr <Weapon> JsonHeroBuilder::construct_weapon(const nlohmann::json 
     {
         return std::unique_ptr<Weapon>(new MagicWeapon(weapon_info["name"],
                                                        weapon_info["arm_type"].get<holding_type>(),
-                                                       weapon_info["type_of_damage"].get<types>(),
+                                                       weapon_info["type_of_damage"].get<damage_types>(),
                                                        weapon_info["damage"].get<size_t>()));
     }
 }
@@ -228,7 +228,7 @@ std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_magic_defenses(con
          defense_info != magic_defenses_info.cend(); ++defense_info)
     {
         std::unique_ptr <Defense> defense(new MagicDefense((*defense_info)["name"],
-                                                           (*defense_info)["type_of_resistance"].get<types>(),
+                                                           (*defense_info)["type_of_resistance"].get<damage_types>(),
                                                            (*defense_info)["resistance"].get<size_t>()));
         apply_defence_decorators((*defense_info), defense);
         magic_defenses.emplace_back(std::move(defense));
@@ -244,7 +244,7 @@ std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_physical_defenses(
          defense_info != physical_defenses_info.cend(); ++defense_info)
     {
         std::unique_ptr <Defense> defense(new PhysicalDefense((*defense_info)["name"],
-                                                              (*defense_info)["type_of_resistance"].get<types>(),
+                                                              (*defense_info)["type_of_resistance"].get<damage_types>(),
                                                               (*defense_info)["resistance"].get<size_t>()));
         apply_defence_decorators((*defense_info), defense);
         physical_defenses.emplace_back(std::move(defense));
@@ -257,9 +257,10 @@ CharacterizationObservable JsonHeroBuilder::build_hero_personality(const std::st
 {
     auto characteristic = m_config[hero]["characteristic"];
     return CharacterizationObservable(characteristic["strength"].get<size_t>(),
-            characteristic["sleight"].get<size_t>(), characteristic["intelligence"].get<size_t>(),
-            characteristic["physique"].get<size_t>(), characteristic["luck"].get<size_t>(),
-            characteristic["initiative"].get<size_t>());
+                                      characteristic["sleight"].get<size_t>(),
+                                      characteristic["intelligence"].get<size_t>(),
+                                      characteristic["physique"].get<size_t>(), characteristic["luck"].get<size_t>(),
+                                      characteristic["initiative"].get<size_t>());
 }
 
 JsonHeroBuilder::~JsonHeroBuilder()

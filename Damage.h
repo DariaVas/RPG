@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-enum types
+enum class damage_types
 {
     physical = 1,
     fire,
@@ -14,10 +14,10 @@ enum types
 
 struct Damage
 {
-    types type;
-    size_t damage_power;
-    size_t piercing_power;
-    size_t critical_damage_multiplier;
+    damage_types damage_type;
+    std::size_t damage_power;
+    std::size_t piercing_power;
+    std::size_t critical_damage_multiplier;
 };
 
 #endif // DAMAGE_H

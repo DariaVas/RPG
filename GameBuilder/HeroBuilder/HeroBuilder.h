@@ -19,7 +19,7 @@ public:
 
     virtual ~HeroBuilder() = 0;
 
-public:
+private:
     Character build_hero(const std::string &hero);
 
     Outfit build_hero_outfit(const std::string &hero);
