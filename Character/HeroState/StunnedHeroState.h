@@ -7,8 +7,12 @@ class StunnedHeroState : public HeroState
 {
 public:
     StunnedHeroState();
-    void damage(Character* ch);
-    void take_damage(Character* ch, Damage& dmg);
+    bool can_dodge(Character* victim) override;
+    Damage try_to_reflect_damage(Character* victim, Damage& damage) override;
+    void take_reflected_damage(Character* attacker, Damage& reflected_dmg) override;
+    void try_to_resist_damage(Character* victim, Damage& damage) override;
+    void try_to_create_critical_hit(Character* atacker, Damage& damage) override;
+    bool take_remained_damage(Character* victim, Damage &dmg) override;
 };
 
 #endif // STUNNEDHEROSTATE_H

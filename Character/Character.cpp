@@ -97,12 +97,12 @@ void Character::set_stun(size_t stun_seconds)
 
 void Character::break_outfit(size_t breaking_value)
 {
-
+    m_outfit
 }
 
 std::vector<Damage> Character::get_damages()
 {
-    return m_outfit.generate_damages(*this);
+    return m_outfit.generate_damages(this);
 }
 
 size_t Character::get_parameter(parameter p)
@@ -124,3 +124,39 @@ size_t Character::get_reflection(damage_types reflection_type)
 {
     return m_parameters.get_damage_reflection(reflection_type);
 }
+
+bool Character::can_dodge()
+{
+    return m_hero_state->can_dodge(this);
+}
+
+Damage Character::try_to_reflect_damage(Damage& damage)
+{
+    return m_hero_state->try_to_reflect_damage(this, damage);
+}
+
+void Character::take_reflected_damage(Damage& reflected_dmg)
+{
+    m_hero_state->take_reflected_damage(this, reflected_dmg);
+}
+
+void Character::try_to_resist_damage(Damage& damage)
+{
+    m_hero_state->try_to_resist_damage(this, damage);
+}
+
+void Character::try_to_create_critical_hit(Damage& damage)
+{
+    m_hero_state->try_to_create_critical_hit(this, damage);
+}
+
+bool Character::take_remained_damage(Damage &dmg)
+{
+    return m_hero_state->take_remained_damage(this, dmg);
+}
+
+void Character::apply_effect_after_attack(Character* victim)
+{
+    m_outfit.apply_effect_after_attack(victim);
+}
+

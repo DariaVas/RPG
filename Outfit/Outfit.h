@@ -25,7 +25,10 @@ public:
     std::vector<Damage> generate_damages(Character* ch);
 
     ~Outfit() = default;
+    
+    void apply_effect_after_attack(Character* ch);
 
+    void break_random_thing(size_t value_to_break);
 private:
     std::vector <std::unique_ptr<Defense>> m_defenses;
     std::vector <std::unique_ptr<Weapon>> m_weapons;

@@ -21,11 +21,6 @@ damage_types Weapon::get_damage_type() const
     return m_damage_type;
 }
 
-void Weapon::effect_before_attack(Character *character)
-{
-
-}
-
 void Weapon::effect_after_attack(Character *character)
 {
 

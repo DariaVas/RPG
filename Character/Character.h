@@ -44,7 +44,16 @@ public:
     const std::string& get_hero_name();
 
     std::vector<Damage> get_damages();
-
+    
+    bool can_dodge();
+    Damage try_to_reflect_damage(Damage& damage);
+    void take_reflected_damage(Damage& reflected_dmg);
+    void try_to_resist_damage(Damage& damage);
+    void try_to_create_critical_hit(Damage& damage);
+    bool take_remained_damage(Damage &dmg);
+    
+    void apply_effect_after_attack(Character* victim);
+    
 private:
     Outfit m_outfit;
     CharacterizationObservable m_characterization;

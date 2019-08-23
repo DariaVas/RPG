@@ -20,8 +20,6 @@ public:
 
     virtual Damage generate_damage(Character *character) = 0;
 
-    virtual void effect_before_attack(Character *character);
-
     virtual void effect_after_attack(Character *character);
 
     void apply_effect(Character *character) override;
