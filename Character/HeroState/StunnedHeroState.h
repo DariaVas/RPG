@@ -8,7 +8,7 @@ class StunnedHeroState : public HeroState
 public:
     StunnedHeroState(size_t seconds);
 
-    std::vector<Damage> generate_damages(Outfit *outfit, Character *ch) override;
+    std::vector <Damage> generate_damages(Outfit *outfit, Character *ch) override;
 
     bool can_dodge(Character *victim) override;
 
@@ -19,8 +19,10 @@ public:
     void try_to_create_critical_hit(Character *atacker, Damage &damage) override;
 
     bool take_remained_damage(Character *victim, Damage &dmg) override;
+
 private:
-    void change_state_if_the_times_came(Character* ch);
+    void change_state_if_the_times_came(Character *ch);
+
 private:
     size_t m_stun_seconds;
     size_t m_done_steps;

@@ -16,7 +16,7 @@
 #include "Utils.h"
 
 RandomHeroBuilder::RandomHeroBuilder()
-    :m_weapon_and_shield_chosen(static_cast<bool> (utils::rdtsc()%2))
+        : m_weapon_and_shield_chosen(static_cast<bool> (utils::rdtsc() % 2))
 {
 
 }
@@ -33,13 +33,13 @@ CharacterizationObservable RandomHeroBuilder::build_hero_personality(const std::
 
 std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_magic_defenses(const std::string &hero)
 {
-    const std::string magic_things_name [] = {"ring1", "ring2", "amulet"};
-    std::vector<std::unique_ptr<Defense>> things;
-    for(const auto& name : magic_things_name)
+    const std::string magic_things_name[] = {"ring1", "ring2", "amulet"};
+    std::vector <std::unique_ptr<Defense>> things;
+    for (const auto &name : magic_things_name)
     {
-        std::unique_ptr<Defense> thing (new MagicDefense(name,
-                                                              get_random_magic_type(),
-                                                              generate_random_value(g_parameter_upper_bound)));
+        std::unique_ptr <Defense> thing(new MagicDefense(name,
+                                                         get_random_magic_type(),
+                                                         generate_random_value(g_parameter_upper_bound)));
         apply_defence_decorators(thing);
         things.emplace_back(std::move(thing));
     }
@@ -48,18 +48,18 @@ std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_magic_defenses(c
 
 std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_physical_defenses(const std::string &hero)
 {
-    const std::string physical_things_name [] = {"head protection",
-                                              "torso protection",
-                                              "gloves",
-                                              "legs protection",
-                                               "boots"
-                                             };
-    std::vector<std::unique_ptr<Defense>> things;
-    for(const auto& name : physical_things_name)
+    const std::string physical_things_name[] = {"head protection",
+                                                "torso protection",
+                                                "gloves",
+                                                "legs protection",
+                                                "boots"
+    };
+    std::vector <std::unique_ptr<Defense>> things;
+    for (const auto &name : physical_things_name)
     {
-        std::unique_ptr<Defense> thing (new PhysicalDefense(name,
-                                                              damage_types::physical,
-                                                              generate_random_value(g_parameter_upper_bound)));
+        std::unique_ptr <Defense> thing(new PhysicalDefense(name,
+                                                            damage_types::physical,
+                                                            generate_random_value(g_parameter_upper_bound)));
         apply_defence_decorators(thing);
         things.emplace_back(std::move(thing));
     }
@@ -71,15 +71,15 @@ std::unique_ptr <Defense> RandomHeroBuilder::build_shield(const std::string &her
     std::unique_ptr <Defense> shield;
     if (m_weapon_and_shield_chosen)
     {
-        std::unique_ptr<Defense> thing (new PhysicalDefense( "shield",
-                                                              damage_types::physical,
-                                                              generate_random_value(g_parameter_upper_bound)));
+        shield.reset(new PhysicalDefense("shield",
+                                         damage_types::physical,
+                                         generate_random_value(g_parameter_upper_bound)));
         apply_defence_decorators(shield);
     }
     return shield;
 }
 
-std::unique_ptr <Weapon> RandomHeroBuilder::construct_weapon( const std::string& weapon_name, holding_type hold_type)
+std::unique_ptr <Weapon> RandomHeroBuilder::construct_weapon(const std::string &weapon_name, holding_type hold_type)
 {
     damage_types type = get_random_damage_type();
     if (type == damage_types::physical)
@@ -87,7 +87,8 @@ std::unique_ptr <Weapon> RandomHeroBuilder::construct_weapon( const std::string&
         return std::unique_ptr<Weapon>(new PhysicalWeapon(weapon_name,
                                                           hold_type,
                                                           generate_random_value(g_parameter_upper_bound)));
-    } else
+    }
+    else
     {
         return std::unique_ptr<Weapon>(new MagicWeapon(weapon_name,
                                                        hold_type,
@@ -100,7 +101,7 @@ std::vector <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std:
 {
     std::vector <std::unique_ptr<Weapon>> weapons;
 
-    if(m_weapon_and_shield_chosen)
+    if (m_weapon_and_shield_chosen)
     {
         std::unique_ptr <Weapon> weapon = construct_weapon("weapon", holding_type::one_handed);
         apply_weapon_decorators(weapon);
@@ -109,7 +110,7 @@ std::vector <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std:
     else
     {
         const size_t count_of_weapons = generate_random_value(2);
-        if(count_of_weapons == 2)
+        if (count_of_weapons == 2)
         {
             std::unique_ptr <Weapon> weapon1 = construct_weapon("weapon1", holding_type::one_handed);
             apply_weapon_decorators(weapon1);
@@ -121,7 +122,9 @@ std::vector <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std:
         }
         else
         {
-            std::unique_ptr <Weapon> weapon = construct_weapon("weapon", static_cast<holding_type>(generate_random_value(holding_type::two_handed)));
+            std::unique_ptr <Weapon> weapon = construct_weapon("weapon",
+                                                               static_cast<holding_type>(generate_random_value(
+                                                                       holding_type::two_handed)));
             apply_weapon_decorators(weapon);
             weapons.emplace_back(std::move(weapon));
         }
@@ -131,7 +134,8 @@ std::vector <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std:
 
 size_t RandomHeroBuilder::generate_random_value(size_t upper_bound)
 {
-    return utils::rdtsc() % upper_bound + 1;
+    auto value = utils::rdtsc() % upper_bound + 1;
+    return value;
 }
 
 damage_types RandomHeroBuilder::get_random_magic_type()
@@ -198,10 +202,12 @@ damage_types RandomHeroBuilder::get_random_damage_type()
 
 void RandomHeroBuilder::apply_defence_decorators(std::unique_ptr <Defense> &decorated_obj)
 {
-    const size_t count_of_decarators = utils::rdtsc() % (static_cast<size_t>(numDefenseDecorator::increase_chance_of_dodge) + 1);
+    const size_t count_of_decarators =
+            utils::rdtsc() % (static_cast<size_t>(numDefenseDecorator::increase_chance_of_dodge) + 1);
     for (size_t i = 0; i < count_of_decarators; ++i)
     {
-        decorate_defence(static_cast<numDefenseDecorator>(generate_random_value(static_cast<size_t>(numDefenseDecorator::increase_chance_of_dodge))), decorated_obj);
+        decorate_defence(static_cast<numDefenseDecorator>(generate_random_value(
+                static_cast<size_t>(numDefenseDecorator::increase_chance_of_dodge))), decorated_obj);
     }
 }
 
@@ -210,7 +216,9 @@ void RandomHeroBuilder::apply_weapon_decorators(std::unique_ptr <Weapon> &decora
     const size_t count_of_decarators = utils::rdtsc() % (static_cast<size_t>(numWeaponDecorator::damn) + 1);
     for (size_t i = 0; i < count_of_decarators; ++i)
     {
-        decorate_weapon(static_cast<numWeaponDecorator>(generate_random_value(static_cast<size_t>(numWeaponDecorator::damn))), decorated_obj);
+        decorate_weapon(
+                static_cast<numWeaponDecorator>(generate_random_value(static_cast<size_t>(numWeaponDecorator::damn))),
+                decorated_obj);
     }
 }
 

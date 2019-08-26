@@ -13,6 +13,10 @@ MagicWeapon::MagicWeapon(const std::string &name, holding_type hold_type, damage
     {
         throw std::runtime_error("Magic weapon cannot have physic damage_types of damage");
     }
+    LOGI << "Added magic weapon : " << name
+         << " hold type: " << static_cast<int> (hold_type)
+         << " damage type: " << static_cast <int> (damage_type)
+         << " weapon power: " << weapon_power;
 }
 
 Damage MagicWeapon::generate_damage(Character *ch)
@@ -23,10 +27,10 @@ Damage MagicWeapon::generate_damage(Character *ch)
             ch->get_characteristic(characteristic::intelligence));
 
     LOGI << "Generated base magic damage, code of damage_types:  "
-              << static_cast<std::underlying_type<damage_types>::type>(get_damage_type()) <<
-              " weapon power = " <<
-              get_weapon_power() << " , additional power from characteristic = " <<
-              additional_power << " , total power = " << power << std::endl;
+         << static_cast<std::underlying_type<damage_types>::type>(get_damage_type()) <<
+         " weapon power = " <<
+         get_weapon_power() << " , additional power from characteristic = " <<
+         additional_power << " , total power = " << power << std::endl;
 
     return Damage{get_damage_type(), power, 0, modifier_of_critical_hit};
 }

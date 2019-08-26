@@ -8,7 +8,8 @@ class RandomHeroBuilder : public HeroBuilder
 {
 public:
     RandomHeroBuilder();
-    ~RandomHeroBuilder()=default;
+
+    ~RandomHeroBuilder() = default;
 
 private:
     CharacterizationObservable build_hero_personality(const std::string &hero) override;
@@ -37,7 +38,8 @@ private:
 
     void decorate_weapon(numWeaponDecorator decorator_num, std::unique_ptr <Weapon> &decorated_obj);
 
-    std::unique_ptr <Weapon> construct_weapon(const std::string& weapon_name, holding_type hold_type);
+    std::unique_ptr <Weapon> construct_weapon(const std::string &weapon_name, holding_type hold_type);
+
 private:
     bool m_weapon_and_shield_chosen;
 };

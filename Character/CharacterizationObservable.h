@@ -17,7 +17,8 @@ enum class characteristic
     initiative,
 };
 
-extern const size_t g_characteristic_upper_bound;
+extern const size_t
+        g_characteristic_upper_bound;
 
 class CharacterizationObservable
 {

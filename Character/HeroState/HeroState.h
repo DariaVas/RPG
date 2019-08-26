@@ -5,12 +5,13 @@
 #include "Damage.h"
 
 class Character;
+
 class Outfit;
 
 class HeroState
 {
 public:
-    virtual std::vector<Damage> generate_damages(Outfit *outfit, Character *ch) = 0;
+    virtual std::vector <Damage> generate_damages(Outfit *outfit, Character *ch) = 0;
 
     virtual bool can_dodge(Character *victim) = 0;
 

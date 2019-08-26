@@ -11,6 +11,7 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
         m_hero_name(hero_name),
         m_hero_state(new ActiveHeroState())
 {
+    m_characterization.add_observer(&m_parameters);
     m_outfit.apply_magic_effect(this);
     LOGI << "Hero : " << m_hero_name;
 
@@ -29,18 +30,18 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
          << "chance of critical hit: " << m_parameters.get_parameter(parameter::critical_hit_chance);
 
     LOGI << "Reflection of damage: \n"
-         << "physical: " << m_parameters.get_damage_reflection(damage_types::physical ) << "\n"
-         << "fire: " << m_parameters.get_damage_reflection(damage_types::fire ) << "\n"
-         << "ice: " << m_parameters.get_damage_reflection(damage_types::ice ) << "\n"
-         << "electric: " << m_parameters.get_damage_reflection(damage_types::electric ) << "\n"
-         << "acid: "<< m_parameters.get_damage_reflection(damage_types::acid) ;
+         << "physical: " << m_parameters.get_damage_reflection(damage_types::physical) << "\n"
+         << "fire: " << m_parameters.get_damage_reflection(damage_types::fire) << "\n"
+         << "ice: " << m_parameters.get_damage_reflection(damage_types::ice) << "\n"
+         << "electric: " << m_parameters.get_damage_reflection(damage_types::electric) << "\n"
+         << "acid: " << m_parameters.get_damage_reflection(damage_types::acid);
 
     LOGI << "Resistance to damage: \n"
-         << "physical: " << m_parameters.get_damage_resistance(damage_types::physical ) << "\n"
-         << "fire: " << m_parameters.get_damage_resistance(damage_types::fire ) << "\n"
-         << "ice: " << m_parameters.get_damage_resistance(damage_types::ice ) << "\n"
-         << "electric: " << m_parameters.get_damage_resistance(damage_types::electric ) << "\n"
-         << "acid: "<< m_parameters.get_damage_resistance(damage_types::acid) ;
+         << "physical: " << m_parameters.get_damage_resistance(damage_types::physical) << "\n"
+         << "fire: " << m_parameters.get_damage_resistance(damage_types::fire) << "\n"
+         << "ice: " << m_parameters.get_damage_resistance(damage_types::ice) << "\n"
+         << "electric: " << m_parameters.get_damage_resistance(damage_types::electric) << "\n"
+         << "acid: " << m_parameters.get_damage_resistance(damage_types::acid);
 
 }
 
@@ -58,7 +59,8 @@ void Character::decrease_characteristic(characteristic feature, size_t feature_v
     if (ch_value < feature_value)
     {
         m_characterization.set_characteristic(feature, 0);
-    } else
+    }
+    else
     {
         m_characterization.set_characteristic(feature, ch_value - feature_value);
     }
@@ -80,7 +82,8 @@ void Character::decrease_parameter(parameter p, size_t value)
     if (m_parameters.get_parameter(p) < value)
     {
         m_parameters.set_parameter(p, 0);
-    } else
+    }
+    else
     {
         m_parameters.set_parameter(p, m_parameters.get_parameter(p) - value);
     }
@@ -96,7 +99,8 @@ void Character::decrease_resistance(damage_types resistance_type, size_t value)
     if (m_parameters.get_damage_resistance(resistance_type) < value)
     {
         m_parameters.set_damage_resistance(resistance_type, 0);
-    } else
+    }
+    else
     {
         m_parameters.set_damage_resistance(resistance_type,
                                            m_parameters.get_damage_resistance(resistance_type) - value);
@@ -113,7 +117,8 @@ void Character::decrease_reflection_of_damage(damage_types damage_type, size_t v
     if (m_parameters.get_damage_reflection(damage_type) < value)
     {
         m_parameters.set_damage_reflection(damage_type, 0);
-    } else
+    }
+    else
     {
         m_parameters.set_damage_reflection(damage_type, m_parameters.get_damage_reflection(damage_type) - value);
     }
@@ -122,7 +127,7 @@ void Character::decrease_reflection_of_damage(damage_types damage_type, size_t v
 
 void Character::set_stun(bool is_stunned)
 {
-    if(is_stunned)
+    if (is_stunned)
     {
         std::cout << m_hero_name << " is stunned since now" << std::endl;
 
@@ -139,7 +144,7 @@ void Character::set_stun(bool is_stunned)
 
 void Character::break_outfit(size_t breaking_value)
 {
-    m_outfit.break_random_thing(this,breaking_value);
+    m_outfit.break_random_thing(this, breaking_value);
 }
 
 std::vector <Damage> Character::get_damages()

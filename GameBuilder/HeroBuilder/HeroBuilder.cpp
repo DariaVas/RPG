@@ -1,3 +1,4 @@
+#include <plog/Log.h>
 #include "HeroBuilder.h"
 
 Character HeroBuilder::build_first_hero()
@@ -12,6 +13,7 @@ Character HeroBuilder::build_second_hero()
 
 Character HeroBuilder::build_hero(const std::string &hero)
 {
+    LOGI << "Creating " << hero;
     Outfit outfit(build_hero_outfit(hero));
     CharacterizationObservable characterization(build_hero_personality(hero));
     return Character(outfit, characterization, hero);
@@ -19,7 +21,11 @@ Character HeroBuilder::build_hero(const std::string &hero)
 
 Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
 {
+    LOGI << "Building outfit for " << hero;
+
     Outfit outfit;
+
+    LOGI << "Buildig magic defenses";
 
     std::vector <std::unique_ptr<Defense>> magic_defenses(build_magic_defenses(hero));
     if (magic_defenses.size() != 3)
@@ -53,7 +59,7 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
     }
 
     std::vector <std::unique_ptr<Weapon>> weapons(build_weapon(hero));
-    if (weapons.size() > 2 ||( shield && weapons.size() == 2))
+    if (weapons.size() > 2 || (shield && weapons.size() == 2))
     {
         throw std::logic_error("Quantity of weapons cannot be greater than 2, "
                                "also hero can hold only 1 weapon if he has shield");
@@ -62,6 +68,7 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
     {
         outfit.add_weapon(weapon);
     }
+    LOGI << "Outfit for " << hero << " was built. ";
     return outfit;
 }
 

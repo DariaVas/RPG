@@ -13,10 +13,11 @@ void Thing::reduce_durability(unsigned int value)
     {
         m_durability = 0;
         LOGI << "The thing " << m_name << " is already broken";
-    } else
+    }
+    else
     {
         m_durability -= value;
-        LOGI << "The durability of "<<m_name << " was reduced to " << m_durability << " points";
+        LOGI << "The durability of " << m_name << " was reduced to " << m_durability << " points";
     }
 }
 

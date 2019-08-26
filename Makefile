@@ -1,4 +1,3 @@
-#CC=/usr/bin/clang++-4.0
 CC=g++
 CFLAGS=-std=c++11 -Wall  -fPIC
 INC=\

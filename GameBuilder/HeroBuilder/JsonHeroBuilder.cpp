@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <plog/Log.h>
 #include "JsonHeroBuilder.h"
 #include "IncreaseChanceOfDodge.h"
 #include "IncreaseResistanceToDamage.h"
@@ -171,7 +172,8 @@ std::unique_ptr <Weapon> JsonHeroBuilder::construct_weapon(const nlohmann::json 
         return std::unique_ptr<Weapon>(new PhysicalWeapon(weapon_info["name"],
                                                           weapon_info["arm_type"].get<holding_type>(),
                                                           weapon_info["damage"].get<size_t>()));
-    } else
+    }
+    else
     {
         return std::unique_ptr<Weapon>(new MagicWeapon(weapon_info["name"],
                                                        weapon_info["arm_type"].get<holding_type>(),
@@ -190,7 +192,8 @@ std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::s
         std::unique_ptr <Weapon> weapon(construct_weapon(weapon_info));
         apply_weapon_decorators(weapon_info, weapon);
         weapons.emplace_back(std::move(weapon));
-    } else if (m_config[hero]["outfit"]["defense_and_weapon_slots"]["choice"] == "weapons_only")
+    }
+    else if (m_config[hero]["outfit"]["defense_and_weapon_slots"]["choice"] == "weapons_only")
     {
         auto weapons_info = m_config[hero]["outfit"]["defense_and_weapon_slots"]["weapons_only"];
         for (json::const_iterator it = weapons_info.cbegin();
@@ -205,7 +208,8 @@ std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::s
         if (weapons.size() > 2)
         {
             throw std::runtime_error("A Hero cannot have more than 2 weapons");
-        } else if (weapons.size() == 2)
+        }
+        else if (weapons.size() == 2)
         {
             if (weapons[0]->get_hold_type() != holding_type::one_handed ||
                 weapons[1]->get_hold_type() != holding_type::one_handed)
@@ -213,7 +217,8 @@ std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::s
                 throw std::runtime_error("Logic error, if a hero has 2 weapons they must be one-handed");
             }
         }
-    } else
+    }
+    else
     {
         throw std::runtime_error("Unknown choice of \"defense_and_weapon_slots\"");
     }

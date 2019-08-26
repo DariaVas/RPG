@@ -10,6 +10,9 @@ IncreaseCharacteristicDefense::IncreaseCharacteristicDefense(std::unique_ptr <De
         m_characteristic(characteristic),
         m_value(value)
 {
+    LOGI << "Created decorator for defense: IncreaseCharacteristicDefense,"
+         << " characteristic to increase: " << static_cast<int>(m_characteristic)
+         << " value to increase: " << m_value;
 
 }
 

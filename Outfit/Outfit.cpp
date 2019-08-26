@@ -65,11 +65,11 @@ void Outfit::apply_effect_after_attack(Character *ch)
     }
 }
 
-void Outfit::break_random_thing(Character* ch, size_t value_to_break)
+void Outfit::break_random_thing(Character *ch, size_t value_to_break)
 {
     bool is_broken_weapon = false;
     int thing_to_break = utils::rdtsc() % (m_weapons.size() + m_defenses.size());
-    Thing* thing;
+    Thing *thing;
     if (thing_to_break >= m_weapons.size())
     {
         thing_to_break -= m_weapons.size();
@@ -81,11 +81,11 @@ void Outfit::break_random_thing(Character* ch, size_t value_to_break)
         is_broken_weapon = true;
     }
     thing->reduce_durability(value_to_break);
-    if(thing->is_broken())
+    if (thing->is_broken())
     {
         thing->discard_effect(ch);
         LOGI << "Thing " << thing->get_name() << " was broken, so all applied effects was discarded";
-        if(is_broken_weapon)
+        if (is_broken_weapon)
         {
             m_weapons.erase(m_weapons.begin() + thing_to_break);
         }

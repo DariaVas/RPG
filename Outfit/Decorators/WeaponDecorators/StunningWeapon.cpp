@@ -6,7 +6,7 @@
 StunningWeapon::StunningWeapon(std::unique_ptr <Weapon> &decorator) :
         WeaponDecorator(decorator)
 {
-
+    LOGI << "Created decorator for weapon: StunningWeapon ";
 }
 
 void StunningWeapon::effect_after_attack(Character *character)

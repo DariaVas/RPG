@@ -12,8 +12,8 @@ public:
     HeroBuilder *get_hero_builder()
     {
         std::cout << "Please, enter the path to json config: " << std::endl;
-        std::string path = "/opt/RPG/character.json";
-//        std::cin >> path;
+        std::string path;
+        std::cin >> path;
         return new JsonHeroBuilder(path);
     }
 

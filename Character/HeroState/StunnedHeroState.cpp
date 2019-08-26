@@ -6,25 +6,26 @@
 
 
 StunnedHeroState::StunnedHeroState(size_t seconds)
-    :m_stun_seconds(seconds)
+        : m_stun_seconds(seconds)
 {
     // We set stun seconds to know, when the hero must change state from Stunned  to Active
     // Note! Because of the fight of two heroes goes about 2 second,  it will be stupid if the hero is stunned during the all game.
     //       That is why we will calculate hero steps instead of seconds.
 }
 
-std::vector<Damage> StunnedHeroState::generate_damages(Outfit *outfit, Character *ch)
+std::vector <Damage> StunnedHeroState::generate_damages(Outfit *outfit, Character *ch)
 {
     ++m_done_steps;
     std::cout << ch->get_hero_name() << " is stunned, so he didn't generate damage" << std::endl;
     change_state_if_the_times_came(ch);
-    return std::vector<Damage> {};
+    return std::vector < Damage > {};
 }
 
 
 bool StunnedHeroState::can_dodge(Character *victim)
 {
     ++m_done_steps;
+    std::cout << "Victim is stunned, he cannot protect himself" << std::endl;
     change_state_if_the_times_came(victim);
     return false;
 }
@@ -44,15 +45,14 @@ void StunnedHeroState::take_reflected_damage(Character *attacker, Damage &reflec
 
 void StunnedHeroState::try_to_create_critical_hit(Character *atacker, Damage &damage)
 {
-    ++m_done_steps;
-    change_state_if_the_times_came(atacker);
-    // stunned hero cannot create critical hit
+    throw std::logic_error("Stunned hero cannot create critical hit, because he didn't generate a damage");
 }
 
 bool StunnedHeroState::take_remained_damage(Character *victim, Damage &dmg)
 {
     _take_damage(victim, dmg);
     ++m_done_steps;
+    std::cout << "Victim is stunned, he took all damage." << std::endl;
     change_state_if_the_times_came(victim);
     return true;
 }

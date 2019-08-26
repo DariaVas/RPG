@@ -176,134 +176,134 @@
       ]
     }
   },
-"second_hero": {
-  "characteristic": {
-    "strength": 100,
-    "sleight": 50,
-    "intelligence": 70,
-    "physique": 300,
-    "luck": 56,
-    "initiative": 10
-  },
-  "outfit": {
-    "armor": [
-      {
-        "name": "head protection",
-        "type_of_resistance": 1,
-        "resistance": 10,
-        "additional_effects": [
-          1,
-          3
-        ]
-      },
-      {
-        "name": "torso protection",
-        "type_of_resistance": 1,
-        "resistance": 10,
-        "additional_effects": [
-          1,
-          3
-        ]
-      },
-      {
-        "name": "gloves",
-        "type_of_resistance": 1,
-        "resistance": 10,
-        "additional_effects": [
-          1,
-          3
-        ]
-      },
-      {
-        "name": "legs protection",
-        "type_of_resistance": 1,
-        "resistance": 10,
-        "additional_effects": [
-          1,
-          3
-        ]
-      },
-      {
-        "name": "boots",
-        "type_of_resistance": 1,
-        "resistance": 10,
-        "additional_effects": [
-          1,
-          3
-        ]
-      }
-    ],
-    "defense_and_weapon_slots": {
-      "choice": "weapon_shield",
-      "weapon_shield": {
-        "weapon": {
-          "name": "weapon0",
-          "arm_type": 1,
-          "type_of_damage": 3,
-          "damage": 40,
+  "second_hero": {
+    "characteristic": {
+      "strength": 100,
+      "sleight": 50,
+      "intelligence": 70,
+      "physique": 300,
+      "luck": 56,
+      "initiative": 10
+    },
+    "outfit": {
+      "armor": [
+        {
+          "name": "head protection",
+          "type_of_resistance": 1,
+          "resistance": 10,
           "additional_effects": [
             1,
-            5
+            3
           ]
         },
-        "shield": {
+        {
+          "name": "torso protection",
           "type_of_resistance": 1,
+          "resistance": 10,
+          "additional_effects": [
+            1,
+            3
+          ]
+        },
+        {
+          "name": "gloves",
+          "type_of_resistance": 1,
+          "resistance": 10,
+          "additional_effects": [
+            1,
+            3
+          ]
+        },
+        {
+          "name": "legs protection",
+          "type_of_resistance": 1,
+          "resistance": 10,
+          "additional_effects": [
+            1,
+            3
+          ]
+        },
+        {
+          "name": "boots",
+          "type_of_resistance": 1,
+          "resistance": 10,
+          "additional_effects": [
+            1,
+            3
+          ]
+        }
+      ],
+      "defense_and_weapon_slots": {
+        "choice": "weapon_shield",
+        "weapon_shield": {
+          "weapon": {
+            "name": "weapon0",
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              1,
+              5
+            ]
+          },
+          "shield": {
+            "type_of_resistance": 1,
+            "resistance": 15,
+            "additional_effects": [
+              2
+            ]
+          }
+        },
+        "weapons_only": [
+          {
+            "name": "weapon1",
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "name": "weapon2",
+            "arm_type": 1,
+            "type_of_damage": 3,
+            "damage": 40,
+            "additional_effects": [
+              3,
+              4
+            ]
+          }
+        ]
+      },
+      "magic_attributes": [
+        {
+          "name": "ring1",
+          "type_of_resistance": 3,
+          "resistance": 15,
+          "additional_effects": [
+            3
+          ]
+        },
+        {
+          "name": "ring2",
+          "type_of_resistance": 3,
           "resistance": 15,
           "additional_effects": [
             2
           ]
-        }
-      },
-      "weapons_only": [
-        {
-          "name": "weapon1",
-          "arm_type": 1,
-          "type_of_damage": 3,
-          "damage": 40,
-          "additional_effects": [
-            3,
-            4,
-            5
-          ]
         },
         {
-          "name": "weapon2",
-          "arm_type": 1,
-          "type_of_damage": 3,
-          "damage": 40,
+          "name": "amulet",
+          "type_of_resistance": 3,
+          "resistance": 15,
           "additional_effects": [
-            3,
-            4
+            1
           ]
         }
       ]
-    },
-    "magic_attributes": [
-      {
-        "name": "ring1",
-        "type_of_resistance": 3,
-        "resistance": 15,
-        "additional_effects": [
-          3
-        ]
-      },
-      {
-        "name": "ring2",
-        "type_of_resistance": 3,
-        "resistance": 15,
-        "additional_effects": [
-          2
-        ]
-      },
-      {
-        "name": "amulet",
-        "type_of_resistance": 3,
-        "resistance": 15,
-        "additional_effects": [
-          1
-        ]
-      }
-    ]
+    }
   }
-}
 }

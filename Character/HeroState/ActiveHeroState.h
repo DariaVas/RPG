@@ -8,7 +8,7 @@ class ActiveHeroState : public HeroState
 public:
     ActiveHeroState();
 
-    std::vector<Damage> generate_damages(Outfit *outfit, Character *ch) override;
+    std::vector <Damage> generate_damages(Outfit *outfit, Character *ch) override;
 
     bool can_dodge(Character *victim) override;
 

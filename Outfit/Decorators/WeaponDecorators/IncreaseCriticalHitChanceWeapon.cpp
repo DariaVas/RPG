@@ -7,7 +7,8 @@ IncreaseCriticalHitChanceWeapon::IncreaseCriticalHitChanceWeapon(std::unique_ptr
         WeaponDecorator(decorator),
         m_increase_value(value)
 {
-
+    LOGI << "Created decorator for weapon: IncreaseCriticalHitChanceWeapon, "
+         << " points to increase : " << m_increase_value;
 }
 
 void IncreaseCriticalHitChanceWeapon::apply_effect(Character *character)

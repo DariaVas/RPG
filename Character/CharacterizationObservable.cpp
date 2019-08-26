@@ -1,7 +1,7 @@
 #include <plog/Log.h>
 #include "CharacterizationObservable.h"
 
- const size_t g_characteristic_upper_bound = 1000;
+const size_t g_characteristic_upper_bound = 1000;
 
 CharacterizationObservable::CharacterizationObservable() :
         m_characterizations{
@@ -26,7 +26,7 @@ CharacterizationObservable::CharacterizationObservable(size_t strength, size_t s
                         {characteristic::initiative,   initiative}
                 }
 {
-    for(auto& ch : m_characterizations)
+    for (auto &ch : m_characterizations)
     {
         check_characterization_upper_bound(ch.first);
     }
@@ -52,7 +52,9 @@ void CharacterizationObservable::set_characteristic(characteristic feature, size
     size_t value_before = f->second;
     f->second = feature_value;
 
-    notify_observers(feature, feature_value - value_before);
+    check_characterization_upper_bound(feature);
+
+    notify_observers(feature, f->second - value_before);
 }
 
 void CharacterizationObservable::add_observer(Observer *o)
@@ -71,7 +73,7 @@ void CharacterizationObservable::notify_observers(characteristic changed_feature
     {
         o->handle_event(changed_feature, changed_delta);
     }
-    LOGI << "CharacterizationObservable notified all observers about changes changed feature ";
+    LOGI << "CharacterizationObservable notified all observers about changed feature ";
 }
 
 void CharacterizationObservable::check_characterization_upper_bound(characteristic type)

@@ -2,9 +2,7 @@
 #include <plog/Log.h>
 #include "Parameters.h"
 
-const size_t coefficient = 10;
-const size_t critical_hit_coef = 2;
-const float dodge_coef = 0.3;
+const float coef = 0.1;
 
 const size_t g_parameter_upper_bound = 100;
 
@@ -32,10 +30,10 @@ Parameters::Parameters(CharacterizationObservable *characteristics)
     m_parameters[parameter::carried_weight] =
             characteristics->get_characteristic(characteristic::strength);
     m_parameters[parameter::critical_hit_chance] =
-            characteristics->get_characteristic(characteristic::luck) / critical_hit_coef;
-    m_parameters[parameter::dodge_chance] = (characteristics->get_characteristic(characteristic::luck) +
-                                             characteristics->get_characteristic(characteristic::sleight) +
-                                             m_parameters[parameter::carried_weight]) / 3;
+            characteristics->get_characteristic(characteristic::luck) * coef;
+    m_parameters[parameter::dodge_chance] = ((characteristics->get_characteristic(characteristic::luck) +
+                                              characteristics->get_characteristic(characteristic::sleight) +
+                                              m_parameters[parameter::carried_weight]) / 3) * coef;
     set_parameters_upper_bound();
 }
 
@@ -63,45 +61,42 @@ void Parameters::set_parameters_upper_bound()
     }
 }
 
-void Parameters::handle_event(characteristic changed_characteristic,  int delta)
+void Parameters::handle_event(characteristic changed_characteristic, int delta)
 {
-    LOGI << "Characteristic " <<  static_cast<std::underlying_type<damage_types>::type>(changed_characteristic)
+    LOGI << "Characteristic " << static_cast<std::underlying_type<damage_types>::type>(changed_characteristic)
          << " changed on " << delta;
+
 
     switch (changed_characteristic)
     {
         case characteristic::physique:
-    {
+        {
             avoid_overflow(delta, m_parameters[parameter::HP]);
-            m_parameters[parameter::HP] = delta;
-
+            m_parameters[parameter::HP] += delta;
             break;
-    }
+        }
         case characteristic::strength:
-    {
+        {
             avoid_overflow(delta, m_parameters[parameter::carried_weight]);
-            m_parameters[parameter::carried_weight] = delta;
+            m_parameters[parameter::carried_weight] += delta;
             break;
-    }
+        }
         case characteristic::luck:
-    {
-            int calculated_diff = 0;
-            calculated_diff = delta / critical_hit_coef;
+        {
+            int calculated_diff = delta * coef;
             avoid_overflow(calculated_diff, m_parameters[parameter::critical_hit_chance]);
-            m_parameters[parameter::critical_hit_chance] = calculated_diff;
-            avoid_overflow(delta, m_parameters[parameter::dodge_chance]);
-            m_parameters[parameter::dodge_chance] = delta;
+            m_parameters[parameter::critical_hit_chance] += calculated_diff;
+            avoid_overflow(calculated_diff, m_parameters[parameter::dodge_chance]);
+            m_parameters[parameter::dodge_chance] += calculated_diff / 3;
             break;
-    }
+        }
         case characteristic::sleight:
-    {
-            avoid_overflow(delta, m_parameters[parameter::dodge_chance]);
-            m_parameters[parameter::dodge_chance] = delta;
+        {
+            int calculated_diff = delta * coef;
+            avoid_overflow(calculated_diff, m_parameters[parameter::dodge_chance]);
+            m_parameters[parameter::dodge_chance] += calculated_diff / 3;
             break;
-    }
-        default:
-            throw std::runtime_error("Unknown characteristic");
-            break;
+        }
     }
     set_parameters_upper_bound();
 }

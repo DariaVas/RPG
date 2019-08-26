@@ -28,7 +28,7 @@ public:
 
     void apply_effect_after_attack(Character *ch);
 
-    void break_random_thing(Character* ch, size_t value_to_break);
+    void break_random_thing(Character *ch, size_t value_to_break);
 
 private:
     std::vector <std::unique_ptr<Defense>> m_defenses;

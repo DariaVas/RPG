@@ -9,7 +9,9 @@ IncreaseCharacteristicWeapon::IncreaseCharacteristicWeapon(std::unique_ptr <Weap
         m_characteristic(characteristic),
         m_value(value)
 {
-
+    LOGI << "Created decorator for weapon: IncreaseCharacteristicWeapon, "
+         << " chosen characteristic: " << static_cast<int> (m_characteristic)
+         << " points to increase : " << m_value;
 }
 
 void IncreaseCharacteristicWeapon::apply_effect(Character *character)
