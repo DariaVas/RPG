@@ -10,6 +10,7 @@ class RandomGameCreator : public GameCreator
 public:
     HeroBuilder *get_hero_builder()
     {
+
         return new RandomHeroBuilder();
     }
 };

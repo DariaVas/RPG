@@ -1,65 +1,58 @@
 #include <iostream>
+#include <plog/Log.h>
 #include "ActiveHeroState.h"
 #include "Character.h"
+#include "Utils.h"
 
 ActiveHeroState::ActiveHeroState()
 {
 
 }
 
-//void ActiveHeroState::damage(Character* ch)
-//{
-//    // Add code
-//}
-
-//void ActiveHeroState::take_damage(Character* ch, Damage& dmg)
-//{
-//    //Add code
-//}
-
-bool ActiveHeroState::can_dodge(Character* victim)
+std::vector<Damage> ActiveHeroState::generate_damages(Outfit *outfit, Character *ch)
 {
-    size_t generated_dodge_chance = rand() % 100 + 1;
+    return outfit->generate_damages(ch);
+}
+
+
+bool ActiveHeroState::can_dodge(Character *victim)
+{
+    size_t generated_dodge_chance = utils::rdtsc() % 100 + 1;
     size_t hero_dodge_chance = victim->get_parameter(parameter::dodge_chance);
     std::cout << victim->get_hero_name() << " is trying to dodge, his dodge chance: " << hero_dodge_chance
               << " generated dodge chance : " << generated_dodge_chance << std::endl;
-    if(generated_dodge_chance < hero_dodge_chance)
+    if (generated_dodge_chance < hero_dodge_chance)
     {
-        std::cout << victim->get_hero_name() << " dodged damage"<<std::endl;
+        LOGI << victim->get_hero_name() << " dodged damage";
         return true;
     }
-    std::cout << victim->get_hero_name() << " didn't dodge damage"<<std::endl;
+    LOGI << victim->get_hero_name() << " didn't dodge damage";
     return false;
 }
 
-Damage ActiveHeroState::try_to_reflect_damage(Character* victim, Damage& damage)
+Damage ActiveHeroState::try_to_reflect_damage(Character *victim, Damage &damage)
 {
     size_t reflection = victim->get_reflection(damage.damage_type);
     size_t reflected_damage = (damage.damage_power / 100.0) * reflection; //get percent of reflected damage
-    std::cout << victim->get_hero_name() << "tried to reflect damage, as a result reflected damage power : " << reflected_damage<<std::endl;
+    std::cout << victim->get_hero_name() << " tried to reflect damage, as a result reflected damage power : "
+              << reflected_damage << std::endl;
     return Damage{damage.damage_type, reflected_damage, damage.piercing_power, 0};
 }
 
-void ActiveHeroState::take_reflected_damage(Character* attacker, Damage& reflected_dmg)
+void ActiveHeroState::take_reflected_damage(Character *attacker, Damage &reflected_dmg)
 {
-    if(can_dodge(attacker))
+    if (can_dodge(attacker))
     {
-        std::cout << attacker->get_hero_name() << " dodged reflected damage";
+        LOGI << attacker->get_hero_name() << " dodged from reflected damage";
         return;
     }
-
-    // just take the reflected damage
-}
-
-void ActiveHeroState::try_to_resist_damage(Character* victim, Damage& damage)
-{
-    
+    _take_damage(attacker, reflected_dmg);
 }
 
 void ActiveHeroState::try_to_create_critical_hit(Character *atacker, Damage &damage)
 {
-    size_t generated_critical_hit_chance = rand() % 100 + 1;
-    if(generated_critical_hit_chance < atacker->get_parameter(parameter::critical_hit_chance))
+    size_t generated_critical_hit_chance = utils::rdtsc() % 100 + 1;
+    if (generated_critical_hit_chance < atacker->get_parameter(parameter::critical_hit_chance))
     {
         damage.damage_power += damage.critical_damage_multiplier;
         std::cout << atacker->get_hero_name() << " created a critical hit, and damage power was increased on "
@@ -67,28 +60,30 @@ void ActiveHeroState::try_to_create_critical_hit(Character *atacker, Damage &dam
     }
 }
 
-bool ActiveHeroState::take_remained_damage(Character* victim, Damage &dmg)
+bool ActiveHeroState::take_remained_damage(Character *victim, Damage &dmg)
 {
     size_t defense = victim->get_resistance(dmg.damage_type);
-    if(defense < dmg.piercing_power)
+    if (defense < dmg.piercing_power)
     {
         defense = 0;
-    }
-    else
+    } else
     {
         defense -= dmg.piercing_power;
+        std::cout << victim->get_hero_name() << " defense was pierced on "
+                  << dmg.piercing_power << " points " << std::endl;
     }
-    
+
     if (dmg.damage_power < defense)
     {
-        dmg.damage_power = 0;
-        // the damage was deflected
+        std::cout << victim->get_hero_name() << " resisted the damage" << std::endl;
+        // the hero resisted the damage
         return false;
-    }
-    else
+    } else
     {
         dmg.damage_power -= defense;
+        std::cout << victim->get_hero_name() << " decreased damage power on "
+                  << defense << " points " << std::endl;
     }
-    _take_damage(victim,dmg);
+    _take_damage(victim, dmg);
     return true;
 }

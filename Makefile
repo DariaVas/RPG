@@ -12,7 +12,8 @@ INC=\
     $(PWD)/Outfit/Decorators/WeaponDecorators \
     $(PWD)/Outfit/Decorators/DefenseDecorators \
     $(PWD)/Outfit/Defense \
-    $(PWD)/Outfit/Weapon
+    $(PWD)/Outfit/Weapon \
+    $(PWD)/plog/include \
 
 ifeq ($(DEBUG), 1)
     CFLAGS += -DDEBUG -g
@@ -24,8 +25,11 @@ INC_PARAMS=$(foreach d, $(INC), -I$d)
 LDFLAGS=
 SOURCES=\
     ./main.o \
+    ./Utils.o \
     ./Game/Game.o \
     ./Character/Character.o \
+    ./Character/HeroState/ActiveHeroState.o \
+    ./Character/HeroState/HeroState.o \
     ./Character/HeroState/ActiveHeroState.o \
     ./Character/HeroState/StunnedHeroState.o \
     ./Character/CharacterizationObservable.o \

@@ -18,3 +18,5 @@ physique = 4,
 luck = 5,
 initiative = 6
 }
+
+Limit for characteristics : 1000 points

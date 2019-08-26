@@ -8,7 +8,7 @@
 class StunningWeapon final : public WeaponDecorator
 {
 public:
-    StunningWeapon(std::unique_ptr <Weapon> &decorator, size_t stun_seconds);
+    StunningWeapon(std::unique_ptr <Weapon> &decorator);
 
 
     void effect_after_attack(Character *character) override;

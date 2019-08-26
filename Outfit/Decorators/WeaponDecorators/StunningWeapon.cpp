@@ -1,16 +1,18 @@
+#include <plog/Log.h>
 #include "StunningWeapon.h"
 #include "Character.h"
 
 
-StunningWeapon::StunningWeapon(std::unique_ptr <Weapon> &decorator, size_t stun_seconds) :
-        WeaponDecorator(decorator),
-        m_stun_seconds(stun_seconds)
+StunningWeapon::StunningWeapon(std::unique_ptr <Weapon> &decorator) :
+        WeaponDecorator(decorator)
 {
 
 }
 
 void StunningWeapon::effect_after_attack(Character *character)
 {
-    character->set_stun(m_stun_seconds);
+    character->set_stun(true);
+    LOGI << character->get_hero_name() << " got post damage effect, and he was stunned "
+         << " due to \" Stunning Weapon\" effect";
     m_decorator->effect_after_attack(character);
 }

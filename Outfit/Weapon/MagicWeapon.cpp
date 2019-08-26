@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <plog/Log.h>
 #include <type_traits>
 #include "MagicWeapon.h"
 #include "Character.h"
@@ -21,7 +22,8 @@ Damage MagicWeapon::generate_damage(Character *ch)
     size_t modifier_of_critical_hit = calculate_modifier_of_critical_hit(
             ch->get_characteristic(characteristic::intelligence));
 
-    std::cout << "Generated base magic damage, code of damage_types:  " << static_cast<std::underlying_type<damage_types>::type>(get_damage_type()) <<
+    LOGI << "Generated base magic damage, code of damage_types:  "
+              << static_cast<std::underlying_type<damage_types>::type>(get_damage_type()) <<
               " weapon power = " <<
               get_weapon_power() << " , additional power from characteristic = " <<
               additional_power << " , total power = " << power << std::endl;

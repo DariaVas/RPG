@@ -16,6 +16,7 @@ enum class parameter
     critical_hit_chance,
 };
 
+extern const size_t g_parameter_upper_bound;
 
 class Parameters : public Observer
 {
@@ -38,7 +39,8 @@ public:
 
 private:
     void set_parameters_upper_bound();
-    void avoid_overflow(int& delta, size_t characteristic_value);
+
+    void avoid_overflow(int &delta, size_t characteristic_value);
 
 private:
     std::map <damage_types, size_t> m_damage_resistance;

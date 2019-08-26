@@ -9,7 +9,7 @@
 
 enum holding_type
 {
-    one_handed,
+    one_handed=1,
     two_handed
 };
 

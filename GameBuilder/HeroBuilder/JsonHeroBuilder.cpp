@@ -106,7 +106,7 @@ void JsonHeroBuilder::decorate_weapon(numWeaponDecorator decorator_num, std::uni
             break;
         case numWeaponDecorator::stunning:
             decorator.reset(
-                    new StunningWeapon(decorated_obj, weapon_effects["stunning"]["stunning_seconds"].get<size_t>()));
+                    new StunningWeapon(decorated_obj));
             break;
         case numWeaponDecorator::breaking:
             decorator.reset(

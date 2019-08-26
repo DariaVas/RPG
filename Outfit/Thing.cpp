@@ -1,3 +1,4 @@
+#include <plog/Log.h>
 #include "Thing.h"
 #include "Character.h"
 
@@ -11,9 +12,11 @@ void Thing::reduce_durability(unsigned int value)
     if (value > m_durability)
     {
         m_durability = 0;
+        LOGI << "The thing " << m_name << " is already broken";
     } else
     {
         m_durability -= value;
+        LOGI << "The durability of "<<m_name << " was reduced to " << m_durability << " points";
     }
 }
 

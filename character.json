@@ -14,7 +14,6 @@
       "points_to_increase": 10
     },
     "stunning": {
-      "stunning_seconds": 2
     },
     "breaking": {
       "breaking_power": 10
@@ -52,7 +51,7 @@
       "strength": 100,
       "sleight": 50,
       "intelligence": 70,
-      "physique": 30,
+      "physique": 300,
       "luck": 56,
       "initiative": 10
     },
@@ -113,7 +112,8 @@
             "type_of_damage": 3,
             "damage": 40,
             "additional_effects": [
-              1
+              1,
+              5
             ]
           },
           "shield": {
@@ -181,7 +181,7 @@
     "strength": 100,
     "sleight": 50,
     "intelligence": 70,
-    "physique": 30,
+    "physique": 300,
     "luck": 56,
     "initiative": 10
   },
@@ -242,7 +242,8 @@
           "type_of_damage": 3,
           "damage": 40,
           "additional_effects": [
-            1
+            1,
+            5
           ]
         },
         "shield": {

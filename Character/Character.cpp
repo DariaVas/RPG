@@ -1,8 +1,10 @@
+#include <iostream>
+#include "plog/Log.h"
 #include "Character.h"
 #include "ActiveHeroState.h"
 #include "StunnedHeroState.h"
 
-Character::Character(Outfit &outfit, const CharacterizationObservable &characterization, const std::string& hero_name) :
+Character::Character(Outfit &outfit, const CharacterizationObservable &characterization, const std::string &hero_name) :
         m_outfit(std::move(outfit)),
         m_characterization(characterization),
         m_parameters(&m_characterization),
@@ -10,6 +12,36 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
         m_hero_state(new ActiveHeroState())
 {
     m_outfit.apply_magic_effect(this);
+    LOGI << "Hero : " << m_hero_name;
+
+    LOGI << "Characteristic: \n"
+         << "strength: " << m_characterization.get_characteristic(characteristic::strength) << "\n"
+         << "sleight: " << m_characterization.get_characteristic(characteristic::sleight) << "\n"
+         << "intelligence: " << m_characterization.get_characteristic(characteristic::intelligence) << "\n"
+         << "physique: " << m_characterization.get_characteristic(characteristic::physique) << "\n"
+         << "luck: " << m_characterization.get_characteristic(characteristic::luck) << "\n"
+         << "initiative: " << m_characterization.get_characteristic(characteristic::initiative);
+
+    LOGI << "Parameters: \n"
+         << "HP: " << m_parameters.get_parameter(parameter::HP) << "\n"
+         << "carried weight: " << m_parameters.get_parameter(parameter::carried_weight) << "\n"
+         << "chance of dodge: " << m_parameters.get_parameter(parameter::dodge_chance) << "\n"
+         << "chance of critical hit: " << m_parameters.get_parameter(parameter::critical_hit_chance);
+
+    LOGI << "Reflection of damage: \n"
+         << "physical: " << m_parameters.get_damage_reflection(damage_types::physical ) << "\n"
+         << "fire: " << m_parameters.get_damage_reflection(damage_types::fire ) << "\n"
+         << "ice: " << m_parameters.get_damage_reflection(damage_types::ice ) << "\n"
+         << "electric: " << m_parameters.get_damage_reflection(damage_types::electric ) << "\n"
+         << "acid: "<< m_parameters.get_damage_reflection(damage_types::acid) ;
+
+    LOGI << "Resistance to damage: \n"
+         << "physical: " << m_parameters.get_damage_resistance(damage_types::physical ) << "\n"
+         << "fire: " << m_parameters.get_damage_resistance(damage_types::fire ) << "\n"
+         << "ice: " << m_parameters.get_damage_resistance(damage_types::ice ) << "\n"
+         << "electric: " << m_parameters.get_damage_resistance(damage_types::electric ) << "\n"
+         << "acid: "<< m_parameters.get_damage_resistance(damage_types::acid) ;
+
 }
 
 void Character::increase_characteristic(characteristic feature, size_t feature_value)
@@ -81,28 +113,38 @@ void Character::decrease_reflection_of_damage(damage_types damage_type, size_t v
     if (m_parameters.get_damage_reflection(damage_type) < value)
     {
         m_parameters.set_damage_reflection(damage_type, 0);
-    }
-    else
+    } else
     {
         m_parameters.set_damage_reflection(damage_type, m_parameters.get_damage_reflection(damage_type) - value);
     }
 }
 
 
-void Character::set_stun(size_t stun_seconds)
+void Character::set_stun(bool is_stunned)
 {
-    m_stunned = true;
-    m_stun_seconds = stun_seconds;
+    if(is_stunned)
+    {
+        std::cout << m_hero_name << " is stunned since now" << std::endl;
+
+        m_hero_state.reset(new StunnedHeroState(m_characterization.get_characteristic(characteristic::initiative)));
+    }
+    else
+    {
+        std::cout << m_hero_name << " is active since now" << std::endl;
+
+        m_hero_state.reset(new ActiveHeroState());
+    }
+
 }
 
 void Character::break_outfit(size_t breaking_value)
 {
-    m_outfit
+    m_outfit.break_random_thing(this,breaking_value);
 }
 
-std::vector<Damage> Character::get_damages()
+std::vector <Damage> Character::get_damages()
 {
-    return m_outfit.generate_damages(this);
+    return m_hero_state->generate_damages(&m_outfit, this);
 }
 
 size_t Character::get_parameter(parameter p)
@@ -110,7 +152,7 @@ size_t Character::get_parameter(parameter p)
     return m_parameters.get_parameter(p);
 }
 
-const std::string& Character:: get_hero_name()
+const std::string &Character::get_hero_name()
 {
     return m_hero_name;
 }
@@ -130,22 +172,17 @@ bool Character::can_dodge()
     return m_hero_state->can_dodge(this);
 }
 
-Damage Character::try_to_reflect_damage(Damage& damage)
+Damage Character::try_to_reflect_damage(Damage &damage)
 {
     return m_hero_state->try_to_reflect_damage(this, damage);
 }
 
-void Character::take_reflected_damage(Damage& reflected_dmg)
+void Character::take_reflected_damage(Damage &reflected_dmg)
 {
     m_hero_state->take_reflected_damage(this, reflected_dmg);
 }
 
-void Character::try_to_resist_damage(Damage& damage)
-{
-    m_hero_state->try_to_resist_damage(this, damage);
-}
-
-void Character::try_to_create_critical_hit(Damage& damage)
+void Character::try_to_create_critical_hit(Damage &damage)
 {
     m_hero_state->try_to_create_critical_hit(this, damage);
 }
@@ -155,7 +192,7 @@ bool Character::take_remained_damage(Damage &dmg)
     return m_hero_state->take_remained_damage(this, dmg);
 }
 
-void Character::apply_effect_after_attack(Character* victim)
+void Character::apply_effect_after_attack(Character *victim)
 {
     m_outfit.apply_effect_after_attack(victim);
 }

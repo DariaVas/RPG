@@ -1,4 +1,5 @@
 #include <iostream>
+#include <plog/Log.h>
 #include "PhysicalWeapon.h"
 #include "Character.h"
 
@@ -16,7 +17,7 @@ Damage PhysicalWeapon::generate_damage(Character *ch)
     size_t power = get_weapon_power() + additional_power;
     size_t modifier_of_critical_hit = calculate_modifier_of_critical_hit(max_characteristic);
 
-    std::cout << "Generated base physic damage, weapon power = " <<
+    LOGI << "Generated base physic damage, weapon power = " <<
               get_weapon_power() << " , additional power from characteristic = " <<
               additional_power << " , total power = " << power << std::endl;
 

@@ -17,6 +17,8 @@ enum class characteristic
     initiative,
 };
 
+extern const size_t g_characteristic_upper_bound;
+
 class CharacterizationObservable
 {
 public:
@@ -35,6 +37,8 @@ public:
 
 private:
     void notify_observers(characteristic changed_feature, int changed_delta);
+
+    void check_characterization_upper_bound(characteristic type);
 
 private:
     std::map <characteristic, size_t> m_characterizations;

@@ -53,9 +53,10 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
     }
 
     std::vector <std::unique_ptr<Weapon>> weapons(build_weapon(hero));
-    if (weapons.size() > 2)
+    if (weapons.size() > 2 ||( shield && weapons.size() == 2))
     {
-        throw std::logic_error("Quantity of weapons cannot be greater than 2 : ");
+        throw std::logic_error("Quantity of weapons cannot be greater than 2, "
+                               "also hero can hold only 1 weapon if he has shield");
     }
     for (auto &weapon : weapons)
     {
