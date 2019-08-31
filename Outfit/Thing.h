@@ -23,13 +23,16 @@ public:
 
     size_t get_durability();
 
-    std::string get_name();
-
+    const std::string& get_name();
+    
+    size_t get_weight();
+    
     virtual ~Thing() = default;
 
 private:
     unsigned int m_durability;
     const std::string m_name;
+    const size_t m_weight;
 };
 
 #endif // THING_H

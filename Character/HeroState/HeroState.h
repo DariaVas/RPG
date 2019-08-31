@@ -22,7 +22,7 @@ public:
     virtual void try_to_create_critical_hit(Character *atacker, Damage &damage) = 0;
 
     virtual bool take_remained_damage(Character *victim, Damage &dmg) = 0;
-
+    
     virtual ~HeroState() = default;
 
 protected:

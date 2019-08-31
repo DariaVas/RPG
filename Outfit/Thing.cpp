@@ -2,7 +2,7 @@
 #include "Thing.h"
 #include "Character.h"
 
-Thing::Thing(const std::string &name) : m_durability(100), m_name(name)
+Thing::Thing(const std::string &name) : m_durability(100), m_name(name), m_weight(100)
 {
 
 }
@@ -31,7 +31,12 @@ size_t Thing::get_durability()
     return m_durability;
 }
 
-std::string Thing::get_name()
+const std::string& Thing::get_name()
 {
     return m_name;
+}
+
+size_t Thing::get_weight()
+{
+    return m_weight;
 }

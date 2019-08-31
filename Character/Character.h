@@ -56,13 +56,20 @@ public:
     bool take_remained_damage(Damage &dmg);
 
     void apply_effect_after_attack(Character *victim);
+    
+    bool all_steps_done();
+    
+    void reduce_time_to_next_move(size_t time);
+    
+    size_t get_time_to_next_move();
 
 private:
     Outfit m_outfit;
     CharacterizationObservable m_characterization;
     Parameters m_parameters;
-    std::string m_hero_name;
+    const std::string m_hero_name;
     std::unique_ptr <HeroState> m_hero_state;
+    size_t m_time_to_next_move;
 };
 
 #endif // CHARACTER_H

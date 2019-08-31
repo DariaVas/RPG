@@ -31,9 +31,10 @@ Parameters::Parameters(CharacterizationObservable *characteristics)
             characteristics->get_characteristic(characteristic::strength);
     m_parameters[parameter::critical_hit_chance] =
             characteristics->get_characteristic(characteristic::luck) * coef;
-    m_parameters[parameter::dodge_chance] = ((characteristics->get_characteristic(characteristic::luck) +
-                                              characteristics->get_characteristic(characteristic::sleight) +
-                                              m_parameters[parameter::carried_weight]) / 3) * coef;
+//    m_parameters[parameter::dodge_chance] = ((characteristics->get_characteristic(characteristic::luck) +
+//                                              characteristics->get_characteristic(characteristic::sleight) +
+//                                              m_parameters[parameter::carried_weight]) / 3) * coef;
+    m_parameters[parameter::dodge_chance] = 0;
     set_parameters_upper_bound();
 }
 

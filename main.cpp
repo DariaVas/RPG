@@ -1,6 +1,7 @@
 #include <iostream>
 #include <plog/Log.h>
 #include "Game.h"
+#include "Utils.h"
 #include "ConfigGameCreator.h"
 #include "RandomGameCreator.h"
 
@@ -33,6 +34,14 @@ int main()
         LOGI << "Game started";
         Game game(game_creator);
         game.play();
+    }
+    catch (const utils::HeroDied &h)
+    {
+        std::cout << "♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥\n";
+        std::cout << "Game over, hero : " << h.what() << "died\n";
+        std::cout << "♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥\n";
+        
+        return 1;
     }
     catch (const std::exception &ex)
     {

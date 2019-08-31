@@ -12,6 +12,10 @@ public:
     void play();
 
 private:
+    void play_raund(Character* initiator, Character* passive_hero);
+    
+    void fight(Character* attacker, Character* victim);
+private:
     std::unique_ptr <HeroBuilder> m_heroes_builder;
     Character m_first_hero;
     Character m_second_hero;

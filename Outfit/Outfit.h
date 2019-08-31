@@ -29,10 +29,13 @@ public:
     void apply_effect_after_attack(Character *ch);
 
     void break_random_thing(Character *ch, size_t value_to_break);
+    
+    size_t get_outift_weight();
 
 private:
     std::vector <std::unique_ptr<Defense>> m_defenses;
     std::vector <std::unique_ptr<Weapon>> m_weapons;
+    const size_t m_weight;
 };
 
 #endif // OUTFIT_H

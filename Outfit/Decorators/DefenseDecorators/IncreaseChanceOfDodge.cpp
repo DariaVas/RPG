@@ -6,7 +6,7 @@
 
 IncreaseChanceOfDodge::IncreaseChanceOfDodge(std::unique_ptr <Defense> &decorator, size_t value) :
         DefenseDecorator(decorator),
-        m_dodge_power(value)
+        m_dodge_power(0) //revert it
 {
     LOGI << "Created decorator for defense: IncreaseChanceOfDodge, value to increase dodge: " << m_dodge_power;
 }

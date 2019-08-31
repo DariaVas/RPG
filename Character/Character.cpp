@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "ActiveHeroState.h"
 #include "StunnedHeroState.h"
+#include "Utils.h"
 
 Character::Character(Outfit &outfit, const CharacterizationObservable &characterization, const std::string &hero_name) :
         m_outfit(std::move(outfit)),
@@ -13,6 +14,7 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
 {
     m_characterization.add_observer(&m_parameters);
     m_outfit.apply_magic_effect(this);
+    m_time_to_next_move = m_characterization.get_characteristic(characteristic::initiative);
     LOGI << "Hero : " << m_hero_name;
 
     LOGI << "Characteristic: \n"
@@ -87,6 +89,11 @@ void Character::decrease_parameter(parameter p, size_t value)
     {
         m_parameters.set_parameter(p, m_parameters.get_parameter(p) - value);
     }
+    
+    if(p == parameter::HP && !m_parameters.get_parameter(parameter::HP))
+    {
+        throw utils::HeroDied(m_hero_name);
+    }
 }
 
 void Character::increase_resistance(damage_types resistance_type, size_t value)
@@ -149,6 +156,11 @@ void Character::break_outfit(size_t breaking_value)
 
 std::vector <Damage> Character::get_damages()
 {
+    if(m_time_to_next_move != 0)
+    {
+        throw std::logic_error("Character cannot generate damages until the time to the move comes");
+    }
+    m_time_to_next_move = m_characterization.get_characteristic(characteristic::initiative);
     return m_hero_state->generate_damages(&m_outfit, this);
 }
 
@@ -202,3 +214,24 @@ void Character::apply_effect_after_attack(Character *victim)
     m_outfit.apply_effect_after_attack(victim);
 }
 
+bool Character::all_steps_done()
+{
+    return m_time_to_next_move == m_characterization.get_characteristic(characteristic::initiative);
+}
+
+void Character::reduce_time_to_next_move(size_t time)
+{
+    if(m_time_to_next_move < time)
+    {
+        m_time_to_next_move=0;
+    }
+    else
+    {
+        m_time_to_next_move -= time;
+    }
+}
+
+size_t Character::get_time_to_next_move()
+{
+    return m_time_to_next_move;
+}

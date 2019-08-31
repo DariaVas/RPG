@@ -26,6 +26,7 @@ Outfit::Outfit(std::vector <std::unique_ptr<Defense>> &defenses, std::vector <st
 void Outfit::add_defense(std::unique_ptr <Defense> &defense)
 {
     m_defenses.emplace_back(std::move(defense));
+    m_weap
 }
 
 void Outfit::add_weapon(std::unique_ptr <Weapon> &weapon)
@@ -94,5 +95,10 @@ void Outfit::break_random_thing(Character *ch, size_t value_to_break)
             m_defenses.erase(m_defenses.begin() + thing_to_break);
         }
     }
+}
+
+size_t Outfit::get_outift_weight()
+{
+    return m_weight;
 }
 
