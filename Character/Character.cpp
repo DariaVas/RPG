@@ -13,6 +13,7 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
         m_hero_state(new ActiveHeroState())
 {
     m_characterization.add_observer(&m_parameters);
+    check_outfit_overflow();
     m_outfit.apply_magic_effect(this);
     m_time_to_next_move = m_characterization.get_characteristic(characteristic::initiative);
     LOGI << "Hero : " << m_hero_name;
@@ -138,7 +139,7 @@ void Character::set_stun(bool is_stunned)
     {
         std::cout << m_hero_name << " is stunned since now" << std::endl;
 
-        m_hero_state.reset(new StunnedHeroState(m_characterization.get_characteristic(characteristic::initiative)));
+        m_hero_state.reset(new StunnedHeroState(this));
     }
     else
     {
@@ -216,22 +217,29 @@ void Character::apply_effect_after_attack(Character *victim)
 
 bool Character::all_steps_done()
 {
-    return m_time_to_next_move == m_characterization.get_characteristic(characteristic::initiative);
+    return m_hero_state->all_steps_done(this);
 }
 
 void Character::reduce_time_to_next_move(size_t time)
 {
-    if(m_time_to_next_move < time)
-    {
-        m_time_to_next_move=0;
-    }
-    else
-    {
-        m_time_to_next_move -= time;
-    }
+    m_hero_state->reduce_time_to_next_move(this, time);
 }
+
+void Character::set_time_to_next_move(size_t time)
+{
+    m_time_to_next_move = time;
+}
+
 
 size_t Character::get_time_to_next_move()
 {
     return m_time_to_next_move;
+}
+
+void Character::check_outfit_overflow()
+{
+    while(m_parameters.get_parameter(parameter::carried_weight) < m_outfit.get_outift_weight())
+    {
+        m_outfit.lost_thing(this);
+    }
 }

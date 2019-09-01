@@ -38,7 +38,7 @@ int main()
     catch (const utils::HeroDied &h)
     {
         std::cout << "♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥\n";
-        std::cout << "Game over, hero : " << h.what() << "died\n";
+        std::cout << "Game over, " << h.what() << " died\n";
         std::cout << "♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥ ♥\n";
         
         return 1;

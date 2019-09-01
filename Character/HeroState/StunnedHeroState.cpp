@@ -5,35 +5,27 @@
 #include "StunnedHeroState.h"
 
 
-StunnedHeroState::StunnedHeroState(size_t seconds)
-        : m_stun_seconds(seconds)
+StunnedHeroState::StunnedHeroState(Character* ch)
+        : m_stun_seconds(0)
 {
-    // We set stun seconds to know, when the hero must change state from Stunned  to Active
-    // Note! Because of the fight of two heroes goes about 2 second,  it will be stupid if the hero is stunned during the all game.
-    //       That is why we will calculate hero steps instead of seconds.
+//    ch->set_time_to_next_move(ch->get_characteristic(characteristic::initiative));
 }
 
 std::vector <Damage> StunnedHeroState::generate_damages(Outfit *outfit, Character *ch)
 {
-    ++m_done_steps;
     std::cout << ch->get_hero_name() << " is stunned, so he didn't generate damage" << std::endl;
-    change_state_if_the_times_came(ch);
     return std::vector < Damage > {};
 }
 
 
 bool StunnedHeroState::can_dodge(Character *victim)
 {
-    ++m_done_steps;
     std::cout << "Victim is stunned, he cannot protect himself" << std::endl;
-    change_state_if_the_times_came(victim);
     return false;
 }
 
 Damage StunnedHeroState::try_to_reflect_damage(Character *victim, Damage &damage)
 {
-    ++m_done_steps;
-    change_state_if_the_times_came(victim);
     return damage;
 }
 
@@ -51,13 +43,35 @@ void StunnedHeroState::try_to_create_critical_hit(Character *atacker, Damage &da
 bool StunnedHeroState::take_remained_damage(Character *victim, Damage &dmg)
 {
     _take_damage(victim, dmg);
-    ++m_done_steps;
     std::cout << "Victim is stunned, he took all damage." << std::endl;
-    change_state_if_the_times_came(victim);
     return true;
 }
 
 void StunnedHeroState::change_state_if_the_times_came(Character *ch)
 {
-    ch->set_stun(false);
+    if(ch->get_characteristic(characteristic::initiative) == m_stun_seconds)
+    {
+        ch->set_stun(false);
+    }
+}
+
+void StunnedHeroState::reduce_time_to_next_move(Character *ch, size_t time)
+{
+    size_t time_to_next_move = ch->get_time_to_next_move();
+    if(time_to_next_move < time)
+    {
+        time_to_next_move=0;
+    }
+    else
+    {
+        time_to_next_move -= time;
+    }
+    ch->set_time_to_next_move(time_to_next_move);
+    m_stun_seconds += time;
+    change_state_if_the_times_came(ch);
+}
+
+bool StunnedHeroState::all_steps_done(Character* ch)
+{
+    return false;
 }

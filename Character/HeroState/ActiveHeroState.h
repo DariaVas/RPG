@@ -19,6 +19,11 @@ public:
     void try_to_create_critical_hit(Character *atacker, Damage &damage) override;
 
     bool take_remained_damage(Character *victim, Damage &dmg) override;
+
+    void reduce_time_to_next_move(Character *ch, size_t time) override;
+
+    bool all_steps_done(Character* ch) override;
+
 };
 
 #endif // ACTIVEHEROSTATE_H

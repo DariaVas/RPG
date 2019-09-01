@@ -52,8 +52,8 @@
       "sleight": 50,
       "intelligence": 70,
       "physique": 300,
-      "luck": 56,
-      "initiative": 10
+      "luck": 0,
+      "initiative": 50
     },
     "outfit": {
       "armor": [
@@ -182,8 +182,8 @@
       "sleight": 50,
       "intelligence": 70,
       "physique": 300,
-      "luck": 56,
-      "initiative": 10
+      "luck": 0,
+      "initiative": 100
     },
     "outfit": {
       "armor": [

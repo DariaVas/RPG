@@ -60,9 +60,13 @@ public:
     bool all_steps_done();
     
     void reduce_time_to_next_move(size_t time);
+
+    void set_time_to_next_move(size_t time);
     
     size_t get_time_to_next_move();
 
+private:
+    void check_outfit_overflow();
 private:
     Outfit m_outfit;
     CharacterizationObservable m_characterization;

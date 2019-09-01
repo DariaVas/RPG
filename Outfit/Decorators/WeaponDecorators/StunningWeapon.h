@@ -14,7 +14,7 @@ public:
     void effect_after_attack(Character *character) override;
 
 private:
-    size_t m_stun_seconds;
+    bool done; //remove me
 };
 
 #endif // STUNNINGWEAPON_H

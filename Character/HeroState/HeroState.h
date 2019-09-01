@@ -17,11 +17,15 @@ public:
 
     virtual Damage try_to_reflect_damage(Character *victim, Damage &damage) = 0;
 
+    virtual void reduce_time_to_next_move(Character *ch, size_t time) = 0;
+
     virtual void take_reflected_damage(Character *attacker, Damage &reflected_dmg) = 0;
 
     virtual void try_to_create_critical_hit(Character *atacker, Damage &damage) = 0;
 
     virtual bool take_remained_damage(Character *victim, Damage &dmg) = 0;
+
+    virtual bool all_steps_done(Character* ch) = 0;
     
     virtual ~HeroState() = default;
 

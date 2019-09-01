@@ -68,17 +68,11 @@ void ActiveHeroState::try_to_create_critical_hit(Character *atacker, Damage &dam
 
 bool ActiveHeroState::take_remained_damage(Character *victim, Damage &dmg)
 {
-    size_t defense = victim->get_resistance(dmg.damage_type);
-    if (defense < dmg.piercing_power)
-    {
-        defense = 0;
-    }
-    else
-    {
-        defense -= dmg.piercing_power;
-        std::cout << "Victim defense was pierced on "
+    int defense = victim->get_resistance(dmg.damage_type);
+
+    defense -= dmg.piercing_power;
+    std::cout << "Victim defense was pierced on "
                   << dmg.piercing_power << " points." << std::endl;
-    }
 
     if (dmg.damage_power < defense)
     {
@@ -94,3 +88,23 @@ bool ActiveHeroState::take_remained_damage(Character *victim, Damage &dmg)
     _take_damage(victim, dmg);
     return true;
 }
+
+void ActiveHeroState::reduce_time_to_next_move(Character *ch, size_t time)
+{
+    size_t time_to_next_move = ch->get_time_to_next_move();
+    if(time_to_next_move < time)
+    {
+        time_to_next_move=0;
+    }
+    else
+    {
+        time_to_next_move -= time;
+    }
+    ch->set_time_to_next_move(time_to_next_move);
+}
+
+bool ActiveHeroState::all_steps_done(Character* ch)
+{
+    return ch->get_characteristic(characteristic::initiative) == ch->get_time_to_next_move();
+}
+
