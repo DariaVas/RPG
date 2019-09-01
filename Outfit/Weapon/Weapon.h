@@ -18,7 +18,7 @@ class Weapon : public Thing
 public:
     Weapon(const std::string &name, holding_type hold_type, damage_types damage_type, size_t weapon_power);
 
-    virtual Damage generate_damage(Character *character) = 0;
+    virtual  std::vector<Damage> generate_damage(Character *character) = 0;
 
     virtual void effect_after_attack(Character *character);
 

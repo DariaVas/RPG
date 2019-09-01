@@ -11,10 +11,10 @@ IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon
          << " points to increase : " << m_increase_value;
 }
 
-Damage IncreaseCriticalHitModifier::generate_damage(Character *character)
+std::vector<Damage> IncreaseCriticalHitModifier::generate_damage(Character *character)
 {
-    Damage damage = m_decorator->generate_damage(character);
-    damage.critical_damage_multiplier += m_increase_value;
+    std::vector<Damage> damage = m_decorator->generate_damage(character);
+    damage[0].critical_damage_multiplier += m_increase_value;
     LOGI << "Hero " << character->get_hero_name()
          << " generated a damage, and its critical damage multiplier was increased on "
          << m_increase_value << " due to the effect \"Increase critical hit modifier\"";

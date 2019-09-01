@@ -11,7 +11,7 @@ WeaponDecorator::WeaponDecorator(std::unique_ptr <Weapon> &decorator) :
 
 }
 
-Damage WeaponDecorator::generate_damage(Character *character)
+ std::vector<Damage> WeaponDecorator::generate_damage(Character *character)
 {
     return m_decorator->generate_damage(character);
 }

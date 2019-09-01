@@ -19,3 +19,15 @@ uint64_t utils::rdtsc()
 }
 
 #endif
+
+void utils::safely_decrease_unsigned_value(size_t& value, size_t delta)
+{
+    if (value <= delta)
+    {
+        value = 0;
+    }
+    else
+    {
+        value -=delta;
+    }
+}

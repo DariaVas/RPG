@@ -61,9 +61,11 @@ public:
     
     void reduce_time_to_next_move(size_t time);
 
-    void set_time_to_next_move(size_t time);
-    
+    void increase_waiting_time(size_t time);
+
     size_t get_time_to_next_move();
+
+    void break_hit_thing(size_t damage_value);
 
 private:
     void check_outfit_overflow();
@@ -73,7 +75,7 @@ private:
     Parameters m_parameters;
     const std::string m_hero_name;
     std::unique_ptr <HeroState> m_hero_state;
-    size_t m_time_to_next_move;
+    size_t m_waiting_time;
 };
 
 #endif // CHARACTER_H

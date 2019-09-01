@@ -30,7 +30,7 @@ public:
     virtual ~Thing() = default;
 
 private:
-    unsigned int m_durability;
+    size_t m_durability;
     const std::string m_name;
     const size_t m_weight;
 };

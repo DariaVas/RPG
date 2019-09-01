@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdexcept>
 #include "Game.h"
+#include "Utils.h"
 
 Game::Game(std::unique_ptr <GameCreator> &game_creator)
         : m_heroes_builder(game_creator->get_hero_builder()),
@@ -17,6 +18,7 @@ void Game::play()
     size_t round = 0;
     Character *initiator = &m_first_hero;
     Character *passive_hero = &m_second_hero;
+    check_lives(initiator, passive_hero);
     while (true)
     {
         std::cout << "-----------------------------------------\n\n";
@@ -35,7 +37,7 @@ void Game::play_raund(Character *initiator, Character *passive_hero)
 
         initiator->reduce_time_to_next_move(minimal_time);
         passive_hero->reduce_time_to_next_move(minimal_time);
-        
+
         if(initiator->get_time_to_next_move() == 0 && passive_hero->get_time_to_next_move() == 0)
         {
            fight(initiator, passive_hero);
@@ -53,15 +55,15 @@ void Game::play_raund(Character *initiator, Character *passive_hero)
 void Game::fight(Character* attacker, Character* victim)
 {
     
-    std::cout << "*****************************************\n\n";
+    std::cout << "\n\n*****************************************\n";
     std::cout << "Attacker: " << attacker->get_hero_name() << " HP: " << attacker->get_parameter(parameter::HP) << "\n"
               << "Victim: " << victim->get_hero_name() << " HP: " << victim->get_parameter(parameter::HP) << std::endl;
-    std::cout << "*****************************************\n\n";
+    std::cout << "*****************************************\n";
 
     auto damages = attacker->get_damages();
     for (auto &damage : damages)
     {
-        std::cout << "Attacker generated a damage: \n"
+        std::cout << "--> Attacker generated a damage: \n"
                   << "damage type: " << static_cast<std::underlying_type<damage_types>::type>(damage.damage_type)
                   << "\n"
                   << "damage power: " << damage.damage_power << "\n"
@@ -114,5 +116,24 @@ void Game::fight(Character* attacker, Character* victim)
         {
             std::cout << "Victim didn't take the damage." << std::endl;
         }
+        check_lives(attacker, victim);
+    }
+}
+
+void Game::check_lives(Character *attacker, Character *victim)
+{
+    size_t a_hp = attacker->get_parameter(parameter::HP);
+    size_t v_hp = victim->get_parameter(parameter::HP);
+    if(a_hp == 0 && v_hp == 0)
+    {
+        throw utils::HeroDied("both heroes");
+    }
+    else if(a_hp == 0)
+    {
+        throw utils::HeroDied(attacker->get_hero_name());
+    }
+    else if(v_hp == 0)
+    {
+        throw utils::HeroDied(victim->get_hero_name());
     }
 }

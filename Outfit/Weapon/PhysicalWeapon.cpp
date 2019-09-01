@@ -12,7 +12,7 @@ PhysicalWeapon::PhysicalWeapon(const std::string &name, holding_type hold_type, 
          << " weapon power: " << weapon_power;
 }
 
-Damage PhysicalWeapon::generate_damage(Character *ch)
+std::vector<Damage> PhysicalWeapon::generate_damage(Character *ch)
 {
     size_t max_characteristic = std::max(ch->get_characteristic(characteristic::sleight),
                                          ch->get_characteristic(characteristic::strength));
@@ -24,5 +24,5 @@ Damage PhysicalWeapon::generate_damage(Character *ch)
          get_weapon_power() << " , additional power from characteristic = " <<
          additional_power << " , total power = " << power << std::endl;
 
-    return Damage{get_damage_type(), power, 0, modifier_of_critical_hit};
+    return  std::vector<Damage>{Damage{get_damage_type(), power, 0, modifier_of_critical_hit}};
 }

@@ -34,7 +34,9 @@ public:
 
     size_t get_characteristic(characteristic feature);
 
-    void set_characteristic(characteristic feature, size_t feature_value);
+    void increase_characteristic(characteristic feature, size_t feature_value);
+
+    void decrease_characteristic(characteristic feature, size_t feature_value);
 
 private:
     void notify_observers(characteristic changed_feature, int changed_delta);

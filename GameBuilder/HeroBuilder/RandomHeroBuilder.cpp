@@ -31,10 +31,10 @@ CharacterizationObservable RandomHeroBuilder::build_hero_personality(const std::
                                       generate_random_value(g_characteristic_upper_bound));
 }
 
-std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_magic_defenses(const std::string &hero)
+std::list <std::unique_ptr<Defense>> RandomHeroBuilder::build_magic_defenses(const std::string &hero)
 {
     const std::string magic_things_name[] = {"ring1", "ring2", "amulet"};
-    std::vector <std::unique_ptr<Defense>> things;
+    std::list <std::unique_ptr<Defense>> things;
     for (const auto &name : magic_things_name)
     {
         std::unique_ptr <Defense> thing(new MagicDefense(name,
@@ -46,7 +46,7 @@ std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_magic_defenses(c
     return things;
 }
 
-std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_physical_defenses(const std::string &hero)
+std::list <std::unique_ptr<Defense>> RandomHeroBuilder::build_physical_defenses(const std::string &hero)
 {
     const std::string physical_things_name[] = {"head protection",
                                                 "torso protection",
@@ -54,7 +54,7 @@ std::vector <std::unique_ptr<Defense>> RandomHeroBuilder::build_physical_defense
                                                 "legs protection",
                                                 "boots"
     };
-    std::vector <std::unique_ptr<Defense>> things;
+    std::list <std::unique_ptr<Defense>> things;
     for (const auto &name : physical_things_name)
     {
         std::unique_ptr <Defense> thing(new PhysicalDefense(name,
@@ -97,9 +97,9 @@ std::unique_ptr <Weapon> RandomHeroBuilder::construct_weapon(const std::string &
     }
 }
 
-std::vector <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std::string &hero)
+std::list <std::unique_ptr<Weapon>> RandomHeroBuilder::build_weapon(const std::string &hero)
 {
-    std::vector <std::unique_ptr<Weapon>> weapons;
+    std::list <std::unique_ptr<Weapon>> weapons;
 
     if (m_weapon_and_shield_chosen)
     {
@@ -230,7 +230,7 @@ void RandomHeroBuilder::decorate_weapon(numWeaponDecorator decorator_num, std::u
     {
         case numWeaponDecorator::additional_damage:
             decorator.reset(
-                    new AdditionalHit(decorated_obj, generate_random_value(g_parameter_upper_bound)));
+                    new AdditionalHit(decorated_obj, get_random_damage_type(), generate_random_value(g_parameter_upper_bound)));
             break;
         case numWeaponDecorator::increase_characteristic:
             decorator.reset(new IncreaseCharacteristicWeapon(decorated_obj,

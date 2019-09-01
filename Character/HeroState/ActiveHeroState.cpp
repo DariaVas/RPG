@@ -74,7 +74,7 @@ bool ActiveHeroState::take_remained_damage(Character *victim, Damage &dmg)
     std::cout << "Victim defense was pierced on "
                   << dmg.piercing_power << " points." << std::endl;
 
-    if (dmg.damage_power < defense)
+    if (static_cast<int>(dmg.damage_power) < defense)
     {
         std::cout << "Victim resisted the damage." << std::endl;
         return false;
@@ -91,16 +91,7 @@ bool ActiveHeroState::take_remained_damage(Character *victim, Damage &dmg)
 
 void ActiveHeroState::reduce_time_to_next_move(Character *ch, size_t time)
 {
-    size_t time_to_next_move = ch->get_time_to_next_move();
-    if(time_to_next_move < time)
-    {
-        time_to_next_move=0;
-    }
-    else
-    {
-        time_to_next_move -= time;
-    }
-    ch->set_time_to_next_move(time_to_next_move);
+    ch->increase_waiting_time(time);
 }
 
 bool ActiveHeroState::all_steps_done(Character* ch)

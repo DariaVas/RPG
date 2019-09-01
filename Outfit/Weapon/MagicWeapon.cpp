@@ -19,7 +19,7 @@ MagicWeapon::MagicWeapon(const std::string &name, holding_type hold_type, damage
          << " weapon power: " << weapon_power;
 }
 
-Damage MagicWeapon::generate_damage(Character *ch)
+ std::vector<Damage> MagicWeapon::generate_damage(Character *ch)
 {
     size_t additional_power = calculate_additional_damage(ch->get_characteristic(characteristic::intelligence));
     size_t power = get_weapon_power() + additional_power;
@@ -32,6 +32,6 @@ Damage MagicWeapon::generate_damage(Character *ch)
          get_weapon_power() << " , additional power from characteristic = " <<
          additional_power << " , total power = " << power << std::endl;
 
-    return Damage{get_damage_type(), power, 0, modifier_of_critical_hit};
+    return std::vector<Damage>{Damage{get_damage_type(), power, 0, modifier_of_critical_hit}};
 }
 

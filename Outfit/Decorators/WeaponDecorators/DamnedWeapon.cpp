@@ -9,7 +9,7 @@ DamnedWeapon::DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, ch
         m_value(value),
         m_first_damage(true)
 {
-    LOGI << "Created decorator for weapon: DamnedWeapon, "
+    LOGI << "Created decorator for weapon: Damned Weapon, "
          << " chosen characteristic: " << static_cast<int>(m_characteristic)
          << " points to reduce : " << m_value;
 }

@@ -14,13 +14,13 @@ public:
 private:
     CharacterizationObservable build_hero_personality(const std::string &hero) override;
 
-    std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) override;
+    std::list <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) override;
 
-    std::vector <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) override;
+    std::list <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) override;
 
     std::unique_ptr <Defense> build_shield(const std::string &hero) override;
 
-    std::vector <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) override;
+    std::list <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) override;
 
     size_t generate_random_value(size_t upper_bound);
 

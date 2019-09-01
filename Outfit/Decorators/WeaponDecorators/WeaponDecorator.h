@@ -6,13 +6,14 @@
 #include <iostream>
 #include <memory>
 #include "Weapon.h"
+#include <vector>
 
 class WeaponDecorator : public Weapon
 {
 public:
     WeaponDecorator(std::unique_ptr <Weapon> &decorator);
 
-    virtual Damage generate_damage(Character *character) override;
+    virtual std::vector<Damage> generate_damage(Character *character) override;
 
     virtual void effect_after_attack(Character *character) override;
 

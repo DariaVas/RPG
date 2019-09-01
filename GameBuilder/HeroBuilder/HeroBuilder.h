@@ -26,13 +26,13 @@ private:
 
     virtual CharacterizationObservable build_hero_personality(const std::string &hero) = 0;
 
-    virtual std::vector <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) = 0;
+    virtual std::list <std::unique_ptr<Defense>> build_magic_defenses(const std::string &hero) = 0;
 
-    virtual std::vector <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) = 0;
+    virtual std::list <std::unique_ptr<Defense>> build_physical_defenses(const std::string &hero) = 0;
 
     virtual std::unique_ptr <Defense> build_shield(const std::string &hero) = 0;
 
-    virtual std::vector <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) = 0;
+    virtual std::list <std::unique_ptr<Weapon>> build_weapon(const std::string &hero) = 0;
 };
 
 enum class numDefenseDecorator

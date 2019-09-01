@@ -14,5 +14,7 @@ namespace utils {
     };
     
     uint64_t rdtsc();
+
+    void safely_decrease_unsigned_value(size_t& value, size_t delta);
 }
 #endif // UTILS_H

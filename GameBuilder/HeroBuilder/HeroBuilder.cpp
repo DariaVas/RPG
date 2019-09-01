@@ -27,7 +27,7 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
 
     LOGI << "Buildig magic defenses";
 
-    std::vector <std::unique_ptr<Defense>> magic_defenses(build_magic_defenses(hero));
+    std::list <std::unique_ptr<Defense>> magic_defenses(build_magic_defenses(hero));
     if (magic_defenses.size() != 3)
     {
         throw std::logic_error("Quantity of magic defenses must be equal 3 : 2 rings and 1 amulet");
@@ -37,7 +37,7 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
         outfit.add_defense(defense);
     }
 
-    std::vector <std::unique_ptr<Defense>> physical_defenses(build_physical_defenses(hero));
+    std::list <std::unique_ptr<Defense>> physical_defenses(build_physical_defenses(hero));
     if (physical_defenses.size() != 5)
     {
         throw std::logic_error("Quantity of physical defenses must be equal 5 : "
@@ -58,7 +58,7 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
         outfit.add_defense(shield);
     }
 
-    std::vector <std::unique_ptr<Weapon>> weapons(build_weapon(hero));
+    std::list <std::unique_ptr<Weapon>> weapons(build_weapon(hero));
     if (weapons.size() > 2 || (shield && weapons.size() == 2))
     {
         throw std::logic_error("Quantity of weapons cannot be greater than 2, "

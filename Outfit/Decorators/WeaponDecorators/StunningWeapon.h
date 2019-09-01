@@ -10,11 +10,7 @@ class StunningWeapon final : public WeaponDecorator
 public:
     StunningWeapon(std::unique_ptr <Weapon> &decorator);
 
-
     void effect_after_attack(Character *character) override;
-
-private:
-    bool done; //remove me
 };
 
 #endif // STUNNINGWEAPON_H

@@ -89,7 +89,7 @@ void JsonHeroBuilder::decorate_weapon(numWeaponDecorator decorator_num, std::uni
     {
         case numWeaponDecorator::additional_damage:
             decorator.reset(
-                    new AdditionalHit(decorated_obj, weapon_effects["additional_damage"]["damage"].get<size_t>()));
+                    new AdditionalHit(decorated_obj, weapon_effects["additional_damage"]["damage_type"].get<damage_types>(), weapon_effects["additional_damage"]["damage"].get<size_t>()));
             break;
         case numWeaponDecorator::increase_characteristic:
             decorator.reset(new IncreaseCharacteristicWeapon(decorated_obj,
@@ -182,9 +182,9 @@ std::unique_ptr <Weapon> JsonHeroBuilder::construct_weapon(const nlohmann::json 
     }
 }
 
-std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::string &hero)
+std::list <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::string &hero)
 {
-    std::vector <std::unique_ptr<Weapon>> weapons;
+    std::list <std::unique_ptr<Weapon>> weapons;
 
     if (m_config[hero]["outfit"]["defense_and_weapon_slots"]["choice"] == "weapon_shield")
     {
@@ -211,8 +211,8 @@ std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::s
         }
         else if (weapons.size() == 2)
         {
-            if (weapons[0]->get_hold_type() != holding_type::one_handed ||
-                weapons[1]->get_hold_type() != holding_type::one_handed)
+            if (weapons.front()->get_hold_type() != holding_type::one_handed ||
+                weapons.back()->get_hold_type() != holding_type::one_handed)
             {
                 throw std::runtime_error("Logic error, if a hero has 2 weapons they must be one-handed");
             }
@@ -225,9 +225,9 @@ std::vector <std::unique_ptr<Weapon>> JsonHeroBuilder::build_weapon(const std::s
     return weapons;
 }
 
-std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_magic_defenses(const std::string &hero)
+std::list <std::unique_ptr<Defense>> JsonHeroBuilder::build_magic_defenses(const std::string &hero)
 {
-    std::vector <std::unique_ptr<Defense>> magic_defenses;
+    std::list <std::unique_ptr<Defense>> magic_defenses;
     auto magic_defenses_info = m_config[hero]["outfit"]["magic_attributes"];
     for (json::const_iterator defense_info = magic_defenses_info.cbegin();
          defense_info != magic_defenses_info.cend(); ++defense_info)
@@ -241,9 +241,9 @@ std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_magic_defenses(con
     return magic_defenses;
 }
 
-std::vector <std::unique_ptr<Defense>> JsonHeroBuilder::build_physical_defenses(const std::string &hero)
+std::list <std::unique_ptr<Defense>> JsonHeroBuilder::build_physical_defenses(const std::string &hero)
 {
-    std::vector <std::unique_ptr<Defense>> physical_defenses;
+    std::list <std::unique_ptr<Defense>> physical_defenses;
     auto physical_defenses_info = m_config[hero]["outfit"]["armor"];
     for (json::const_iterator defense_info = physical_defenses_info.cbegin();
          defense_info != physical_defenses_info.cend(); ++defense_info)

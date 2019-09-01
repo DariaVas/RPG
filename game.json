@@ -1,6 +1,7 @@
 {
   "weapon_effects": {
     "additional_damage": {
+      "damage_type": 4,
       "damage": 20
     },
     "increase_characteristic": {
@@ -48,7 +49,7 @@
   },
   "first_hero": {
     "characteristic": {
-      "strength": 100,
+      "strength": 1000,
       "sleight": 50,
       "intelligence": 70,
       "physique": 300,
@@ -178,10 +179,10 @@
   },
   "second_hero": {
     "characteristic": {
-      "strength": 100,
+      "strength": 1000,
       "sleight": 50,
       "intelligence": 70,
-      "physique": 300,
+      "physique": 1000,
       "luck": 0,
       "initiative": 100
     },

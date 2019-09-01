@@ -6,7 +6,7 @@
 class StunnedHeroState : public HeroState
 {
 public:
-    StunnedHeroState(Character* ch);
+    StunnedHeroState();
 
     std::vector <Damage> generate_damages(Outfit *outfit, Character *ch) override;
 

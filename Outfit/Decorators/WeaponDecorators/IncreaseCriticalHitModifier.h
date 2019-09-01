@@ -11,7 +11,7 @@ class IncreaseCriticalHitModifier final : public WeaponDecorator
 public:
     IncreaseCriticalHitModifier(std::unique_ptr <Weapon> &decorator, size_t value);
 
-    Damage generate_damage(Character *character) override;
+    std::vector<Damage> generate_damage(Character *character) override;
 
 private:
     size_t m_increase_value;

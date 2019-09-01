@@ -5,10 +5,9 @@
 #include "StunnedHeroState.h"
 
 
-StunnedHeroState::StunnedHeroState(Character* ch)
+StunnedHeroState::StunnedHeroState()
         : m_stun_seconds(0)
 {
-//    ch->set_time_to_next_move(ch->get_characteristic(characteristic::initiative));
 }
 
 std::vector <Damage> StunnedHeroState::generate_damages(Outfit *outfit, Character *ch)
@@ -49,7 +48,7 @@ bool StunnedHeroState::take_remained_damage(Character *victim, Damage &dmg)
 
 void StunnedHeroState::change_state_if_the_times_came(Character *ch)
 {
-    if(ch->get_characteristic(characteristic::initiative) == m_stun_seconds)
+    if(ch->get_characteristic(characteristic::initiative) < m_stun_seconds)
     {
         ch->set_stun(false);
     }
@@ -57,16 +56,7 @@ void StunnedHeroState::change_state_if_the_times_came(Character *ch)
 
 void StunnedHeroState::reduce_time_to_next_move(Character *ch, size_t time)
 {
-    size_t time_to_next_move = ch->get_time_to_next_move();
-    if(time_to_next_move < time)
-    {
-        time_to_next_move=0;
-    }
-    else
-    {
-        time_to_next_move -= time;
-    }
-    ch->set_time_to_next_move(time_to_next_move);
+    ch->increase_waiting_time(time);
     m_stun_seconds += time;
     change_state_if_the_times_came(ch);
 }

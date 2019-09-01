@@ -1,22 +1,22 @@
 #include <plog/Log.h>
 #include "Thing.h"
+#include "Utils.h"
 #include "Character.h"
 
-Thing::Thing(const std::string &name) : m_durability(100), m_name(name), m_weight(100)
+Thing::Thing(const std::string &name) : m_durability(100), m_name(name), m_weight(10)
 {
 
 }
 
 void Thing::reduce_durability(unsigned int value)
 {
-    if (value > m_durability)
+    utils::safely_decrease_unsigned_value(m_durability, value);
+    if (m_durability == 0)
     {
-        m_durability = 0;
-        LOGI << "The thing " << m_name << " is already broken";
+        LOGI << "The thing " << m_name << " has been broken";
     }
     else
     {
-        m_durability -= value;
         LOGI << "The durability of " << m_name << " was reduced to " << m_durability << " points";
     }
 }

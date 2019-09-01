@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++11 -Wall  -fPIC
+CFLAGS=-std=c++11 -Wall  -fPIC -rdynamic
 INC=\
     $(PWD) \
     $(PWD)/Character \

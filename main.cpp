@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdio.h>
+#include <execinfo.h>
+#include <signal.h>
 #include <plog/Log.h>
 #include "Game.h"
 #include "Utils.h"
@@ -7,11 +10,26 @@
 
 using namespace std;
 
+void handler(int sig)
+{
+  void *array[10];
+  size_t size;
+
+  // get void*'s for all entries on the stack
+  size = backtrace(array, 10);
+
+  // print out all the frames to stderr
+  fprintf(stderr, "Error: signal %d:\n", sig);
+  backtrace_symbols_fd(array, size, STDERR_FILENO);
+  exit(1);
+}
+
 int main()
 {
     try
     {
-        plog::init(plog::debug, "./RPG.log");
+        signal(SIGSEGV, handler);
+        plog::init(plog::debug, "./RPG.log", 60000000);
         std::cout << "How do you want to initialize heroes? \n"
                      "1. Randomly generate heroes \n"
                      "2. Load heroes configuration from json configuration file \n";

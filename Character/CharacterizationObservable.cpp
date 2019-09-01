@@ -1,4 +1,5 @@
 #include <plog/Log.h>
+#include "Utils.h"
 #include "CharacterizationObservable.h"
 
 const size_t g_characteristic_upper_bound = 1000;
@@ -42,19 +43,19 @@ size_t CharacterizationObservable::get_characteristic(characteristic feature)
     return f->second;
 }
 
-void CharacterizationObservable::set_characteristic(characteristic feature, size_t feature_value)
+void CharacterizationObservable::increase_characteristic(characteristic feature, size_t feature_value)
 {
-    auto f = m_characterizations.find(feature);
-    if (f == m_characterizations.end())
-    {
-        throw std::runtime_error("Cannot find feature");
-    }
-    size_t value_before = f->second;
-    f->second = feature_value;
-
+    size_t value_before = m_characterizations[feature];
+    m_characterizations[feature] += feature_value;
     check_characterization_upper_bound(feature);
+    notify_observers(feature, m_characterizations[feature] - value_before);
+}
 
-    notify_observers(feature, f->second - value_before);
+void CharacterizationObservable::decrease_characteristic(characteristic feature, size_t feature_value)
+{
+    size_t value_before = m_characterizations[feature];
+    utils::safely_decrease_unsigned_value(m_characterizations[feature], feature_value);
+    notify_observers(feature, m_characterizations[feature] - value_before);
 }
 
 void CharacterizationObservable::add_observer(Observer *o)

@@ -8,14 +8,14 @@
 Character::Character(Outfit &outfit, const CharacterizationObservable &characterization, const std::string &hero_name) :
         m_outfit(std::move(outfit)),
         m_characterization(characterization),
-        m_parameters(&m_characterization),
+        m_parameters(hero_name, &m_characterization),
         m_hero_name(hero_name),
-        m_hero_state(new ActiveHeroState())
+        m_hero_state(new ActiveHeroState()),
+        m_waiting_time(0)
 {
     m_characterization.add_observer(&m_parameters);
     check_outfit_overflow();
     m_outfit.apply_magic_effect(this);
-    m_time_to_next_move = m_characterization.get_characteristic(characteristic::initiative);
     LOGI << "Hero : " << m_hero_name;
 
     LOGI << "Characteristic: \n"
@@ -50,25 +50,13 @@ Character::Character(Outfit &outfit, const CharacterizationObservable &character
 
 void Character::increase_characteristic(characteristic feature, size_t feature_value)
 {
-    size_t ch_value = m_characterization.get_characteristic(feature);
-
-    m_characterization.set_characteristic(feature, ch_value + feature_value);
+    m_characterization.increase_characteristic(feature, feature_value);
 }
 
 void Character::decrease_characteristic(characteristic feature, size_t feature_value)
 {
-    size_t ch_value = m_characterization.get_characteristic(feature);
-
-    if (ch_value < feature_value)
-    {
-        m_characterization.set_characteristic(feature, 0);
-    }
-    else
-    {
-        m_characterization.set_characteristic(feature, ch_value - feature_value);
-    }
+    m_characterization.decrease_characteristic(feature, feature_value);
 }
-
 
 size_t Character::get_characteristic(characteristic feature)
 {
@@ -77,59 +65,32 @@ size_t Character::get_characteristic(characteristic feature)
 
 void Character::increase_parameter(parameter p, size_t value)
 {
-    m_parameters.set_parameter(p, m_parameters.get_parameter(p) + value);
+    m_parameters.increase_parameter(p, value);
 }
 
 void Character::decrease_parameter(parameter p, size_t value)
 {
-    if (m_parameters.get_parameter(p) < value)
-    {
-        m_parameters.set_parameter(p, 0);
-    }
-    else
-    {
-        m_parameters.set_parameter(p, m_parameters.get_parameter(p) - value);
-    }
-    
-    if(p == parameter::HP && !m_parameters.get_parameter(parameter::HP))
-    {
-        throw utils::HeroDied(m_hero_name);
-    }
+    m_parameters.decrease_parameter(p, value);
 }
 
 void Character::increase_resistance(damage_types resistance_type, size_t value)
 {
-    m_parameters.set_damage_resistance(resistance_type, m_parameters.get_damage_resistance(resistance_type) + value);
+    m_parameters.increase_resistance(resistance_type, value);
 }
 
 void Character::decrease_resistance(damage_types resistance_type, size_t value)
 {
-    if (m_parameters.get_damage_resistance(resistance_type) < value)
-    {
-        m_parameters.set_damage_resistance(resistance_type, 0);
-    }
-    else
-    {
-        m_parameters.set_damage_resistance(resistance_type,
-                                           m_parameters.get_damage_resistance(resistance_type) - value);
-    }
+    m_parameters.decrease_resistance(resistance_type, value);
 }
 
 void Character::increase_reflection_of_damage(damage_types damage_type, size_t value)
 {
-    m_parameters.set_damage_reflection(damage_type, m_parameters.get_damage_reflection(damage_type) + value);
+    m_parameters.increase_reflection_of_damage(damage_type, value);
 }
 
 void Character::decrease_reflection_of_damage(damage_types damage_type, size_t value)
 {
-    if (m_parameters.get_damage_reflection(damage_type) < value)
-    {
-        m_parameters.set_damage_reflection(damage_type, 0);
-    }
-    else
-    {
-        m_parameters.set_damage_reflection(damage_type, m_parameters.get_damage_reflection(damage_type) - value);
-    }
+    m_parameters.decrease_reflection_of_damage(damage_type, value);
 }
 
 
@@ -139,7 +100,7 @@ void Character::set_stun(bool is_stunned)
     {
         std::cout << m_hero_name << " is stunned since now" << std::endl;
 
-        m_hero_state.reset(new StunnedHeroState(this));
+        m_hero_state.reset(new StunnedHeroState());
     }
     else
     {
@@ -157,11 +118,11 @@ void Character::break_outfit(size_t breaking_value)
 
 std::vector <Damage> Character::get_damages()
 {
-    if(m_time_to_next_move != 0)
+    if(m_waiting_time <  m_characterization.get_characteristic(characteristic::initiative))
     {
         throw std::logic_error("Character cannot generate damages until the time to the move comes");
     }
-    m_time_to_next_move = m_characterization.get_characteristic(characteristic::initiative);
+    m_waiting_time = 0;
     return m_hero_state->generate_damages(&m_outfit, this);
 }
 
@@ -225,15 +186,16 @@ void Character::reduce_time_to_next_move(size_t time)
     m_hero_state->reduce_time_to_next_move(this, time);
 }
 
-void Character::set_time_to_next_move(size_t time)
+void Character::increase_waiting_time(size_t time)
 {
-    m_time_to_next_move = time;
+    m_waiting_time += time;
 }
-
 
 size_t Character::get_time_to_next_move()
 {
-    return m_time_to_next_move;
+    size_t initiative =  m_characterization.get_characteristic(characteristic::initiative);
+    utils::safely_decrease_unsigned_value(initiative, m_waiting_time);
+    return initiative;
 }
 
 void Character::check_outfit_overflow()
@@ -243,3 +205,9 @@ void Character::check_outfit_overflow()
         m_outfit.lost_thing(this);
     }
 }
+
+void Character::break_hit_thing(size_t damage_value)
+{
+    m_outfit.break_hit_thing(this,damage_value);
+}
+
