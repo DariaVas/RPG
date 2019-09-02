@@ -81,14 +81,23 @@ void Outfit::break_random_thing(Character *ch, size_t value_to_break)
     size_t thing_to_break = utils::rdtsc() % (m_weapons.size() + m_defenses.size());
     if (thing_to_break >= m_weapons.size())
     {
-       m_hit_thing = choosen_thing{true, thing_to_break - m_weapons.size(), false};
+        thing_to_break-=m_weapons.size();
+        std::list<std::unique_ptr<Defense>>::iterator it = std::next(m_defenses.begin(), thing_to_break);
+        (*it)->discard_effect(ch);
+        LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
+        m_defenses.erase(it);
     }
     else
     {
-        m_hit_thing = choosen_thing{false, thing_to_break, false};
+        std::list<std::unique_ptr<Weapon>>::iterator it = std::next(m_weapons.begin(), thing_to_break);
+        (*it)->reduce_durability(value_to_break);
+        if((*it)->is_broken())
+        {
+            (*it)->discard_effect(ch);
+            LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
+            m_weapons.erase(it);
+        }
     }
-
-    break_hit_thing(ch, value_to_break);
 }
 
 size_t Outfit::get_outift_weight()
@@ -109,14 +118,14 @@ void Outfit::lost_thing(Character *ch)
 {
     if(m_defenses.size())
     {
-        auto& defense = m_defenses.back();
+        auto defense = std::move(m_defenses.back());
         m_defenses.pop_back();
         defense->discard_effect(ch);
         LOGI<<ch->get_hero_name() << " lost " << m_defenses.back()->get_name();
     }
     else if(m_weapons.size())
     {
-        auto& weapon = m_weapons.back();
+        auto weapon = std::move(m_defenses.back());
         m_weapons.pop_back();
         weapon->discard_effect(ch);
         LOGI<<ch->get_hero_name() << " lost " << m_weapons.back()->get_name();
@@ -124,37 +133,5 @@ void Outfit::lost_thing(Character *ch)
     else
     {
         LOGI << ch->get_hero_name() << " has lost all things";
-    }
-}
-
-void Outfit::break_hit_thing(Character *ch, size_t value_to_break)
-{
-    if (m_hit_thing.broken)
-    {
-        LOGI << "Hit thing is already broken";
-        return;
-    }
-    if(m_hit_thing.is_defense)
-    {
-        std::list<std::unique_ptr<Defense>>::iterator it = std::next(m_defenses.begin(), m_hit_thing.index);
-        (*it)->reduce_durability(value_to_break);
-        if((*it)->is_broken())
-        {
-            m_hit_thing.broken = true;
-            (*it)->discard_effect(ch);
-            LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
-            m_defenses.erase(it);
-        }
-    }
-    else
-    {
-        std::list<std::unique_ptr<Weapon>>::iterator it = std::next(m_weapons.begin(), m_hit_thing.index);
-        (*it)->reduce_durability(value_to_break);
-        if((*it)->is_broken())
-        {
-            (*it)->discard_effect(ch);
-            LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
-            m_weapons.erase(it);
-        }
     }
 }

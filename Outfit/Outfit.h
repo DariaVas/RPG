@@ -39,16 +39,10 @@ public:
 
     void lost_thing(Character *ch);
 
-    void break_hit_thing(Character *ch, size_t value_to_break);
-
     ~Outfit() = default;
-
-private:
-    void break_thing(Character *ch, choosen_thing& thing, size_t value_to_break);
 private:
     std::list <std::unique_ptr<Defense>> m_defenses;
     std::list <std::unique_ptr<Weapon>> m_weapons;
-    choosen_thing m_hit_thing;
 };
 
 #endif // OUTFIT_H

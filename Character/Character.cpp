@@ -56,6 +56,10 @@ void Character::increase_characteristic(characteristic feature, size_t feature_v
 void Character::decrease_characteristic(characteristic feature, size_t feature_value)
 {
     m_characterization.decrease_characteristic(feature, feature_value);
+    if(feature == characteristic::strength)
+    {
+        check_outfit_overflow();
+    }
 }
 
 size_t Character::get_characteristic(characteristic feature)
@@ -205,9 +209,3 @@ void Character::check_outfit_overflow()
         m_outfit.lost_thing(this);
     }
 }
-
-void Character::break_hit_thing(size_t damage_value)
-{
-    m_outfit.break_hit_thing(this,damage_value);
-}
-

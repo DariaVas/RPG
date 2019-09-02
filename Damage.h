@@ -18,6 +18,7 @@ struct Damage
     std::size_t damage_power;
     std::size_t piercing_power;
     std::size_t critical_damage_multiplier;
+    std::size_t breaking_power;
 };
 
 #endif // DAMAGE_H

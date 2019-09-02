@@ -11,11 +11,12 @@ BreakingWeapon::BreakingWeapon(std::unique_ptr <Weapon> &decorator, size_t break
          << " breaking power: " << m_breaking_value;
 }
 
-void BreakingWeapon::effect_after_attack(Character *character)
+std::vector<Damage> BreakingWeapon::generate_damage(Character *character)
 {
-    character->break_hit_thing(m_breaking_value);
+    std::vector<Damage> damage = m_decorator->generate_damage(character);
+    damage[0].breaking_power += m_breaking_value;
     LOGI << character->get_hero_name() << " got post damage effect, his outfit was damaged on " << m_breaking_value
          << " points "
          << " due to \"Breaking Weapon\" effect";
-    m_decorator->effect_after_attack(character);
+    return damage;
 }
