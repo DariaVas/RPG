@@ -11,9 +11,21 @@ class DefenseDecorator : public Defense
 public:
     DefenseDecorator(std::unique_ptr <Defense> &decorator);
 
-    void apply_effect(Character *character);
+    virtual void apply_effect(Character *character) override;
 
-    void discard_effect(Character *character);
+    virtual void discard_effect(Character *character) override;
+
+    virtual void reduce_durability(unsigned int value) override;
+
+    damage_types get_resist_type() override;
+
+    size_t get_resist_power() override;
+
+    bool is_broken() override;
+
+    const std::string& get_name() override;
+
+    size_t get_weight() override;
 
     virtual ~DefenseDecorator() = 0;
 

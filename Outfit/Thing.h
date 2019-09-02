@@ -15,17 +15,15 @@ public:
 
     virtual void reduce_durability(unsigned int value);
 
-    bool is_broken();
+    virtual bool is_broken();
 
     virtual void apply_effect(Character *character) = 0;
 
     virtual void discard_effect(Character *character) = 0;
 
-    size_t get_durability();
-
-    const std::string& get_name();
+    virtual const std::string& get_name();
     
-    size_t get_weight();
+    virtual size_t get_weight();
     
     virtual ~Thing() = default;
 

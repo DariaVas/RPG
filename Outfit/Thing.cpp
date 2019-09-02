@@ -26,11 +26,6 @@ bool Thing::is_broken()
     return m_durability == 0;
 }
 
-size_t Thing::get_durability()
-{
-    return m_durability;
-}
-
 const std::string& Thing::get_name()
 {
     return m_name;

@@ -22,15 +22,15 @@ public:
 
     virtual void effect_after_attack(Character *character);
 
-    void apply_effect(Character *character) override;
+    virtual void apply_effect(Character *character) override;
 
-    void discard_effect(Character *character) override;
+    virtual void discard_effect(Character *character) override;
 
     holding_type get_hold_type() const;
 
-    size_t get_weapon_power() const;
+    virtual size_t get_weapon_power() const;
 
-    damage_types get_damage_type() const;
+    virtual damage_types get_damage_type() const;
 
     virtual ~Weapon() = 0;
 

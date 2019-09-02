@@ -27,3 +27,33 @@ DefenseDecorator::~DefenseDecorator()
 {
 
 }
+
+void DefenseDecorator::reduce_durability(unsigned int value)
+{
+    m_decorator->reduce_durability(value);
+}
+
+damage_types DefenseDecorator::get_resist_type()
+{
+    return m_decorator->get_resist_type();
+}
+
+size_t DefenseDecorator::get_resist_power()
+{
+    return m_decorator->get_resist_power();
+}
+
+bool DefenseDecorator::is_broken()
+{
+    return m_decorator->is_broken();
+}
+
+const std::string& DefenseDecorator::get_name()
+{
+    return m_decorator->get_name();
+}
+
+size_t DefenseDecorator::get_weight()
+{
+    return m_decorator->get_weight();
+}
