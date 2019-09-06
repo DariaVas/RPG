@@ -57,7 +57,7 @@ How to configure  in JSON:
 Also you can choose random configuration of your heroes.
 Log file path : ./RPG.log.
 
-<br> <b> The next design patterns were used in the architecture of the project: <b></br>
+<br> <b> The next design patterns were used in the architecture of the project: </b></br>
 <br>1. Factory method: </br>
 The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from GameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
 <br> Code: </br>
