@@ -61,8 +61,11 @@ Log file path : ./RPG.log.
 1. Factory method: 
 The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from GameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
 Code: 
-/RPG/GameBuilder
-/RPG/GameBuilder/HeroBuilder 
+
+<ul>
+<li>/RPG/GameBuilder</li>
+<li>/RPG/GameBuilder/HeroBuilder </li>
+</ul>
 2. Template method;
 The template method pattern was used to set the common steps for building an outfit and hero.
 Code:
