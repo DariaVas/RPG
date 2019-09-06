@@ -57,21 +57,21 @@ How to configure  in JSON:
 Also you can choose random configuration of your heroes.
 Log file path : ./RPG.log.
 
-<br> The next design patterns were used in the architecture of the project: </br>
-1. Factory method: 
+<br> <b> The next design patterns were used in the architecture of the project: <b></br>
+<br>1. Factory method: </br>
 The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from GameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
 <br> Code: </br>
 <ul>
 <li>/RPG/GameBuilder</li>
 <li>/RPG/GameBuilder/HeroBuilder </li>
 </ul>
-2. Template method;
+<br>2. Template method</br>
 The template method pattern was used to set the common steps for building an outfit and hero.
 <br>Code:</br>
 <ul>
 <li>/RPG/GameBuilder/HeroBuilder</li>
 </ul>
-3. State
+<br>3. State</br>
 State pattern was used to set the different state of hero.
 <br>Code:</br>
 <ul>
@@ -79,7 +79,7 @@ State pattern was used to set the different state of hero.
 <li>/RPG/Character/Character.cpp</li>
 <li>/RPG/Character/Character.h</li>
 </ul>
-4.  Observer
+<br>4.  Observer</br>
 Observer pattern was used to notify class Parameters about changes in the class Characteristic, because parameters depends on characteristics.
 <br>Code:</br>
 <ul>
@@ -89,7 +89,7 @@ Observer pattern was used to notify class Parameters about changes in the class 
 <li>/RPG/Character/Parameters.cpp</li>
 <li>/RPG/Character/Parameters.h</li>
 </ul>
-5. Decorator
+<br>5. Decorator</br>
 The decorator pattern was used to dynamically add new properties for weapon and defenses.
 <br>Code:</br>
 <ul>
