@@ -61,8 +61,8 @@ The next design patterns were used in the architecture of the project:
 1. Factory method: 
 The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from GameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
 Code: 
-/RPG/GameBuilder //creators
-/RPG/GameBuilder/HeroBuilder  // products
+/RPG/GameBuilder
+/RPG/GameBuilder/HeroBuilder 
 2. Template method;
 The template method pattern was used to set the common steps for building an outfit and hero.
 Code:
@@ -70,7 +70,7 @@ Code:
 3. State
 State pattern was used to set the different state of hero.
 Code:
-/RPG/Character/HeroState //state
+/RPG/Character/HeroState
 /RPG/Character/Character.cpp 
 /RPG/Character/Character.h 
 4.  Observer
