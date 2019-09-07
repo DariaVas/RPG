@@ -13,5 +13,6 @@ void StunningWeapon::effect_after_attack(Character *character)
 {
     LOGI << character->get_hero_name() << " got post damage effect, and he was stunned "
          << " due to \" Stunning Weapon\" effect";
+    character->set_stun(true);
     m_decorator->effect_after_attack(character);
 }

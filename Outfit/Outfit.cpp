@@ -76,16 +76,22 @@ void Outfit::break_random_thing(Character *ch, size_t value_to_break)
     if(m_weapons.empty()&& m_defenses.empty())
     {
         LOGW<<"There is no things to be broken";
+        return;
     }
-
     size_t thing_to_break = utils::rdtsc() % (m_weapons.size() + m_defenses.size());
     if (thing_to_break >= m_weapons.size())
     {
         thing_to_break-=m_weapons.size();
         std::list<std::unique_ptr<Defense>>::iterator it = std::next(m_defenses.begin(), thing_to_break);
-        (*it)->discard_effect(ch);
-        LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
-        m_defenses.erase(it);
+
+        (*it)->reduce_durability(value_to_break);
+        if((*it)->is_broken())
+        {
+            auto thing = std::move(*it);
+            m_defenses.erase(it);
+            thing->discard_effect(ch);
+            LOGI << "Thing " << thing->get_name() << " was broken, so all applied effects was discarded";
+        }
     }
     else
     {
@@ -93,9 +99,10 @@ void Outfit::break_random_thing(Character *ch, size_t value_to_break)
         (*it)->reduce_durability(value_to_break);
         if((*it)->is_broken())
         {
-            (*it)->discard_effect(ch);
-            LOGI << "Thing " << (*it)->get_name() << " was broken, so all applied effects was discarded";
+            auto thing = std::move(*it);
             m_weapons.erase(it);
+            thing->discard_effect(ch);
+            LOGI << "Thing " << thing->get_name() << " was broken, so all applied effects was discarded";
         }
     }
 }
@@ -121,14 +128,14 @@ void Outfit::lost_thing(Character *ch)
         auto defense = std::move(m_defenses.back());
         m_defenses.pop_back();
         defense->discard_effect(ch);
-        LOGI<<ch->get_hero_name() << " lost " << m_defenses.back()->get_name();
+        LOGI<<ch->get_hero_name() << " lost " << defense->get_name();
     }
     else if(m_weapons.size())
     {
-        auto weapon = std::move(m_defenses.back());
+        auto weapon = std::move(m_weapons.back());
         m_weapons.pop_back();
         weapon->discard_effect(ch);
-        LOGI<<ch->get_hero_name() << " lost " << m_weapons.back()->get_name();
+        LOGI<<ch->get_hero_name() << " lost " << weapon->get_name();
     }
     else
     {

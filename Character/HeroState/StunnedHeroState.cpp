@@ -25,7 +25,7 @@ bool StunnedHeroState::can_dodge(Character *victim)
 
 Damage StunnedHeroState::try_to_reflect_damage(Character *victim, Damage &damage)
 {
-    return damage;
+    return Damage{damage.damage_type};
 }
 
 void StunnedHeroState::take_reflected_damage(Character *attacker, Damage &reflected_dmg)
