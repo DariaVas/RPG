@@ -3,10 +3,10 @@
 #define RPG_CONFIGGAMECREATOR_H
 
 #include <iostream>
-#include "GameCreator.h"
+#include "IGameCreator.h"
 #include "JsonHeroBuilder.h"
 
-class ConfigGameCreator : public GameCreator
+class ConfigGameCreator : public IGameCreator
 {
 public:
     HeroBuilder *get_hero_builder()

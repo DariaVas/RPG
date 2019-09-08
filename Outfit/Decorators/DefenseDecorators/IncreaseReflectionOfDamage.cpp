@@ -5,9 +5,9 @@
 #include "Character.h"
 
 
-IncreaseReflectionOfDamage::IncreaseReflectionOfDamage(std::unique_ptr <Defense> &decorator, size_t value,
+IncreaseReflectionOfDamage::IncreaseReflectionOfDamage(std::unique_ptr <Defense> &defense, size_t value,
                                                        damage_types damage_type) :
-        DefenseDecorator(decorator),
+        DefenseDecorator(defense),
         m_damage_type(damage_type),
         m_reflection_power(value)
 {
@@ -26,7 +26,7 @@ void IncreaseReflectionOfDamage::apply_effect(Character *character)
     character->increase_reflection_of_damage(m_damage_type, m_reflection_power);
     LOGI << "Thing: " << this->get_name() << ", applied effect \" increase reflection of damage\"" << std::endl;
 
-    m_decorator->apply_effect(character);
+    m_defense->apply_effect(character);
 }
 
 void IncreaseReflectionOfDamage::discard_effect(Character *character)
@@ -38,5 +38,5 @@ void IncreaseReflectionOfDamage::discard_effect(Character *character)
     character->decrease_reflection_of_damage(m_damage_type, -m_reflection_power);
     LOGI << "Thing: " << this->get_name() << ", discarded effect \" increase reflection of damage\"" << std::endl;
 
-    m_decorator->discard_effect(character);
+    m_defense->discard_effect(character);
 }

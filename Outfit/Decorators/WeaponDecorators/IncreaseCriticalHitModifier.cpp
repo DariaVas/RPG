@@ -3,8 +3,8 @@
 #include "Character.h"
 
 
-IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon> &decorator, size_t value) :
-        WeaponDecorator(decorator),
+IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon> &weapon, size_t value) :
+        WeaponDecorator(weapon),
         m_increase_value(value)
 {
     LOGI << "Created decorator for weapon: IncreaseCriticalHitModifier "
@@ -13,7 +13,7 @@ IncreaseCriticalHitModifier::IncreaseCriticalHitModifier(std::unique_ptr <Weapon
 
 std::vector<Damage> IncreaseCriticalHitModifier::generate_damage(Character *character)
 {
-    std::vector<Damage> damage = m_decorator->generate_damage(character);
+    std::vector<Damage> damage = m_weapon->generate_damage(character);
     damage[0].critical_damage_multiplier += m_increase_value;
     LOGI << "Hero " << character->get_hero_name()
          << " generated a damage, and its critical damage multiplier was increased on "

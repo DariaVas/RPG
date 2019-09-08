@@ -7,7 +7,7 @@
 class AdditionalHit : public WeaponDecorator
 {
 public:
-    AdditionalHit(std::unique_ptr <Weapon> &decorator, damage_types type,size_t power);
+    AdditionalHit(std::unique_ptr <Weapon> &weapon, damage_types type,size_t power);
 
     std::vector<Damage> generate_damage(Character *character) override;
 

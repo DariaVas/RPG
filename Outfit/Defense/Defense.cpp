@@ -41,5 +41,6 @@ size_t Defense::get_resist_power()
 
 Defense::~Defense()
 {
-
+    
 }
+

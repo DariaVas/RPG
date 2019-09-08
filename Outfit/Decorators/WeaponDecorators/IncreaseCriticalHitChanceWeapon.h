@@ -13,7 +13,7 @@ class IncreaseCriticalHitChanceWeapon final : public WeaponDecorator
 
 public:
 
-    IncreaseCriticalHitChanceWeapon(std::unique_ptr <Weapon> &decorator, size_t value);
+    IncreaseCriticalHitChanceWeapon(std::unique_ptr <Weapon> &weapon, size_t value);
 
     void apply_effect(Character *character) override;
 

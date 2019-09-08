@@ -3,9 +3,9 @@
 #define RPG_RANDOMGAMECREATOR_H
 
 #include "RandomHeroBuilder.h"
-#include "GameCreator.h"
+#include "IGameCreator.h"
 
-class RandomGameCreator : public GameCreator
+class RandomGameCreator : public IGameCreator
 {
 public:
     HeroBuilder *get_hero_builder()

@@ -17,7 +17,7 @@ public:
 
     Character build_second_hero();
 
-    virtual ~HeroBuilder() = 0;
+    virtual ~HeroBuilder() = default;
 
 private:
     Character build_hero(const std::string &hero);

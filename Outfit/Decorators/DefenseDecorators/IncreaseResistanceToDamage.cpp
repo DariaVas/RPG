@@ -4,9 +4,9 @@
 #include "Character.h"
 
 
-IncreaseResistanceToDamage::IncreaseResistanceToDamage(std::unique_ptr <Defense> &decorator, size_t value,
+IncreaseResistanceToDamage::IncreaseResistanceToDamage(std::unique_ptr <Defense> &defense, size_t value,
                                                        damage_types damage_type) :
-        DefenseDecorator(decorator),
+        DefenseDecorator(defense),
         m_damage_type(damage_type),
         m_resistance_power(value)
 {
@@ -26,7 +26,7 @@ void IncreaseResistanceToDamage::apply_effect(Character *character)
     character->increase_resistance(m_damage_type, m_resistance_power);
     LOGI << "Thing: " << this->get_name() << ", applied effect \"increase resistance to damage\"" << std::endl;
 
-    m_decorator->apply_effect(character);
+    m_defense->apply_effect(character);
 }
 
 void IncreaseResistanceToDamage::discard_effect(Character *character)
@@ -37,5 +37,5 @@ void IncreaseResistanceToDamage::discard_effect(Character *character)
          << std::endl;
     character->decrease_resistance(m_damage_type, m_resistance_power);
     LOGI << "Thing: " << this->get_name() << ", discarded effect \"increase resistance to damage\"" << std::endl;
-    m_decorator->discard_effect(character);
+    m_defense->discard_effect(character);
 }

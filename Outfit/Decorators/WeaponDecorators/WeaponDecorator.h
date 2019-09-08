@@ -11,7 +11,7 @@
 class WeaponDecorator : public Weapon
 {
 public:
-    WeaponDecorator(std::unique_ptr <Weapon> &decorator);
+    WeaponDecorator(std::unique_ptr <Weapon> &weapon);
 
     virtual std::vector<Damage> generate_damage(Character *character) override;
 
@@ -35,7 +35,7 @@ public:
     virtual ~WeaponDecorator() = 0;
 
 protected:
-    std::unique_ptr <Weapon> m_decorator;
+    std::unique_ptr <Weapon> m_weapon;
 };
 
 #endif // WEAPONDECORATOR_H

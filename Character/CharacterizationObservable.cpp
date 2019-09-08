@@ -58,19 +58,19 @@ void CharacterizationObservable::decrease_characteristic(characteristic feature,
     notify_observers(feature, m_characterizations[feature] - value_before);
 }
 
-void CharacterizationObservable::add_observer(Observer *o)
+void CharacterizationObservable::add_observer(IObserver *o)
 {
     m_observers.push_back(o);
 }
 
-void CharacterizationObservable::remove_observer(Observer *o)
+void CharacterizationObservable::remove_observer(IObserver *o)
 {
     m_observers.remove(o);
 }
 
 void CharacterizationObservable::notify_observers(characteristic changed_feature, int changed_delta)
 {
-    for (Observer *o: m_observers)
+    for (IObserver *o: m_observers)
     {
         o->handle_event(changed_feature, changed_delta);
     }

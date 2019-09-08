@@ -2,8 +2,8 @@
 #include "AdditionalHit.h"
 #include "Character.h"
 
-AdditionalHit::AdditionalHit(std::unique_ptr <Weapon> &decorator, damage_types type, size_t power) :
-        WeaponDecorator(decorator),
+AdditionalHit::AdditionalHit(std::unique_ptr <Weapon> &weapon, damage_types type, size_t power) :
+        WeaponDecorator(weapon),
         m_damage_power(power),
         m_damage_type(type)
 {
@@ -14,7 +14,7 @@ AdditionalHit::AdditionalHit(std::unique_ptr <Weapon> &decorator, damage_types t
 
 std::vector<Damage> AdditionalHit::generate_damage(Character *character)
 {
-    std::vector<Damage> damage = m_decorator->generate_damage(character);
+    std::vector<Damage> damage = m_weapon->generate_damage(character);
     damage.push_back(Damage{m_damage_type, m_damage_power, 0,0});
     LOGI << "Hero " << character->get_hero_name() << " generated additional damage,"
          << " due to the effect \"Additional hit\"";

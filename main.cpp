@@ -35,7 +35,7 @@ int main()
                      "2. Load heroes configuration from json configuration file \n";
         size_t choose;
         std::cin >> choose;
-        std::unique_ptr <GameCreator> game_creator;
+        std::unique_ptr <IGameCreator> game_creator;
         switch (choose)
         {
             case 1:

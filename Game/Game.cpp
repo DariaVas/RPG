@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-Game::Game(std::unique_ptr <GameCreator> &game_creator)
+Game::Game(std::unique_ptr <IGameCreator> &game_creator)
         : m_heroes_builder(game_creator->get_hero_builder()),
           m_first_hero(m_heroes_builder->build_first_hero()),
           m_second_hero(m_heroes_builder->build_second_hero())

@@ -8,7 +8,7 @@ class IncreaseReflectionOfDamage final : public DefenseDecorator
 {
 public:
 
-    IncreaseReflectionOfDamage(std::unique_ptr <Defense> &decorator, size_t value, damage_types damage_type);
+    IncreaseReflectionOfDamage(std::unique_ptr <Defense> &defense, size_t value, damage_types damage_type);
 
     void apply_effect(Character *character) override;
 

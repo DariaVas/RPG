@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <map>
 #include "Damage.h"
-#include "Observer.h"
+#include "IObserver.h"
 #include "CharacterizationObservable.h"
 
 enum class parameter
@@ -18,7 +18,7 @@ enum class parameter
 
 extern const size_t g_parameter_upper_bound;
 
-class Parameters : public Observer
+class Parameters : public IObserver
 {
 public:
     Parameters(const std::string& owner_name,CharacterizationObservable *characteristics);

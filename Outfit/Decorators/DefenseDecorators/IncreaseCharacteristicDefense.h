@@ -10,7 +10,7 @@ class IncreaseCharacteristicDefense final : public DefenseDecorator
 {
 public:
 
-    IncreaseCharacteristicDefense(std::unique_ptr <Defense> &decorator, size_t value, characteristic characteristic);
+    IncreaseCharacteristicDefense(std::unique_ptr <Defense> &defense, size_t value, characteristic characteristic);
 
     void apply_effect(Character *character) override;
 

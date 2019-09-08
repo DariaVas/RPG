@@ -52,8 +52,3 @@ holding_type Weapon::get_hold_type() const
 {
     return m_hold_type;
 }
-
-Weapon::~Weapon()
-{
-
-}

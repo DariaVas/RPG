@@ -10,7 +10,7 @@ class JsonHeroBuilder : public HeroBuilder
 public:
     JsonHeroBuilder(const std::string &file_path);
 
-    ~JsonHeroBuilder() override;
+    ~JsonHeroBuilder() override = default;
 
 private:
     CharacterizationObservable build_hero_personality(const std::string &hero) override;

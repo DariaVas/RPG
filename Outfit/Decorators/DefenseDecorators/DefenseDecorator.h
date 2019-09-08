@@ -9,7 +9,7 @@
 class DefenseDecorator : public Defense
 {
 public:
-    DefenseDecorator(std::unique_ptr <Defense> &decorator);
+    DefenseDecorator(std::unique_ptr <Defense> &defense);
 
     virtual void apply_effect(Character *character) override;
 
@@ -30,7 +30,7 @@ public:
     virtual ~DefenseDecorator() = 0;
 
 protected:
-    std::unique_ptr <Defense> m_decorator;
+    std::unique_ptr <Defense> m_defense;
 };
 
 #endif // DEFENSEDECORATOR_H

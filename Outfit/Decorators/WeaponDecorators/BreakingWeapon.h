@@ -7,7 +7,7 @@
 class BreakingWeapon final : public WeaponDecorator
 {
 public:
-    BreakingWeapon(std::unique_ptr <Weapon> &decorator, size_t breaking_value);
+    BreakingWeapon(std::unique_ptr <Weapon> &weapon, size_t breaking_value);
 
     std::vector<Damage> generate_damage(Character *character) override;
 

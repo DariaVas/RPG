@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <map>
 #include <list>
-#include "Observer.h"
+#include "IObserver.h"
 
 enum class characteristic
 {
@@ -28,9 +28,9 @@ public:
     CharacterizationObservable(size_t strength, size_t sleight, size_t intelligence,
                                size_t physique, size_t luck, size_t initiative);
 
-    void add_observer(Observer *o);
+    void add_observer(IObserver *o);
 
-    void remove_observer(Observer *o);
+    void remove_observer(IObserver *o);
 
     size_t get_characteristic(characteristic feature);
 
@@ -45,7 +45,7 @@ private:
 
 private:
     std::map <characteristic, size_t> m_characterizations;
-    std::list<Observer *> m_observers;
+    std::list<IObserver *> m_observers;
 };
 
 

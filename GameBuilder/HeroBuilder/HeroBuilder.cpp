@@ -71,8 +71,3 @@ Outfit HeroBuilder::build_hero_outfit(const std::string &hero)
     LOGI << "Outfit for " << hero << " was built. ";
     return outfit;
 }
-
-HeroBuilder::~HeroBuilder()
-{
-
-}

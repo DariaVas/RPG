@@ -59,7 +59,7 @@ Log file path : ./RPG.log.
 
 <br> <b> The next design patterns were used in the architecture of the project: </b></br>
 <br>1. Factory method: </br>
-The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from GameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
+The factory method pattern was used to generate heroes in different ways. So, we have GonfigGameCreator and RandomGameCreator what inherits from IGameCreator. GameCreator products HeroBuilder. In the future, this class can be increased to a Workers Factory.
 <br> Code: </br>
 <ul>
 <li>/RPG/GameBuilder</li>
@@ -85,7 +85,7 @@ Observer pattern was used to notify class Parameters about changes in the class 
 <ul>
 <li>/RPG/Character/CharacterizationObservable.cpp</li>
 <li>/RPG/Character/CharacterizationObservable.h</li>
-<li>/RPG/Character/Observer.h</li>
+<li>/RPG/Character/IObserver.h</li>
 <li>/RPG/Character/Parameters.cpp</li>
 <li>/RPG/Character/Parameters.h</li>
 </ul>

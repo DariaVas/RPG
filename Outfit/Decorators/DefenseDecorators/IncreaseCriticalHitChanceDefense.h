@@ -12,7 +12,7 @@ class IncreaseCriticalHitChanceDefense final : public DefenseDecorator
 
 public:
 
-    IncreaseCriticalHitChanceDefense(std::unique_ptr <Defense> &decorator, size_t value);
+    IncreaseCriticalHitChanceDefense(std::unique_ptr <Defense> &defense, size_t value);
 
     void apply_effect(Character *character) override;
 

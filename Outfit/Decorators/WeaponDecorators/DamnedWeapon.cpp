@@ -3,8 +3,8 @@
 #include "Character.h"
 
 
-DamnedWeapon::DamnedWeapon(std::unique_ptr <Weapon> &decorator, size_t value, characteristic ch_type) :
-        WeaponDecorator(decorator),
+DamnedWeapon::DamnedWeapon(std::unique_ptr <Weapon> &weapon, size_t value, characteristic ch_type) :
+        WeaponDecorator(weapon),
         m_characteristic(ch_type),
         m_value(value),
         m_first_damage(true)
@@ -25,5 +25,5 @@ void DamnedWeapon::effect_after_attack(Character *character)
 
         m_first_damage = false;
     }
-    m_decorator->effect_after_attack(character);
+    m_weapon->effect_after_attack(character);
 }

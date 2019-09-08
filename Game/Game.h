@@ -1,13 +1,13 @@
 #ifndef RPG_GAME_H
 #define RPG_GAME_H
 
-#include "GameCreator.h"
+#include "IGameCreator.h"
 #include "Character.h"
 
 class Game
 {
 public:
-    explicit Game(std::unique_ptr <GameCreator> &game_creator);
+    explicit Game(std::unique_ptr <IGameCreator> &game_creator);
 
     void play();
 

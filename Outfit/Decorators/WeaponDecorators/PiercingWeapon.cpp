@@ -3,8 +3,8 @@
 #include "Character.h"
 
 
-PiercingWeapon::PiercingWeapon(std::unique_ptr <Weapon> &decorator, size_t piercing_power) :
-        WeaponDecorator(decorator),
+PiercingWeapon::PiercingWeapon(std::unique_ptr <Weapon> &weapon, size_t piercing_power) :
+        WeaponDecorator(weapon),
         m_piercing_power(piercing_power)
 {
     LOGI << "Created decorator for weapon: PiercingWeapon "
@@ -13,7 +13,7 @@ PiercingWeapon::PiercingWeapon(std::unique_ptr <Weapon> &decorator, size_t pierc
 
 std::vector<Damage> PiercingWeapon::generate_damage(Character *character)
 {
-    std::vector<Damage> damage = m_decorator->generate_damage(character);
+    std::vector<Damage> damage = m_weapon->generate_damage(character);
     damage[0].piercing_power += m_piercing_power;
     LOGI << "Hero " << character->get_hero_name() << " generated a damage, and its piercing power was increased on "
          << m_piercing_power

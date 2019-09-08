@@ -8,7 +8,7 @@
 class PiercingWeapon final : public WeaponDecorator
 {
 public:
-    PiercingWeapon(std::unique_ptr <Weapon> &decorator, size_t piercing_power);
+    PiercingWeapon(std::unique_ptr <Weapon> &weapon, size_t piercing_power);
 
     std::vector<Damage> generate_damage(Character *character) override;
 

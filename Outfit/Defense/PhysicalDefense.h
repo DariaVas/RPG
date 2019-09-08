@@ -10,6 +10,7 @@ class PhysicalDefense : public Defense
 public:
     PhysicalDefense(const std::string &name, damage_types resist_type, size_t resist_power);
 
+    ~PhysicalDefense() override = default;
 };
 
 #endif // PHYSICALDEFENSE_H

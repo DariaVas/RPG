@@ -7,7 +7,7 @@
 class IncreaseChanceOfDodge final : public DefenseDecorator
 {
 public:
-    IncreaseChanceOfDodge(std::unique_ptr <Defense> &decorator, size_t value);
+    IncreaseChanceOfDodge(std::unique_ptr <Defense> &defense, size_t value);
 
     void apply_effect(Character *character) override;
 

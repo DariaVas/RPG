@@ -4,9 +4,9 @@
 #include "Character.h"
 
 
-IncreaseCharacteristicDefense::IncreaseCharacteristicDefense(std::unique_ptr <Defense> &decorator, size_t value,
+IncreaseCharacteristicDefense::IncreaseCharacteristicDefense(std::unique_ptr <Defense> &defense, size_t value,
                                                              characteristic characteristic) :
-        DefenseDecorator(decorator),
+        DefenseDecorator(defense),
         m_characteristic(characteristic),
         m_value(value)
 {
@@ -22,7 +22,7 @@ void IncreaseCharacteristicDefense::apply_effect(Character *character)
     character->increase_characteristic(m_characteristic, m_value);
 
     LOGI << "Thing: " << this->get_name() << ", applied effect \" increase characteristic\"" << std::endl;
-    m_decorator->apply_effect(character);
+    m_defense->apply_effect(character);
 }
 
 void IncreaseCharacteristicDefense::discard_effect(Character *character)
@@ -30,5 +30,5 @@ void IncreaseCharacteristicDefense::discard_effect(Character *character)
     character->decrease_characteristic(m_characteristic, m_value);
     LOGI << "Thing: " << this->get_name() << ", discarded effect \" increase characteristic\" " << std::endl;
 
-    m_decorator->discard_effect(character);
+    m_defense->discard_effect(character);
 }

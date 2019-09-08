@@ -267,8 +267,3 @@ CharacterizationObservable JsonHeroBuilder::build_hero_personality(const std::st
                                       characteristic["physique"].get<size_t>(), characteristic["luck"].get<size_t>(),
                                       characteristic["initiative"].get<size_t>());
 }
-
-JsonHeroBuilder::~JsonHeroBuilder()
-{
-
-}

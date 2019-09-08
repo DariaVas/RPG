@@ -4,8 +4,8 @@
 #include "Character.h"
 
 
-IncreaseChanceOfDodge::IncreaseChanceOfDodge(std::unique_ptr <Defense> &decorator, size_t value) :
-        DefenseDecorator(decorator),
+IncreaseChanceOfDodge::IncreaseChanceOfDodge(std::unique_ptr <Defense> &defense, size_t value) :
+        DefenseDecorator(defense),
         m_dodge_power(value)
 {
     LOGI << "Created decorator for defense: IncreaseChanceOfDodge, value to increase dodge: " << m_dodge_power;
@@ -19,7 +19,7 @@ void IncreaseChanceOfDodge::apply_effect(Character *character)
     character->increase_parameter(parameter::dodge_chance, m_dodge_power);
     LOGI << "Thing: " << this->get_name() << " effect \" increase chance of dodge \" was applied." << std::endl;
 
-    m_decorator->apply_effect(character);
+    m_defense->apply_effect(character);
 }
 
 void IncreaseChanceOfDodge::discard_effect(Character *character)
@@ -30,5 +30,5 @@ void IncreaseChanceOfDodge::discard_effect(Character *character)
     character->decrease_parameter(parameter::dodge_chance, m_dodge_power);
     LOGI << "Thing: " << this->get_name() << " effect  \" increase chance of dodge \" was discarded." << std::endl;
 
-    m_decorator->discard_effect(character);
+    m_defense->discard_effect(character);
 }

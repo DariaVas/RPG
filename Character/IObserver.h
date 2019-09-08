@@ -1,16 +1,16 @@
-#ifndef OBSERVER_H
-#define OBSERVER_H
+#ifndef IOBSERVER_H
+#define IOBSERVER_H
 
 enum class characteristic;
 
 class CharacterizationObservable;
 
-class Observer
+class IObserver
 {
 public:
     virtual void handle_event(characteristic changed_characteristic, int delta) = 0;
 
-    virtual ~Observer() = default;
+    virtual ~IObserver() = default;
 };
 
-#endif // OBSERVER_H
+#endif // IOBSERVER_H
