@@ -11,8 +11,6 @@
 class WeaponDecorator : public Weapon
 {
 public:
-    WeaponDecorator(std::unique_ptr <Weapon> &weapon);
-
     virtual std::vector<Damage> generate_damage(Character *character) override;
 
     virtual void effect_after_attack(Character *character) override;
@@ -32,7 +30,10 @@ public:
 
     virtual size_t get_weight() override;
 
-    virtual ~WeaponDecorator() = 0;
+    virtual ~WeaponDecorator() = default;
+
+protected:
+    WeaponDecorator(std::unique_ptr <Weapon> &weapon);
 
 protected:
     std::unique_ptr <Weapon> m_weapon;

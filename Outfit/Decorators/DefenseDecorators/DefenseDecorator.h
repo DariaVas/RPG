@@ -9,8 +9,6 @@
 class DefenseDecorator : public Defense
 {
 public:
-    DefenseDecorator(std::unique_ptr <Defense> &defense);
-
     virtual void apply_effect(Character *character) override;
 
     virtual void discard_effect(Character *character) override;
@@ -27,7 +25,10 @@ public:
 
     size_t get_weight() override;
 
-    virtual ~DefenseDecorator() = 0;
+    virtual ~DefenseDecorator() = default;
+
+protected:
+    DefenseDecorator(std::unique_ptr <Defense> &defense);
 
 protected:
     std::unique_ptr <Defense> m_defense;

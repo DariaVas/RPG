@@ -11,7 +11,6 @@ class Character;
 class Defense : public Thing
 {
 public:
-    Defense(const std::string &name, damage_types resist_type, size_t resist_power);
 
     virtual void apply_effect(Character *character) override;
 
@@ -21,7 +20,10 @@ public:
 
     virtual size_t get_resist_power();
 
-    virtual ~Defense() = 0;
+    virtual ~Defense() = default;
+
+protected:
+    Defense(const std::string &name, damage_types resist_type, size_t resist_power);
 
 private:
     damage_types m_resist_type;
