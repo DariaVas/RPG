@@ -25,8 +25,6 @@ public:
 
     size_t get_weight() override;
 
-    virtual ~DefenseDecorator() = default;
-
 protected:
     DefenseDecorator(std::unique_ptr <Defense> &defense);
 

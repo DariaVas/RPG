@@ -30,8 +30,6 @@ public:
 
     virtual size_t get_weight() override;
 
-    virtual ~WeaponDecorator() = default;
-
 protected:
     WeaponDecorator(std::unique_ptr <Weapon> &weapon);
 

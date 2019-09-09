@@ -9,8 +9,6 @@ class RandomHeroBuilder : public HeroBuilder
 public:
     RandomHeroBuilder();
 
-    ~RandomHeroBuilder() = default;
-
 private:
     CharacterizationObservable build_hero_personality(const std::string &hero) override;
 

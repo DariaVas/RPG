@@ -32,8 +32,6 @@ public:
 
     virtual damage_types get_damage_type() const;
 
-    virtual ~Weapon() = default;
-
 protected:
     size_t calculate_modifier_of_critical_hit(size_t characteristic_value);
 

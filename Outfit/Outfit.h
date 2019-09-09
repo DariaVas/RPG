@@ -39,7 +39,6 @@ public:
 
     void lost_thing(Character *ch);
 
-    ~Outfit() = default;
 private:
     std::list <std::unique_ptr<Defense>> m_defenses;
     std::list <std::unique_ptr<Weapon>> m_weapons;

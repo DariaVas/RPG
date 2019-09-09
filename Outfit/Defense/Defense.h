@@ -20,8 +20,6 @@ public:
 
     virtual size_t get_resist_power();
 
-    virtual ~Defense() = default;
-
 protected:
     Defense(const std::string &name, damage_types resist_type, size_t resist_power);
 
