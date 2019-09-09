@@ -23,11 +23,6 @@ void DefenseDecorator::discard_effect(Character *character)
     m_defense->apply_effect(character);
 }
 
-DefenseDecorator::~DefenseDecorator()
-{
-
-}
-
 void DefenseDecorator::reduce_durability(unsigned int value)
 {
     m_defense->reduce_durability(value);

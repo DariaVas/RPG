@@ -36,11 +36,6 @@ void WeaponDecorator::reduce_durability(unsigned int value)
     m_weapon->reduce_durability(value);
 }
 
-WeaponDecorator::~WeaponDecorator()
-{
-
-}
-
 size_t WeaponDecorator::get_weapon_power() const
 {
     return m_weapon->get_weapon_power();
