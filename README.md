@@ -11,7 +11,7 @@ How to configure  in JSON:
     intelligence = 3,
     physique = 4,
     luck = 5,
-    initiative = 6
+    initiative = 6,
     }
     Also, all types of damage are enumerated too.
     To specify the type of damage or the type of resistance / reflection, you should write out it number:
